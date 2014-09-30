@@ -305,8 +305,6 @@
 			mainGroup = 00F8896219DA9DAC00BBC01D;
 			productRefGroup = 00F8896C19DA9DAC00BBC01D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
 				00F8896A19DA9DAC00BBC01D /* RagicViewer */,
@@ -503,6 +501,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,6 +517,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -20,27 +20,15 @@
     
     //should check credentials before dispatching viewcontroller
     NSString * apikey = [[NSUserDefaults standardUserDefaults] objectForKey:@"ragic_apikey"];
-    //Dispatch to normal viewcontroller (with menu)
     if(apikey != nil) {
-        
-        //        RagicHomeViewController *homeViewController = [[[RagicHomeViewController alloc] init] autorelease];
         AZRagicTabFolderTableViewController * leftMenuViewController = [[[AZRagicTabFolderTableViewController alloc] init] autorelease];
         UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:leftMenuViewController] autorelease];
-        //        PKRevealController *revealController = [PKRevealController revealControllerWithFrontViewController:navigationController leftViewController:leftMenuViewController];
-        //        revealController.delegate = self;
-        //        revealController.animationDuration = 0.25;
-        //        [revealController setMinimumWidth:140 maximumWidth:220 forViewController:leftMenuViewController];
         self.window.rootViewController = navigationController;
         
     } else { //Dispatch to login view controller
         AZLoginHomeViewController * controller = [[[AZLoginHomeViewController alloc] init] autorelease];
-//        UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
-//        navigationController.navigationBar.hidden = YES;
         self.window.rootViewController = controller;
-        
     }
-    
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

@@ -51,21 +51,25 @@
 
                                    NSString *responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                                    NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&resultError];
-                                   if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
-                                       NSLog(@"%@", responseString);
-                                       //Should save apikey
-                                       [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"apikey"] forKey:@"ragic_apikey"];
-                                       [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"accounts"][@"account"] forKey:@"ragic_account"];
-                                       [[NSUserDefaults standardUserDefaults] synchronize];
+                                   if(resultDic.count > 0) {
+                                       if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
+                                           NSLog(@"%@", responseString);
+                                           //Should save apikey to keychain if success
+                                           [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"apikey"] forKey:@"ragic_apikey"];
+                                           [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"accounts"][@"account"] forKey:@"ragic_account"];
+                                           [[NSUserDefaults standardUserDefaults] synchronize];
+                                       }
+                                   } else {
+                                       //Something is wrong
+                                       if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
+                                           [self.delegate loginFinishedWithStatusCode:@"fail" andResult:resultDic];
+                                       }
                                    }
-                                   //Dispatching views
 
-                               }
-                               else if ([data length] == 0 && error == nil) {
-                                   NSLog(@"Nothing was downloaded.");
-                               }
-                               else if (error != nil) {
-                                   NSLog(@"Error = %@", error);
+                               } else if (error != nil) {
+                                   if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
+                                       [self.delegate loginFinishedWithStatusCode:@"fail" andResult:@{}];
+                                   }
                                }
                            }];
     return nil;

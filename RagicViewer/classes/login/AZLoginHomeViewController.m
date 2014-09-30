@@ -39,7 +39,7 @@
 
     [super viewDidLoad];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setTitle:@"Login with API Key" forState:UIControlStateNormal];
+    [button setTitle:@"Login" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(loginOption) forControlEvents:UIControlEventTouchUpInside];
     [button setTranslatesAutoresizingMaskIntoConstraints:NO];
