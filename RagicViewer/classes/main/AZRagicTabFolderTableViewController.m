@@ -39,6 +39,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;

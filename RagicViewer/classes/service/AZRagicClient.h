@@ -10,7 +10,7 @@
 
 @protocol RagicClientDelegate
 @optional
--(Boolean) loginFinishedWithStatusCode:(NSString*) code andResult:(NSDictionary*)result;
+-(void) loginFinishedWithStatusCode:(NSString*) code andResult:(NSDictionary*)result;
 -(void) loadFinishedWithResult:(NSDictionary *) result;
 @end
 

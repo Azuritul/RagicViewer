@@ -1,10 +1,10 @@
 PODS:
-  - PKRevealController (2.0.6)
+  - SVProgressHUD (HEAD based on 1.0)
 
 DEPENDENCIES:
-  - PKRevealController
+  - SVProgressHUD (HEAD)
 
 SPEC CHECKSUMS:
-  PKRevealController: 4f175a432ad868c806dce1ebb3fd8a35d228bdb5
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
 
 COCOAPODS: 0.33.1

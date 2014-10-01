@@ -6,9 +6,9 @@
 // project.
 
 
-// PKRevealController
-#define COCOAPODS_POD_AVAILABLE_PKRevealController
-#define COCOAPODS_VERSION_MAJOR_PKRevealController 2
-#define COCOAPODS_VERSION_MINOR_PKRevealController 0
-#define COCOAPODS_VERSION_PATCH_PKRevealController 6
+// SVProgressHUD
+#define COCOAPODS_POD_AVAILABLE_SVProgressHUD
+#define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
+#define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
+#define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
 

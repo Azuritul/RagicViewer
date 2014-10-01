@@ -1,6 +1,5 @@
 //
 //  AZRagicClient.m
-//  RagicRestClient
 //
 //  Created by azuritul on 2014/9/9.
 //  Copyright (c) 2014年 Azuritul. All rights reserved.
@@ -14,14 +13,11 @@
 - (NSDictionary *) loginWithAPIKey:(NSString *) key {
     NSString *url = @"https://api.ragic.com/";
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]] autorelease];
-    [request setValue:@"Basic OWVkOUh2UUNWZ1B0bGlaRkxTblNLSVBZUzQzS0lRVmx0cVU0Z1p0KzZ6d2Rudlo1U1o3Vmk0YTVWYWZ6TlVkYQ=="
-             forHTTPHeaderField:@"Authorization"];
+    [request setValue:[NSString stringWithFormat:@"Basic %@", key] forHTTPHeaderField:@"Authorization"];
     [NSURLConnection sendAsynchronousRequest:request
                               queue:[[[NSOperationQueue alloc] init] autorelease]
                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                       if ([data length] > 0 && error == nil) {
-                          NSError *resultError;
-
                           NSString *responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                           if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
                               NSLog(@"%@", responseString);
@@ -58,6 +54,7 @@
                                            [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"apikey"] forKey:@"ragic_apikey"];
                                            [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"accounts"][@"account"] forKey:@"ragic_account"];
                                            [[NSUserDefaults standardUserDefaults] synchronize];
+                                           [self.delegate loginFinishedWithStatusCode:@"success" andResult:resultDic];
                                        }
                                    } else {
                                        //Something is wrong

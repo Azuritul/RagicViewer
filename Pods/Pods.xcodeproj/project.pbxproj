@@ -7,342 +7,272 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		094A6D9D7122445999AB81A4 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E202F169857943D8BAB6E43B /* Pods-dummy.m */; };
-		22987A746E9940268BA3AC7F /* UIViewController+PKRevealController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06861E27AACC4C529E4B0D92 /* UIViewController+PKRevealController.h */; };
-		32CE6B06F4AC4568980A5CE0 /* libPods-PKRevealController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80ED4BEA57C14D099A90D0DB /* libPods-PKRevealController.a */; };
-		338942AF5B3E4DCB9184C52E /* Pods-PKRevealController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A339DFFE9554B70AEAC9A04 /* Pods-PKRevealController-dummy.m */; };
-		39FFDC8DACF74F21BA47D263 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99AAC8E442C444F9BF7A7787 /* Foundation.framework */; };
-		3E4C5DC52C644DEFBAF82FD2 /* PKRevealControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162D788EAB3C4D34A8C6EE28 /* PKRevealControllerView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		40CFC48172F7464880FEC6F5 /* PKRevealController.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B85A47407E4F3C967E7A21 /* PKRevealController.h */; };
-		439DBBA2D82147ABBD3B3E12 /* PKAnimating.h in Headers */ = {isa = PBXBuildFile; fileRef = DBD050220801414AB336D79A /* PKAnimating.h */; };
-		456618DF7FFD4A22BC457FE2 /* PKAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA4381DA1F5402981D34042 /* PKAnimation.h */; };
-		4F1B977F6ABD43B58C93DC2A /* CALayer+PKConvenienceAnimations.h in Headers */ = {isa = PBXBuildFile; fileRef = F6470585121A42588BB66BAA /* CALayer+PKConvenienceAnimations.h */; };
-		5583651316B74C9FA77E8BF1 /* NSObject+PKBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 9192EFEA67194328B3CF469D /* NSObject+PKBlocks.h */; };
-		5B8D1E85502144688DF2E591 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 883C5F278D414CD48F53E6AB /* QuartzCore.framework */; };
-		5D8440087766415DA94D1126 /* PKRevealControllerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CE69B53A6A6406C9A4DD586 /* PKRevealControllerView.h */; };
-		61D09FEDA85846B783AACA94 /* CALayer+PKConvenienceAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6B7275A2DD49DC80E6CD8D /* CALayer+PKConvenienceAnimations.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		74C52D5F78ED449E8072A0DC /* CAAnimation+PKIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 7918A87D6CF54AD5841F1A41 /* CAAnimation+PKIdentifier.h */; };
-		85098A2B081A4A28AAC8ED2C /* NSObject+PKBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 5103630031DD473C80DCB124 /* NSObject+PKBlocks.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		855F79FAE6DD435D8F312E16 /* PKSequentialAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A32A70325544F73811F8948 /* PKSequentialAnimation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		86343E4029A44B24BD758EE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99AAC8E442C444F9BF7A7787 /* Foundation.framework */; };
-		89F7D0D8A7FA4E76B9C05887 /* UIViewController+PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C59D17C072C4ECE997D4EBE /* UIViewController+PKRevealController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D3FD10FF33D42DD8B216844 /* CAAnimation+PKIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 165E710ABDA84BE090ED2135 /* CAAnimation+PKIdentifier.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9CA3226053EA47798141718E /* PKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A778914E434A16B8879FF2 /* PKLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9D31E20F29FC4D5EB2AE350F /* PKLayerAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0122538BDA4F8EA14A6F65 /* PKLayerAnimator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		ACCC9847347C4A229DA84A49 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9FDC9C8C1CA4859A155D92C /* UIKit.framework */; };
-		C7203EF3EBF74DACAD35B507 /* PKRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819047F6FA7645F881CEF334 /* PKRevealController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		C96D71BBF4244620B294CA0C /* PKLayerAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = A5EDCDD188C14FF8BD8A5DFC /* PKLayerAnimator.h */; };
-		C9B3AAF32A1F4D2E8C6E2DB7 /* PKSequentialAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E9F8EDA2F042A2A98FFB43 /* PKSequentialAnimation.h */; };
-		F0DFED3DE6A446F78D1F9392 /* PKAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE2D26B4DC441F7BBA7E0BA /* PKAnimation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F0FD416EF0174274BDF357F1 /* PKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 72EE051D307B47E381C40AF5 /* PKLog.h */; };
+		15CCA632189B4F2E8F0FC1CB /* SVProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = E007DAE3FFA142C88A6C832E /* SVProgressHUD.h */; };
+		1E329CE142C74C1DA25E49A8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB381727CB74C599A007023 /* QuartzCore.framework */; };
+		C9D89C1CC489441287F1C961 /* Pods-SVProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D8AB5A03A44F0BDAA6E03 /* Pods-SVProgressHUD-dummy.m */; };
+		CE3B4CFECDF84CBE9CF9FAA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE6CA942CA84FEE98981260 /* Foundation.framework */; };
+		E10C618D4F8C44B4B13F4F00 /* libPods-SVProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C644B358124FB3BA484D7D /* libPods-SVProgressHUD.a */; };
+		E6C46A175C3F46C8A51605AB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D11845B4E58340FFB46BC4F4 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		EDCF592D839D494D82DB88A4 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4656C8A19FD449E2959BCBE4 /* Pods-dummy.m */; };
+		FD92D366143544A49C81FA63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE6CA942CA84FEE98981260 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		007A192E0D2245489CFE6C09 /* PBXContainerItemProxy */ = {
+		59019D10892D4E278590D0BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1222E200BB3544C6B3932DB0 /* Project object */;
+			containerPortal = B0399100BFDD4947A071B635 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9610151E52DE4F7C96D92E3A;
-			remoteInfo = "Pods-PKRevealController";
+			remoteGlobalIDString = C764ACB1B22748E0AAD0A198;
+			remoteInfo = "Pods-SVProgressHUD";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06861E27AACC4C529E4B0D92 /* UIViewController+PKRevealController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PKRevealController.h"; path = "Source/PKRevealController/Categories/UIViewController+PKRevealController.h"; sourceTree = "<group>"; };
-		0C2131BE5BFB4005A062BCFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C59D17C072C4ECE997D4EBE /* UIViewController+PKRevealController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PKRevealController.m"; path = "Source/PKRevealController/Categories/UIViewController+PKRevealController.m"; sourceTree = "<group>"; };
-		162D788EAB3C4D34A8C6EE28 /* PKRevealControllerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKRevealControllerView.m; path = Source/PKRevealController/Classes/PKRevealControllerView.m; sourceTree = "<group>"; };
-		165E710ABDA84BE090ED2135 /* CAAnimation+PKIdentifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CAAnimation+PKIdentifier.m"; path = "Source/PKRevealController/Categories/CAAnimation+PKIdentifier.m"; sourceTree = "<group>"; };
-		20B85A47407E4F3C967E7A21 /* PKRevealController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKRevealController.h; path = Source/PKRevealController/PKRevealController.h; sourceTree = "<group>"; };
-		2CE69B53A6A6406C9A4DD586 /* PKRevealControllerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKRevealControllerView.h; path = Source/PKRevealController/Classes/PKRevealControllerView.h; sourceTree = "<group>"; };
-		4C3453200DF54A1BB0555AD0 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		4FE8522DCBA940118D1322E3 /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
-		5103630031DD473C80DCB124 /* NSObject+PKBlocks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+PKBlocks.m"; path = "Source/PKRevealController/Categories/NSObject+PKBlocks.m"; sourceTree = "<group>"; };
-		5BA4381DA1F5402981D34042 /* PKAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKAnimation.h; path = Source/PKRevealController/Modules/PKLayerAnimator/PKAnimation.h; sourceTree = "<group>"; };
-		5F8D436AF76946DF9529318C /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6A0695725B954FE4AF466F76 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		72EE051D307B47E381C40AF5 /* PKLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKLog.h; path = Source/PKRevealController/Modules/PKLog/PKLog.h; sourceTree = "<group>"; };
-		7918A87D6CF54AD5841F1A41 /* CAAnimation+PKIdentifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CAAnimation+PKIdentifier.h"; path = "Source/PKRevealController/Categories/CAAnimation+PKIdentifier.h"; sourceTree = "<group>"; };
-		80ED4BEA57C14D099A90D0DB /* libPods-PKRevealController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PKRevealController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		819047F6FA7645F881CEF334 /* PKRevealController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKRevealController.m; path = Source/PKRevealController/PKRevealController.m; sourceTree = "<group>"; };
-		84A778914E434A16B8879FF2 /* PKLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKLog.m; path = Source/PKRevealController/Modules/PKLog/PKLog.m; sourceTree = "<group>"; };
-		883C5F278D414CD48F53E6AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		8F6B7275A2DD49DC80E6CD8D /* CALayer+PKConvenienceAnimations.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CALayer+PKConvenienceAnimations.m"; path = "Source/PKRevealController/Categories/CALayer+PKConvenienceAnimations.m"; sourceTree = "<group>"; };
-		9192EFEA67194328B3CF469D /* NSObject+PKBlocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+PKBlocks.h"; path = "Source/PKRevealController/Categories/NSObject+PKBlocks.h"; sourceTree = "<group>"; };
-		99AAC8E442C444F9BF7A7787 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		9A32A70325544F73811F8948 /* PKSequentialAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKSequentialAnimation.m; path = Source/PKRevealController/Modules/PKLayerAnimator/PKSequentialAnimation.m; sourceTree = "<group>"; };
-		9A339DFFE9554B70AEAC9A04 /* Pods-PKRevealController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PKRevealController-dummy.m"; sourceTree = "<group>"; };
-		A5E9F8EDA2F042A2A98FFB43 /* PKSequentialAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKSequentialAnimation.h; path = Source/PKRevealController/Modules/PKLayerAnimator/PKSequentialAnimation.h; sourceTree = "<group>"; };
-		A5EDCDD188C14FF8BD8A5DFC /* PKLayerAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKLayerAnimator.h; path = Source/PKRevealController/Modules/PKLayerAnimator/PKLayerAnimator.h; sourceTree = "<group>"; };
-		A9FDC9C8C1CA4859A155D92C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		CA0122538BDA4F8EA14A6F65 /* PKLayerAnimator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKLayerAnimator.m; path = Source/PKRevealController/Modules/PKLayerAnimator/PKLayerAnimator.m; sourceTree = "<group>"; };
-		D6B53D20FF59411E9D2BC982 /* Pods-PKRevealController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PKRevealController.xcconfig"; sourceTree = "<group>"; };
-		D79798E7ED7842FDAA78E3EB /* Pods-PKRevealController-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PKRevealController-Private.xcconfig"; sourceTree = "<group>"; };
-		DBD050220801414AB336D79A /* PKAnimating.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKAnimating.h; path = Source/PKRevealController/Modules/PKLayerAnimator/PKAnimating.h; sourceTree = "<group>"; };
-		DE701C22BEA943D98BC3835D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.xcconfig; sourceTree = "<group>"; };
-		E202F169857943D8BAB6E43B /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		F1BAF0DC13ED41B58F5196B0 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F6470585121A42588BB66BAA /* CALayer+PKConvenienceAnimations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CALayer+PKConvenienceAnimations.h"; path = "Source/PKRevealController/Categories/CALayer+PKConvenienceAnimations.h"; sourceTree = "<group>"; };
-		FAF7339EE9A64AB58FCA1EF2 /* Pods-PKRevealController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PKRevealController-prefix.pch"; sourceTree = "<group>"; };
-		FEE2D26B4DC441F7BBA7E0BA /* PKAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKAnimation.m; path = Source/PKRevealController/Modules/PKLayerAnimator/PKAnimation.m; sourceTree = "<group>"; };
+		27795E9CCB3844CCBC283313 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A1D32559B3D44EC95D8E9CD /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		34D8DEE1EBB140AE8083E4DC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.xcconfig; sourceTree = "<group>"; };
+		3D30F03ACF3743B489321E19 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		4656C8A19FD449E2959BCBE4 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		593BC28D1AAE434D91224907 /* Pods-SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SVProgressHUD.xcconfig"; sourceTree = "<group>"; };
+		5AE6CA942CA84FEE98981260 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		60C644B358124FB3BA484D7D /* libPods-SVProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SVProgressHUD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9509C99B5D4F40ADB79963 /* Pods-SVProgressHUD-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SVProgressHUD-Private.xcconfig"; sourceTree = "<group>"; };
+		72B682521A114F53850B07C5 /* Pods-SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		979D8AB5A03A44F0BDAA6E03 /* Pods-SVProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SVProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		9CB381727CB74C599A007023 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		AC40F7F9A8B94CB680D21F0C /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		AED26ABE1B2E4442832524D6 /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
+		D11845B4E58340FFB46BC4F4 /* SVProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
+		DD4459A6B2BC49D4BBC991A3 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		E007DAE3FFA142C88A6C832E /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		E05C859067E14822A9233C06 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		365AABF6D38E44038CA501A5 /* Frameworks */ = {
+		3E40CA149B6A493BA234FC83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39FFDC8DACF74F21BA47D263 /* Foundation.framework in Frameworks */,
-				32CE6B06F4AC4568980A5CE0 /* libPods-PKRevealController.a in Frameworks */,
+				FD92D366143544A49C81FA63 /* Foundation.framework in Frameworks */,
+				E10C618D4F8C44B4B13F4F00 /* libPods-SVProgressHUD.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A513643A5064BD78C8F4EF8 /* Frameworks */ = {
+		852AD7F4B9634BEFBCAC9FE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86343E4029A44B24BD758EE7 /* Foundation.framework in Frameworks */,
-				5B8D1E85502144688DF2E591 /* QuartzCore.framework in Frameworks */,
-				ACCC9847347C4A229DA84A49 /* UIKit.framework in Frameworks */,
+				CE3B4CFECDF84CBE9CF9FAA2 /* Foundation.framework in Frameworks */,
+				1E329CE142C74C1DA25E49A8 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		053D7B177ABA449D998A7253 /* PKRevealController */ = {
+		3CBE57FE268D4C579C4436F9 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				7918A87D6CF54AD5841F1A41 /* CAAnimation+PKIdentifier.h */,
-				165E710ABDA84BE090ED2135 /* CAAnimation+PKIdentifier.m */,
-				F6470585121A42588BB66BAA /* CALayer+PKConvenienceAnimations.h */,
-				8F6B7275A2DD49DC80E6CD8D /* CALayer+PKConvenienceAnimations.m */,
-				9192EFEA67194328B3CF469D /* NSObject+PKBlocks.h */,
-				5103630031DD473C80DCB124 /* NSObject+PKBlocks.m */,
-				DBD050220801414AB336D79A /* PKAnimating.h */,
-				5BA4381DA1F5402981D34042 /* PKAnimation.h */,
-				FEE2D26B4DC441F7BBA7E0BA /* PKAnimation.m */,
-				A5EDCDD188C14FF8BD8A5DFC /* PKLayerAnimator.h */,
-				CA0122538BDA4F8EA14A6F65 /* PKLayerAnimator.m */,
-				72EE051D307B47E381C40AF5 /* PKLog.h */,
-				84A778914E434A16B8879FF2 /* PKLog.m */,
-				20B85A47407E4F3C967E7A21 /* PKRevealController.h */,
-				819047F6FA7645F881CEF334 /* PKRevealController.m */,
-				2CE69B53A6A6406C9A4DD586 /* PKRevealControllerView.h */,
-				162D788EAB3C4D34A8C6EE28 /* PKRevealControllerView.m */,
-				A5E9F8EDA2F042A2A98FFB43 /* PKSequentialAnimation.h */,
-				9A32A70325544F73811F8948 /* PKSequentialAnimation.m */,
-				06861E27AACC4C529E4B0D92 /* UIViewController+PKRevealController.h */,
-				0C59D17C072C4ECE997D4EBE /* UIViewController+PKRevealController.m */,
-				56DC1F63E3564A759360F820 /* Support Files */,
-			);
-			name = PKRevealController;
-			path = PKRevealController;
-			sourceTree = "<group>";
-		};
-		38B5732939D34156AF894232 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				053D7B177ABA449D998A7253 /* PKRevealController */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		483626DACE884E65906909BF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				98EF171AE6F94F84AB2C1FA9 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4A2CCA30FF0F4A488CC36187 = {
-			isa = PBXGroup;
-			children = (
-				5F8D436AF76946DF9529318C /* Podfile */,
-				483626DACE884E65906909BF /* Frameworks */,
-				38B5732939D34156AF894232 /* Pods */,
-				D0169B1DB2774D668065A1AA /* Products */,
-				6885847ED8E446678203BBC4 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		56DC1F63E3564A759360F820 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				D6B53D20FF59411E9D2BC982 /* Pods-PKRevealController.xcconfig */,
-				D79798E7ED7842FDAA78E3EB /* Pods-PKRevealController-Private.xcconfig */,
-				9A339DFFE9554B70AEAC9A04 /* Pods-PKRevealController-dummy.m */,
-				FAF7339EE9A64AB58FCA1EF2 /* Pods-PKRevealController-prefix.pch */,
-			);
-			name = "Support Files";
-			sourceTree = SOURCE_ROOT;
-		};
-		6885847ED8E446678203BBC4 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				950E8582165E47BB9821CEF9 /* Pods */,
+				49696794EE7449648A686E17 /* Pods */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		950E8582165E47BB9821CEF9 /* Pods */ = {
+		49696794EE7449648A686E17 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DE701C22BEA943D98BC3835D /* Pods.xcconfig */,
-				F1BAF0DC13ED41B58F5196B0 /* Pods-acknowledgements.markdown */,
-				6A0695725B954FE4AF466F76 /* Pods-acknowledgements.plist */,
-				E202F169857943D8BAB6E43B /* Pods-dummy.m */,
-				4FE8522DCBA940118D1322E3 /* Pods-environment.h */,
-				4C3453200DF54A1BB0555AD0 /* Pods-resources.sh */,
+				34D8DEE1EBB140AE8083E4DC /* Pods.xcconfig */,
+				AC40F7F9A8B94CB680D21F0C /* Pods-acknowledgements.markdown */,
+				DD4459A6B2BC49D4BBC991A3 /* Pods-acknowledgements.plist */,
+				4656C8A19FD449E2959BCBE4 /* Pods-dummy.m */,
+				AED26ABE1B2E4442832524D6 /* Pods-environment.h */,
+				3D30F03ACF3743B489321E19 /* Pods-resources.sh */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		98EF171AE6F94F84AB2C1FA9 /* iOS */ = {
+		7657B9D6DBD74B2ABE26339F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				99AAC8E442C444F9BF7A7787 /* Foundation.framework */,
-				883C5F278D414CD48F53E6AB /* QuartzCore.framework */,
-				A9FDC9C8C1CA4859A155D92C /* UIKit.framework */,
+				5AE6CA942CA84FEE98981260 /* Foundation.framework */,
+				9CB381727CB74C599A007023 /* QuartzCore.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		D0169B1DB2774D668065A1AA /* Products */ = {
+		77C783184B524384B5CC0DC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0C2131BE5BFB4005A062BCFF /* libPods.a */,
-				80ED4BEA57C14D099A90D0DB /* libPods-PKRevealController.a */,
+				7657B9D6DBD74B2ABE26339F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91548AFF1B7E48BCB6662B42 = {
+			isa = PBXGroup;
+			children = (
+				2A1D32559B3D44EC95D8E9CD /* Podfile */,
+				77C783184B524384B5CC0DC9 /* Frameworks */,
+				CFD1C98399094299A4AC0FA4 /* Pods */,
+				A350F4C35D2D486FA1AC3D9C /* Products */,
+				3CBE57FE268D4C579C4436F9 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		A350F4C35D2D486FA1AC3D9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27795E9CCB3844CCBC283313 /* libPods.a */,
+				60C644B358124FB3BA484D7D /* libPods-SVProgressHUD.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C0C36DB918934739BFB928F0 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E007DAE3FFA142C88A6C832E /* SVProgressHUD.h */,
+				D11845B4E58340FFB46BC4F4 /* SVProgressHUD.m */,
+				D4A9C755304E4FB0BA404ABB /* Resources */,
+				F0B92268BA1948EAA0E4289F /* Support Files */,
+			);
+			name = SVProgressHUD;
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		CFD1C98399094299A4AC0FA4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C0C36DB918934739BFB928F0 /* SVProgressHUD */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D4A9C755304E4FB0BA404ABB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E05C859067E14822A9233C06 /* SVProgressHUD.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F0B92268BA1948EAA0E4289F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				593BC28D1AAE434D91224907 /* Pods-SVProgressHUD.xcconfig */,
+				6D9509C99B5D4F40ADB79963 /* Pods-SVProgressHUD-Private.xcconfig */,
+				979D8AB5A03A44F0BDAA6E03 /* Pods-SVProgressHUD-dummy.m */,
+				72B682521A114F53850B07C5 /* Pods-SVProgressHUD-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E26E65B08933481FA08DA6CE /* Headers */ = {
+		1249AD63E5C34123966216B1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74C52D5F78ED449E8072A0DC /* CAAnimation+PKIdentifier.h in Headers */,
-				4F1B977F6ABD43B58C93DC2A /* CALayer+PKConvenienceAnimations.h in Headers */,
-				5583651316B74C9FA77E8BF1 /* NSObject+PKBlocks.h in Headers */,
-				439DBBA2D82147ABBD3B3E12 /* PKAnimating.h in Headers */,
-				456618DF7FFD4A22BC457FE2 /* PKAnimation.h in Headers */,
-				C96D71BBF4244620B294CA0C /* PKLayerAnimator.h in Headers */,
-				F0FD416EF0174274BDF357F1 /* PKLog.h in Headers */,
-				40CFC48172F7464880FEC6F5 /* PKRevealController.h in Headers */,
-				5D8440087766415DA94D1126 /* PKRevealControllerView.h in Headers */,
-				C9B3AAF32A1F4D2E8C6E2DB7 /* PKSequentialAnimation.h in Headers */,
-				22987A746E9940268BA3AC7F /* UIViewController+PKRevealController.h in Headers */,
+				15CCA632189B4F2E8F0FC1CB /* SVProgressHUD.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9610151E52DE4F7C96D92E3A /* Pods-PKRevealController */ = {
+		BE5A8BA8A0674BC6AB9CC043 /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 72C5450FDD2943D6AAB41E64 /* Build configuration list for PBXNativeTarget "Pods-PKRevealController" */;
+			buildConfigurationList = E942487034B648558E6F975A /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				FCD6C923C71740AA89D56DF9 /* Sources */,
-				8A513643A5064BD78C8F4EF8 /* Frameworks */,
-				E26E65B08933481FA08DA6CE /* Headers */,
+				EC146A9A2A75432391933EAA /* Sources */,
+				3E40CA149B6A493BA234FC83 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = "Pods-PKRevealController";
-			productName = "Pods-PKRevealController";
-			productReference = 80ED4BEA57C14D099A90D0DB /* libPods-PKRevealController.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		9BB6B3B7E8F448E3AA09E205 /* Pods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F5B19D38E3964B019230C934 /* Build configuration list for PBXNativeTarget "Pods" */;
-			buildPhases = (
-				5ACE8F71D72947FC82349144 /* Sources */,
-				365AABF6D38E44038CA501A5 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EA09C484D14C453BB69A0D07 /* PBXTargetDependency */,
+				ED84BFC231F54AC2B3955E0A /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
-			productReference = 0C2131BE5BFB4005A062BCFF /* libPods.a */;
+			productReference = 27795E9CCB3844CCBC283313 /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		C764ACB1B22748E0AAD0A198 /* Pods-SVProgressHUD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E043AE687E948C7B516C826 /* Build configuration list for PBXNativeTarget "Pods-SVProgressHUD" */;
+			buildPhases = (
+				CF16D705465D475691C955EE /* Sources */,
+				852AD7F4B9634BEFBCAC9FE2 /* Frameworks */,
+				1249AD63E5C34123966216B1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SVProgressHUD";
+			productName = "Pods-SVProgressHUD";
+			productReference = 60C644B358124FB3BA484D7D /* libPods-SVProgressHUD.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1222E200BB3544C6B3932DB0 /* Project object */ = {
+		B0399100BFDD4947A071B635 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = 3CF61F463C35425AAB2D85C2 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 002D53456B0946AB8A539121 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 4A2CCA30FF0F4A488CC36187;
-			productRefGroup = D0169B1DB2774D668065A1AA /* Products */;
+			mainGroup = 91548AFF1B7E48BCB6662B42;
+			productRefGroup = A350F4C35D2D486FA1AC3D9C /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 			);
 			projectRoot = "";
 			targets = (
-				9BB6B3B7E8F448E3AA09E205 /* Pods */,
-				9610151E52DE4F7C96D92E3A /* Pods-PKRevealController */,
+				BE5A8BA8A0674BC6AB9CC043 /* Pods */,
+				C764ACB1B22748E0AAD0A198 /* Pods-SVProgressHUD */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5ACE8F71D72947FC82349144 /* Sources */ = {
+		CF16D705465D475691C955EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				094A6D9D7122445999AB81A4 /* Pods-dummy.m in Sources */,
+				C9D89C1CC489441287F1C961 /* Pods-SVProgressHUD-dummy.m in Sources */,
+				E6C46A175C3F46C8A51605AB /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FCD6C923C71740AA89D56DF9 /* Sources */ = {
+		EC146A9A2A75432391933EAA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D3FD10FF33D42DD8B216844 /* CAAnimation+PKIdentifier.m in Sources */,
-				61D09FEDA85846B783AACA94 /* CALayer+PKConvenienceAnimations.m in Sources */,
-				85098A2B081A4A28AAC8ED2C /* NSObject+PKBlocks.m in Sources */,
-				F0DFED3DE6A446F78D1F9392 /* PKAnimation.m in Sources */,
-				9D31E20F29FC4D5EB2AE350F /* PKLayerAnimator.m in Sources */,
-				9CA3226053EA47798141718E /* PKLog.m in Sources */,
-				C7203EF3EBF74DACAD35B507 /* PKRevealController.m in Sources */,
-				3E4C5DC52C644DEFBAF82FD2 /* PKRevealControllerView.m in Sources */,
-				855F79FAE6DD435D8F312E16 /* PKSequentialAnimation.m in Sources */,
-				338942AF5B3E4DCB9184C52E /* Pods-PKRevealController-dummy.m in Sources */,
-				89F7D0D8A7FA4E76B9C05887 /* UIViewController+PKRevealController.m in Sources */,
+				EDCF592D839D494D82DB88A4 /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EA09C484D14C453BB69A0D07 /* PBXTargetDependency */ = {
+		ED84BFC231F54AC2B3955E0A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9610151E52DE4F7C96D92E3A /* Pods-PKRevealController */;
-			targetProxy = 007A192E0D2245489CFE6C09 /* PBXContainerItemProxy */;
+			target = C764ACB1B22748E0AAD0A198 /* Pods-SVProgressHUD */;
+			targetProxy = 59019D10892D4E278590D0BD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		577EE7638C134032A2B87FCF /* Release */ = {
+		0006A881C624409D94392749 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -372,9 +302,9 @@
 			};
 			name = Release;
 		};
-		893E39DA303B4D95B057925D /* Debug */ = {
+		09C7FA0272274974A066CA7E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D79798E7ED7842FDAA78E3EB /* Pods-PKRevealController-Private.xcconfig */;
+			baseConfigurationReference = 6D9509C99B5D4F40ADB79963 /* Pods-SVProgressHUD-Private.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -383,7 +313,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-PKRevealController-prefix.pch";
+				GCC_PREFIX_HEADER = "Pods-SVProgressHUD-prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -400,93 +330,7 @@
 			};
 			name = Debug;
 		};
-		9FD6FF44A9BD44C1A38E6DC0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D79798E7ED7842FDAA78E3EB /* Pods-PKRevealController-Private.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-PKRevealController-prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_CFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		A714D10EFD1B4445B677111A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE701C22BEA943D98BC3835D /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_CFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		CF22DF8005E8443ABB50CEE8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE701C22BEA943D98BC3835D /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F9520996E93542809524F0A1 /* Debug */ = {
+		3D9E3EC14D19403B82C169E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -522,37 +366,123 @@
 			};
 			name = Debug;
 		};
+		7B6BFAD9274948E29800805B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34D8DEE1EBB140AE8083E4DC /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9FAB86EE307B4CF39C00BABF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D9509C99B5D4F40ADB79963 /* Pods-SVProgressHUD-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-SVProgressHUD-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EEED8D06337345EAAF724FD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34D8DEE1EBB140AE8083E4DC /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3CF61F463C35425AAB2D85C2 /* Build configuration list for PBXProject "Pods" */ = {
+		002D53456B0946AB8A539121 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F9520996E93542809524F0A1 /* Debug */,
-				577EE7638C134032A2B87FCF /* Release */,
+				3D9E3EC14D19403B82C169E5 /* Debug */,
+				0006A881C624409D94392749 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		72C5450FDD2943D6AAB41E64 /* Build configuration list for PBXNativeTarget "Pods-PKRevealController" */ = {
+		0E043AE687E948C7B516C826 /* Build configuration list for PBXNativeTarget "Pods-SVProgressHUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				893E39DA303B4D95B057925D /* Debug */,
-				9FD6FF44A9BD44C1A38E6DC0 /* Release */,
+				09C7FA0272274974A066CA7E /* Debug */,
+				9FAB86EE307B4CF39C00BABF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F5B19D38E3964B019230C934 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		E942487034B648558E6F975A /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CF22DF8005E8443ABB50CEE8 /* Debug */,
-				A714D10EFD1B4445B677111A /* Release */,
+				7B6BFAD9274948E29800805B /* Debug */,
+				EEED8D06337345EAAF724FD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1222E200BB3544C6B3932DB0 /* Project object */;
+	rootObject = B0399100BFDD4947A071B635 /* Project object */;
 }

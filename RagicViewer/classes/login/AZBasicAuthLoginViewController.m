@@ -5,8 +5,11 @@
 
 #import "AZBasicAuthLoginViewController.h"
 #import "AZRagicClient.h"
+#import "AZRagicTabFolderTableViewController.h"
+#import "SVProgressHUD.h"
+#import "AZRagicWebViewController.h"
 
-@interface AZBasicAuthLoginViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RagicClientDelegate>
+@interface AZBasicAuthLoginViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RagicClientDelegate, UITextViewDelegate, UIWebViewDelegate>
 
 @property (nonatomic, retain) UITableView * tableView;
 @property (nonatomic, retain) UITextField * accountField;
@@ -44,19 +47,35 @@
     self.navigationItem.title = @"RagicViewer";
     self.view.backgroundColor = [UIColor whiteColor];
 
-    UITableView *tempTableView = [[[UITableView alloc] init] autorelease];
+    UITableView *tempTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
+
     [tempTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     tempTableView.delegate = self;
     tempTableView.dataSource = self;
     tempTableView.backgroundColor = [UIColor whiteColor];
+    tempTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView = tempTableView;
 
     [self.view addSubview:self.tableView];
 
     NSDictionary *bindings = NSDictionaryOfVariableBindings(_tableView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-20-[_tableView]-20-|" options:0 metrics:nil  views:bindings]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-6-[_tableView(200)]" options:0 metrics:nil  views:bindings]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_tableView]|" options:0 metrics:nil  views:bindings]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-6-[_tableView]|" options:0 metrics:nil  views:bindings]];
 
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.titleLabel.text = @"Forgot password";
+    [button addTarget:self action:@selector(openWebViewController:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tableView]-10-[button]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button, _tableView)]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+}
+
+- (void)openWebViewController:(id)sender {
+    AZRagicWebViewController *controller = [[AZRagicWebViewController alloc] init];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)back {
@@ -64,7 +83,9 @@
 }
 
 - (void)loginButtonPressed {
+    [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
     [NSThread detachNewThreadSelector:@selector(login) toTarget:self withObject:nil];
+    [self.passwordField resignFirstResponder];
 }
 
 - (void)login {
@@ -74,10 +95,25 @@
     NSString * username = self.accountField.text;
     NSString * password = self.passwordField.text;
     [client loginWithUsername:username password:password];
+
 }
 
-- (Boolean)loginFinishedWithStatusCode:(NSString *)code andResult:(NSDictionary *)result {
-    return false;
+- (void)loginFinishedWithStatusCode:(NSString *)code andResult:(NSDictionary *)result {
+    if ([code isEqualToString:@"success"]) {
+        [self performSelectorOnMainThread:@selector(dispatchToMainView) withObject:nil waitUntilDone:NO];
+    } else {
+        [SVProgressHUD dismiss];
+    }
+
+}
+
+- (void)dispatchToMainView {
+    if([SVProgressHUD isVisible]){
+        [SVProgressHUD dismiss];
+    }
+    AZRagicTabFolderTableViewController *controller = [[[AZRagicTabFolderTableViewController alloc] init] autorelease];
+    UINavigationController *newNav = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:newNav animated:YES completion:nil];
 }
 
 #pragma mark UITableViewDataSource
@@ -102,37 +138,42 @@
     }
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    UITextField *field = [[[UITextField alloc] init] autorelease];
-    [field setTranslatesAutoresizingMaskIntoConstraints:NO];
+
     switch (indexPath.row) {
-        case 0:
+        case 0: {
+            UITextField *field = [[[UITextField alloc] init] autorelease];
+            [field setTranslatesAutoresizingMaskIntoConstraints:NO];
             field.placeholder = @"email address";
             self.accountField = field;
             [cell.contentView addSubview:self.accountField];
+            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-12-[field]-12-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
+            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[field(>=40)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
+            }
             break;
-        case 1:
-            field.placeholder = @"your password";
+        case 1:{
+            UITextField *field = [[[UITextField alloc] init] autorelease];
+            [field setTranslatesAutoresizingMaskIntoConstraints:NO];
+            field.placeholder = @"password";
             field.secureTextEntry = YES;
             self.passwordField = field;
             [cell.contentView addSubview:self.passwordField];
+            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-12-[field]-12-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
+            [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[field(>=40)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
+            }
             break;
         default:break;
     }
-
-    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[field]-20-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
-    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[field(40)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
 
     return cell;
 }
 
 - (float)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     // This will create a "invisible" footer
-    return 0.01f;
+    return 40.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    // To "clear" the footer view
     return [[UIView new] autorelease];
 }
 
