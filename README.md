@@ -26,8 +26,6 @@ A code signing key from Apple is required to deploy apps to a device. Without a 
 
 
 ## License
-License
-
 MIT License (MIT)
 
 Copyright (c) 2014 Azuritul Wu
