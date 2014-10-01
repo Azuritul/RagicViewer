@@ -13,4 +13,6 @@
 
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray * result;
+@property (nonatomic, retain) UIView *dropdownMenu;
+@property (nonatomic, retain) NSLayoutConstraint *xAxisLayoutConstraint;
 @end
