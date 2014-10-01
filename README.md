@@ -1,7 +1,7 @@
 RagicViewer
 ===========
 
-This is the repository for RagicViewer, an unofficial Ragic Builder client for iOS.  Though the project is mainly built for personal interest and study needs, it should be able to satisfy some basic needs.
+This is the repository for RagicViewer, an unofficial Ragic Builder client for iOS, mainly built for personal interest and study needs.
 
 If you find any issues, please fire an issue or send a pull request.
 
@@ -21,7 +21,7 @@ A code signing key from Apple is required to deploy apps to a device. Without a 
 
 ## Installation
 * Clone the repo to your own hard drive (with `git clone  https://github.com/Azuritul/RagicViewer.git`)
-* Use Xcode or other ios IDE to open the project
+* Use Xcode or other IDE to open the project
 * Build and run
 
 
