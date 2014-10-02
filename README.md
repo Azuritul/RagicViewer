@@ -13,7 +13,7 @@ This project is still in early beta.
 * iOS 8
 * An iPhone
 
-A code signing key from Apple is required to deploy apps to a device. Without a developer key, the app can only be installed on the iPhone/iPad Simulator.
+A code signing key from Apple is required to deploy apps to a device. Without a developer key, the app can only be installed on the iPhone Simulator.
 
 ##Third party component
 * SVProgressHUD
