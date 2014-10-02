@@ -68,8 +68,19 @@
 
 - (void)loginButtonPressed {
     [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
-    [NSThread detachNewThreadSelector:@selector(login) toTarget:self withObject:nil];
-    [self.passwordField resignFirstResponder];
+    if([self isFormValid]) {
+        [NSThread detachNewThreadSelector:@selector(login) toTarget:self withObject:nil];
+        [self.passwordField resignFirstResponder];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"Username or password is wrong"];
+    }
+}
+
+- (Boolean)isFormValid {
+    if (self.accountField.text.length <= 1) return NO;
+    if (self.passwordField.text.length <= 0) return NO;
+    if (![self.accountField.text containsString:@"@"]) return NO;
+    return YES;
 }
 
 - (void)login {
@@ -128,6 +139,8 @@
             UITextField *field = [[[UITextField alloc] init] autorelease];
             [field setTranslatesAutoresizingMaskIntoConstraints:NO];
             field.placeholder = @"email address";
+            field.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            field.keyboardType = UIKeyboardTypeEmailAddress;
             self.accountField = field;
             [cell.contentView addSubview:self.accountField];
             [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-12-[field]-12-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(field)]];
