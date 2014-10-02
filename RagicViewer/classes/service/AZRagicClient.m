@@ -20,7 +20,6 @@
                       if ([data length] > 0 && error == nil) {
                           NSString *responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                           if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
-                              NSLog(@"%@", responseString);
                           }
                       }
                       else if ([data length] == 0 && error == nil) {
@@ -49,7 +48,6 @@
                                    NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&resultError];
                                    if(resultDic.count > 0) {
                                        if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
-                                           NSLog(@"%@", responseString);
                                            //Should save apikey to keychain if success
                                            [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"apikey"] forKey:@"ragic_apikey"];
                                            [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"accounts"][@"account"] forKey:@"ragic_account"];
@@ -114,10 +112,7 @@
                                    NSError *resultError;
                                    NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&resultError];
                                    if ([self.delegate respondsToSelector:@selector(loadFinishedWithResult:)]) {
-                                       if ([[resultDic allKeys] count] > 0) {
-                                           NSString *entryKey = [resultDic allKeys][0];
-                                           [self.delegate loadFinishedWithResult:resultDic[entryKey][@"children"]];
-                                       }
+                                       [self.delegate loadFinishedWithResult:resultDic];
                                    }
                                }
                                else if ([data length] == 0 && error == nil) {

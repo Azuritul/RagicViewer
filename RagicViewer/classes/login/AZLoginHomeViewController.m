@@ -71,17 +71,11 @@
 }
 
 - (void)loginOption {
-
     AZBasicAuthLoginViewController *tabs = [[[AZBasicAuthLoginViewController alloc] init] autorelease];
     UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:tabs] autorelease];
-//    self.navigationController.navigationItem.hidesBackButton = NO;
-//    [self.navigationController pushViewController:tabs animated:YES];
     nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:nav animated:YES completion:nil];
-//    [self.navigationController pushViewController:tabs animated:YES];
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -93,16 +87,5 @@
     [_tableView release];
     [super dealloc];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

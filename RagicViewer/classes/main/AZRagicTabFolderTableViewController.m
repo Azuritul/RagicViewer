@@ -10,9 +10,12 @@
 #import "AZRagicSheetItem.h"
 #import "AZRagicSheetListViewController.h"
 #import "SVProgressHUD.h"
+#import "AZRagicUtils.h"
+#import "AZLoginHomeViewController.h"
 
 @interface AZRagicTabFolderTableViewController ()
 
+- (void)forwardToLoginView;
 @end
 
 @implementation AZRagicTabFolderTableViewController
@@ -20,7 +23,6 @@
 @synthesize tableView = _tableView;
 @synthesize result = _result;
 @synthesize dropdownMenu = _dropdownMenu;
-
 @synthesize xAxisLayoutConstraint = _xAxisLayoutConstraint;
 
 - (id)init {
@@ -62,8 +64,6 @@
     [self.view addSubview:self.tableView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
 
     //Add dropdown menu
     UIView *dropdownView = [[[UIView alloc] init] autorelease];
@@ -82,14 +82,17 @@
     [self.view addSubview:dropdownView];
 
     NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=44)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(dropdownView)];
-    NSLayoutConstraint *xAxisToParentView = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:0 constant:-100];
+    NSLayoutConstraint *xAxisToParentView = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:0 constant:0];
     NSLayoutConstraint *viewWidthConstraint = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     self.xAxisLayoutConstraint = xAxisToParentView;
     [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
     [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];    [dropdownView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:dropdownView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.view addConstraint:viewWidthConstraint];
     [self.view addConstraints:menuHeightConstraint];
-    [self.view addConstraint:xAxisToParentView];
+    [self.view addConstraint:self.xAxisLayoutConstraint];
+
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
 
 }
 
@@ -116,14 +119,23 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction *action){
-                                                         //Do logout here
+                                                         [AZRagicUtils removeUserInfo];
+                                                         [self forwardToLoginView];
                                                      }];
+
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:okAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
 
+}
+
+- (void)forwardToLoginView {
+    AZLoginHomeViewController * controller = [[[AZLoginHomeViewController alloc] init] autorelease];
+    UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
+    nav.navigationBar.hidden = YES;
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 

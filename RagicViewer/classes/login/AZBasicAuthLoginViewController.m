@@ -7,7 +7,6 @@
 #import "AZRagicClient.h"
 #import "AZRagicTabFolderTableViewController.h"
 #import "SVProgressHUD.h"
-#import "AZRagicWebViewController.h"
 
 @interface AZBasicAuthLoginViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RagicClientDelegate, UITextViewDelegate, UIWebViewDelegate>
 
@@ -55,27 +54,12 @@
     tempTableView.backgroundColor = [UIColor whiteColor];
     tempTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView = tempTableView;
-
     [self.view addSubview:self.tableView];
 
     NSDictionary *bindings = NSDictionaryOfVariableBindings(_tableView);
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_tableView]|" options:0 metrics:nil  views:bindings]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-6-[_tableView]|" options:0 metrics:nil  views:bindings]];
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.titleLabel.text = @"Forgot password";
-    [button addTarget:self action:@selector(openWebViewController:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tableView]-10-[button]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button, _tableView)]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:button
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-}
-
-- (void)openWebViewController:(id)sender {
-    AZRagicWebViewController *controller = [[AZRagicWebViewController alloc] init];
-    [self presentViewController:controller animated:YES completion:nil];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tableView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings( _tableView)]];
 }
 
 - (void)back {

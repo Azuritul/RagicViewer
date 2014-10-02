@@ -5,18 +5,12 @@
 
 #import "AZRagicSheetListViewController.h"
 #import "AZRagicSheetItem.h"
-#import "AZRagicClient.h"
-#import "AZRagicLeafViewController.h"
-
-@interface AZRagicSheetListViewController () <RagicClientDelegate>
-@end
+#import "AZRagicDataListingViewController.h"
 
 @implementation AZRagicSheetListViewController
 
-
 @synthesize tableView = _tableView;
 @synthesize dataArray = _dataArray;
-
 @synthesize dataDict = _dataDict;
 
 - (AZRagicSheetListViewController *)initWithArray:(NSArray *)array {
@@ -52,7 +46,6 @@
     if(!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellKey] autorelease];
     }
-
     AZRagicSheetItem * item = [self.dataArray objectAtIndex:indexPath.row];
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
@@ -65,24 +58,14 @@
     cell.imageView.tintColor = [UIColor colorWithRed:98/255.0f green:126/255.0f blue:255/255.0f alpha:1.0];
     cell.textLabel.text=item.name;
     return cell;
-
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    AZRagicClient *client = [[[AZRagicClient alloc] init] autorelease];
     AZRagicSheetItem * item = [self.dataArray objectAtIndex:(NSUInteger) indexPath.row];
-//    [client loadSheet:item.itemUrl];
-//    client.delegate = self;
-//    AZRagicSheetListViewController *child = [[[AZRagicSheetListViewController alloc] initWithArray:item.children] autorelease];
-    AZRagicLeafViewController *child = [[AZRagicLeafViewController alloc] initWithUrl:item.itemUrl];
-
-    [self.navigationController pushViewController:child animated:YES];
-}
-
-- (void)loadFinishedWithResult:(NSDictionary *)result {
-    NSLog(@"%@", result);
+    AZRagicDataListingViewController *listingViewController = [[[AZRagicDataListingViewController alloc] initWithURL:item.itemUrl] autorelease];
+    [self.navigationController pushViewController:listingViewController animated:YES];
 }
 
 
