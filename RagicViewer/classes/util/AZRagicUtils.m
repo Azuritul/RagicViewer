@@ -8,6 +8,10 @@
 
 @implementation AZRagicUtils
 
++ (NSString *) getUserMainAccount {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ragic_account"];
+}
+
 + (void)removeUserInfo {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ragic_account"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ragic_apikey"];

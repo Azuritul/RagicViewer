@@ -7,5 +7,8 @@
 
 
 @interface AZRagicUtils : NSObject
+
++ (NSString *)getUserMainAccount;
 + (void)removeUserInfo;
+
 @end
