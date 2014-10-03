@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 Azuritul. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "AZRagicLeafViewController.h"
 #import "AZRagicClient.h"
 
 @implementation AZRagicLeafViewController
 
 @synthesize webView = _webView;
-
 @synthesize url = _url;
 
 - (id)initWithUrl:(NSString *) url {
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"RagicViewer";
     UIWebView *webView = [[UIWebView alloc] init];
     [webView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.webView = webView;
@@ -33,21 +34,21 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(webView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(webView)]];
     [self.webView loadRequest:[AZRagicClient webviewRequestWithUrl:self.url]];
+    [self.webView setScalesPageToFit:YES];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     [webView release];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"startLoading");
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"%@", [error localizedFailureReason]);
+    [SVProgressHUD dismiss];
 }
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"web view finished loading");
-//    [self.view setNeedsDisplay];
+    [SVProgressHUD dismiss];
 }
 
 - (void)didReceiveMemoryWarning {

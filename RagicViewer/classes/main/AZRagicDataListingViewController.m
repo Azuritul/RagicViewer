@@ -6,6 +6,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "AZRagicDataListingViewController.h"
 #import "AZRagicClient.h"
+#import "AZRagicLeafViewController.h"
 
 @interface AZRagicDataListingViewController () <RagicClientDelegate>
 @end
@@ -29,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Ragic Viewer";
     self.tableView = [[[UITableView alloc] init] autorelease];
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.tableView];
@@ -37,8 +39,8 @@
     NSDictionary *viewDict = NSDictionaryOfVariableBindings(_tableView);
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:viewDict]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:viewDict]];
+    [self loadData];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
 }
 
 - (void) loadData {
@@ -61,7 +63,6 @@
     NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
     if(item.count > 0) {
         NSString * title = item[item.allKeys[0]];
-        //NSArray *array = [[item allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 
         if(item) {
             cell.backgroundColor = [UIColor clearColor];
@@ -101,15 +102,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+    NSString *nodeId = item[@"_ragicId"];
+    NSString *detailViewURL = [NSString stringWithFormat:@"%@/%@.xhtml", self.url, nodeId];
+    AZRagicLeafViewController *webViewController = [[[AZRagicLeafViewController alloc] initWithUrl:detailViewURL] autorelease];
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)loadFinishedWithResult:(NSDictionary *)result {
     if(result) {
-        NSLog(@"Loading finished successfully");
         [self.dataDict addEntriesFromDictionary:result];
         [self reloadData];
     } else {
-        NSLog(@"Loading failed or fetching results with 0 element");
         [SVProgressHUD performSelectorOnMainThread:@selector(dismiss) withObject:nil waitUntilDone:NO];
     }
 }

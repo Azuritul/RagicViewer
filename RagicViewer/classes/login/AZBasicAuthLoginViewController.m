@@ -69,7 +69,7 @@
 - (void)loginButtonPressed {
     [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
     if([self isFormValid]) {
-        [NSThread detachNewThreadSelector:@selector(login) toTarget:self withObject:nil];
+        [self login];
         [self.passwordField resignFirstResponder];
     } else {
         [SVProgressHUD showErrorWithStatus:@"Username or password is wrong"];
@@ -97,7 +97,8 @@
     if ([code isEqualToString:@"success"]) {
         [self performSelectorOnMainThread:@selector(dispatchToMainView) withObject:nil waitUntilDone:NO];
     } else {
-        [SVProgressHUD dismiss];
+        [SVProgressHUD performSelectorOnMainThread:@selector(dismiss) withObject:nil waitUntilDone:NO];
+        [SVProgressHUD performSelectorOnMainThread:@selector(showErrorWithStatus:) withObject:@"Login failed" waitUntilDone:NO];
     }
 
 }

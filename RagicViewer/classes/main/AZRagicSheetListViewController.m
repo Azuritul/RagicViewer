@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Ragic Viewer";
     self.tableView = [[[UITableView alloc] init] autorelease];
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.tableView];

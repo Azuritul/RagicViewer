@@ -92,8 +92,7 @@
     [self.view addConstraint:self.xAxisLayoutConstraint];
 
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
-
+    [self loadData];
 }
 
 - (void)moreButtonPressed {
