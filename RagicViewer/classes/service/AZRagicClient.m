@@ -137,6 +137,7 @@
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:webViewURL]] autorelease];
     NSString *keyParam = [NSString stringWithFormat:@"Basic %@", apikey];
     [request setValue:keyParam forHTTPHeaderField:@"Authorization"];
+    [request setHTTPShouldHandleCookies:NO];
     [request setHTTPMethod:@"GET"];
     return [[request copy] autorelease];
 }
