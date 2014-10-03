@@ -18,12 +18,12 @@
 @interface AZRagicClient : NSObject
 
 //Basic Auth
-- (NSDictionary *) loginWithAPIKey:(NSString *) key;
+- (void) loginWithAPIKey:(NSString *) key;
 
 //Password Auth
-- (NSDictionary *) loginWithUsername:(NSString *)string password:(NSString *)pass;
-- (NSDictionary *)loadTopLevel:(NSString *)apikey;
-- (NSDictionary *)loadSheet:(NSString *)sheetUrl;
+- (void)loginWithUsername:(NSString *)string password:(NSString *)pass;
+- (void)loadTopLevel:(NSString *)apikey;
+- (void)loadSheet:(NSString *)sheetUrl;
 
 + (NSURLRequest *)webviewRequestWithUrl:(NSString *)url;
 
