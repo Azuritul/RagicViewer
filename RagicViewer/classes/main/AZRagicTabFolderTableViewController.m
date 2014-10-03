@@ -33,21 +33,13 @@
     return self;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem *moreButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"glyphicons_187_more"]
-                                                                   style:UIBarButtonSystemItemDone
+                                                                   style:UIBarButtonItemStyleDone
                                                                   target:self action:@selector(moreButtonPressed)] autorelease];
 
     self.navigationItem.rightBarButtonItem = moreButton;
@@ -185,16 +177,18 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellKey] autorelease];
     }
 
-    AZRagicSheetItem * item = [self.result objectAtIndex:indexPath.row];
+    AZRagicSheetItem * item = [self.result objectAtIndex:(NSUInteger) indexPath.row];
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
         cell.textLabel.textColor = [UIColor grayColor];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
+        cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
     }
-    cell.imageView.image = [[UIImage imageNamed:@"glyphicons_440_folder_closed.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *icon = [[UIImage imageNamed:@"glyphicons_440_folder_closed.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    cell.imageView.image = icon;
     cell.imageView.tintColor = [UIColor colorWithRed:98/255.0f green:126/255.0f blue:255/255.0f alpha:1.0];
+
     cell.textLabel.text=item.name;
     return cell;
 }

@@ -14,7 +14,5 @@
 @property (nonatomic, retain) NSArray * children;
 @property (nonatomic, copy) NSString *itemUrl;
 
-+ (AZRagicSheetItem *)sheetItemFromDictionary:(NSDictionary *)dict forKey:(NSString *)key;
-
 + (AZRagicSheetItem *)sheetItemFromDictionary:(NSDictionary *)dict forKey:(NSString *)key andAccount:(NSString *)account;
 @end

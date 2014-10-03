@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol RagicClientDelegate
+@protocol RagicClientDelegate<NSObject>
 @optional
 -(void) loginFinishedWithStatusCode:(NSString*) code andResult:(NSDictionary*)result;
 -(void) loadFinishedWithResult:(NSDictionary *) result;

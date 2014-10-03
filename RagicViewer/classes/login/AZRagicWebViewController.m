@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     UIWebView *webView = [[UIWebView alloc] init];
     [webView setTranslatesAutoresizingMaskIntoConstraints:NO];
 

@@ -34,11 +34,11 @@
 {
     [super viewDidLoad];
     UIBarButtonItem *customBarItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                       style:UIBarButtonItemStyleBordered
+                                                                       style:UIBarButtonItemStyleDone
                                                                       target:self action:@selector(back)] autorelease];
 
     UIBarButtonItem *loginBarItem = [[[UIBarButtonItem alloc] initWithTitle:@"Login"
-                                                                     style:UIBarButtonItemStyleBordered
+                                                                     style:UIBarButtonItemStyleDone
                                                                     target:self action:@selector(loginButtonPressed)] autorelease];
 
     self.navigationItem.leftBarButtonItem = customBarItem;
@@ -108,7 +108,7 @@
         [SVProgressHUD dismiss];
     }
     AZRagicTabFolderTableViewController *controller = [[[AZRagicTabFolderTableViewController alloc] init] autorelease];
-    UINavigationController *newNav = [[UINavigationController alloc] initWithRootViewController:controller];
+    UINavigationController *newNav = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
     [self presentViewController:newNav animated:YES completion:nil];
 }
 

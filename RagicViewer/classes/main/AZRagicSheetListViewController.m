@@ -47,13 +47,13 @@
     if(!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellKey] autorelease];
     }
-    AZRagicSheetItem * item = [self.dataArray objectAtIndex:indexPath.row];
+    AZRagicSheetItem * item = [self.dataArray objectAtIndex:(NSUInteger) indexPath.row];
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
         cell.textLabel.textColor = [UIColor blackColor];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
+        cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
     }
     cell.imageView.image = [[UIImage imageNamed:@"glyphicons_440_folder_closed.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     cell.imageView.tintColor = [UIColor colorWithRed:98/255.0f green:126/255.0f blue:255/255.0f alpha:1.0];

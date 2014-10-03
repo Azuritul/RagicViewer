@@ -21,7 +21,6 @@
                                        queue:[[[NSOperationQueue alloc] init] autorelease]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if ([data length] > 0 && error == nil) {
-                                   NSString *responseString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                                    if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
                                    }
                                }
@@ -139,7 +138,7 @@
     NSString *keyParam = [NSString stringWithFormat:@"Basic %@", apikey];
     [request setValue:keyParam forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:@"GET"];
-    return [request copy];
+    return [[request copy] autorelease];
 }
 
 @end
