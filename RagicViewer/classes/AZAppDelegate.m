@@ -9,7 +9,6 @@
 #import "AZAppDelegate.h"
 #import "AZRagicTabFolderTableViewController.h"
 #import "AZLoginHomeViewController.h"
-#import "AZRagicTabFolderTableViewController.h"
 
 @implementation AZAppDelegate
 

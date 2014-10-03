@@ -21,14 +21,12 @@
 		6029347F9A38CA4863442C4A /* AZRagicClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 602938DC0D7A653BC4269BB4 /* AZRagicClient.m */; };
 		60293484169B4847FBB9D7BC /* AZBasicAuthLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6029389E24E947812ACD46CE /* AZBasicAuthLoginViewController.m */; };
 		602935346FF1AB55D4AF1B61 /* glyphicons_187_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 602938BD88B5B3BC2A2D15A2 /* glyphicons_187_more.png */; };
-		6029356B4A335902B26025A5 /* AZRagicSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 60293414DC61AE4F658AA4A1 /* AZRagicSheet.m */; };
 		60293714ABB92EC78B05C7DB /* AZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 602933D32F31027C803537F2 /* AZAppDelegate.m */; };
 		6029377E45E9E3BEE35A604A /* glyphicons_158_show_lines.png in Resources */ = {isa = PBXBuildFile; fileRef = 6029378B0E305C04DB5F9510 /* glyphicons_158_show_lines.png */; };
 		602938C00F0E058D365A3005 /* AZRagicUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 60293176089032930097E7EC /* AZRagicUtils.m */; };
 		602939FC734D58E47938BBC9 /* AZRagicSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 602935249D4438D3BD308DF8 /* AZRagicSheetItem.m */; };
 		60293A022FF7351A0A03A395 /* AZRagicTabFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602936C85C3D3F637BD7EACD /* AZRagicTabFolderTableViewController.m */; };
 		60293ADD045122B88F9920E5 /* AZRagicDataListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60293E149A6FF6B56E112A5B /* AZRagicDataListingViewController.m */; };
-		60293E5FF672A042EB455BEE /* AZRagicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602935BFCC86378FFBD8BBD9 /* AZRagicWebViewController.m */; };
 		60293F6D00EC76A3B58E95AF /* AZRagicLeafViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60293A910BCAA86F9A742001 /* AZRagicLeafViewController.m */; };
 		60293FEE8E03815805E21686 /* AZRagicSheetListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 602931BB39EABA3BE1380BDD /* AZRagicSheetListViewController.m */; };
 /* End PBXBuildFile section */
@@ -61,10 +59,7 @@
 		602931BB39EABA3BE1380BDD /* AZRagicSheetListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicSheetListViewController.m; sourceTree = "<group>"; };
 		602933C314424601BCC8107E /* AZBasicAuthLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZBasicAuthLoginViewController.h; sourceTree = "<group>"; };
 		602933D32F31027C803537F2 /* AZAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZAppDelegate.m; sourceTree = "<group>"; };
-		60293414DC61AE4F658AA4A1 /* AZRagicSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicSheet.m; sourceTree = "<group>"; };
 		602935249D4438D3BD308DF8 /* AZRagicSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicSheetItem.m; sourceTree = "<group>"; };
-		60293547B806C4F04DFF19C2 /* AZRagicSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZRagicSheet.h; sourceTree = "<group>"; };
-		602935BFCC86378FFBD8BBD9 /* AZRagicWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicWebViewController.m; sourceTree = "<group>"; };
 		602936C85C3D3F637BD7EACD /* AZRagicTabFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicTabFolderTableViewController.m; sourceTree = "<group>"; };
 		602936FF5C3C07B1BFCBDFFD /* AZRagicDataListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZRagicDataListingViewController.h; sourceTree = "<group>"; };
 		6029374BBD8AB067419E9CC8 /* AZAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZAppDelegate.h; sourceTree = "<group>"; };
@@ -75,7 +70,6 @@
 		6029392CC71A200A9687BD58 /* glyphicons_440_folder_closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_440_folder_closed.png; sourceTree = "<group>"; };
 		602939EEADB07BC404E3FA0D /* RagicViewer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RagicViewer-Prefix.pch"; sourceTree = "<group>"; };
 		602939F8423B69ED8AE7273E /* AZLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZLoginHomeViewController.h; sourceTree = "<group>"; };
-		602939FE6A75B2C4F7DCE73B /* AZRagicWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZRagicWebViewController.h; sourceTree = "<group>"; };
 		60293A910BCAA86F9A742001 /* AZRagicLeafViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicLeafViewController.m; sourceTree = "<group>"; };
 		60293A9664D5139542D404FC /* AZRagicClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZRagicClient.h; sourceTree = "<group>"; };
 		60293B51F2364B1111D19044 /* AZRagicTabFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZRagicTabFolderTableViewController.h; sourceTree = "<group>"; };
@@ -204,8 +198,6 @@
 		602934F3D804E6E59D1AB716 /* domain */ = {
 			isa = PBXGroup;
 			children = (
-				60293547B806C4F04DFF19C2 /* AZRagicSheet.h */,
-				60293414DC61AE4F658AA4A1 /* AZRagicSheet.m */,
 				60293E607B3A28CE20AA3CAB /* AZRagicSheetItem.h */,
 				602935249D4438D3BD308DF8 /* AZRagicSheetItem.m */,
 			);
@@ -248,8 +240,6 @@
 				6029389E24E947812ACD46CE /* AZBasicAuthLoginViewController.m */,
 				602939F8423B69ED8AE7273E /* AZLoginHomeViewController.h */,
 				60293B6790BB672B959E85DC /* AZLoginHomeViewController.m */,
-				602935BFCC86378FFBD8BBD9 /* AZRagicWebViewController.m */,
-				602939FE6A75B2C4F7DCE73B /* AZRagicWebViewController.h */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -401,7 +391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F8897119DA9DAC00BBC01D /* main.m in Sources */,
-				6029356B4A335902B26025A5 /* AZRagicSheet.m in Sources */,
 				602939FC734D58E47938BBC9 /* AZRagicSheetItem.m in Sources */,
 				60293484169B4847FBB9D7BC /* AZBasicAuthLoginViewController.m in Sources */,
 				60293159173C1A6F5A8F527B /* AZLoginHomeViewController.m in Sources */,
@@ -410,7 +399,6 @@
 				60293A022FF7351A0A03A395 /* AZRagicTabFolderTableViewController.m in Sources */,
 				6029347F9A38CA4863442C4A /* AZRagicClient.m in Sources */,
 				60293714ABB92EC78B05C7DB /* AZAppDelegate.m in Sources */,
-				60293E5FF672A042EB455BEE /* AZRagicWebViewController.m in Sources */,
 				602938C00F0E058D365A3005 /* AZRagicUtils.m in Sources */,
 				60293ADD045122B88F9920E5 /* AZRagicDataListingViewController.m in Sources */,
 			);

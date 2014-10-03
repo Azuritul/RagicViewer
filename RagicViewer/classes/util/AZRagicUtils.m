@@ -3,7 +3,6 @@
 // Copyright (c) 2014 Labcule. All rights reserved.
 //
 
-#import "AZRagicTabFolderTableViewController.h"
 #import "AZRagicUtils.h"
 
 @implementation AZRagicUtils
