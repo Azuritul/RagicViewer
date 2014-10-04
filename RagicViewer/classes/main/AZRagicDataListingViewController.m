@@ -1,6 +1,6 @@
 //
 // Created by azuritul on 2014/10/2.
-// Copyright (c) 2014 Labcule. All rights reserved.
+// Copyright (c) 2014 Azuritul. All rights reserved.
 //
 
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -69,7 +69,7 @@
         if(item) {
             cell.backgroundColor = [UIColor clearColor];
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
-            cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#343434"];
+            cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#636363"];
             cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
             cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
             cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10];

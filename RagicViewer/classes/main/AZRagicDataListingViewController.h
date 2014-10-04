@@ -1,6 +1,6 @@
 //
 // Created by azuritul on 2014/10/2.
-// Copyright (c) 2014 Labcule. All rights reserved.
+// Copyright (c) 2014 Azuritul. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

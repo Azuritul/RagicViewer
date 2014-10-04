@@ -16,7 +16,7 @@
 		00F889A019DAA3C400BBC01D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F8899F19DAA3C400BBC01D /* CoreGraphics.framework */; };
 		08D259CAC1F44BEF988AE4EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB2B544931A44BAB38E263A /* libPods.a */; };
 		60293159173C1A6F5A8F527B /* AZLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60293B6790BB672B959E85DC /* AZLoginHomeViewController.m */; };
-		60293290DCAFBA5BEFF344E6 /* titleimage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 6029304F4A23EC3B83E82FEC /* titleimage.JPG */; };
+		60293290DCAFBA5BEFF344E6 /* titleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 6029304F4A23EC3B83E82FEC /* titleImage.JPG */; };
 		602933D40B0B04BD711E41BC /* glyphicons_440_folder_closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6029392CC71A200A9687BD58 /* glyphicons_440_folder_closed.png */; };
 		6029347F9A38CA4863442C4A /* AZRagicClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 602938DC0D7A653BC4269BB4 /* AZRagicClient.m */; };
 		60293484169B4847FBB9D7BC /* AZBasicAuthLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6029389E24E947812ACD46CE /* AZBasicAuthLoginViewController.m */; };
@@ -54,7 +54,7 @@
 		00F8899D19DAA3BA00BBC01D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00F8899F19DAA3C400BBC01D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		222F3C8EA801428285EA6F77 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		6029304F4A23EC3B83E82FEC /* titleimage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titleimage.JPG; sourceTree = "<group>"; };
+		6029304F4A23EC3B83E82FEC /* titleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titleImage.JPG; sourceTree = "<group>"; };
 		60293176089032930097E7EC /* AZRagicUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicUtils.m; sourceTree = "<group>"; };
 		602931BB39EABA3BE1380BDD /* AZRagicSheetListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZRagicSheetListViewController.m; sourceTree = "<group>"; };
 		602933C314424601BCC8107E /* AZBasicAuthLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZBasicAuthLoginViewController.h; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				602938BD88B5B3BC2A2D15A2 /* glyphicons_187_more.png */,
 				6029378B0E305C04DB5F9510 /* glyphicons_158_show_lines.png */,
 				6029392CC71A200A9687BD58 /* glyphicons_440_folder_closed.png */,
-				6029304F4A23EC3B83E82FEC /* titleimage.JPG */,
+				6029304F4A23EC3B83E82FEC /* titleImage.JPG */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -339,7 +339,7 @@
 				6029377E45E9E3BEE35A604A /* glyphicons_158_show_lines.png in Resources */,
 				002A81A419DD0E0200A68324 /* Images.xcassets in Resources */,
 				602933D40B0B04BD711E41BC /* glyphicons_440_folder_closed.png in Resources */,
-				60293290DCAFBA5BEFF344E6 /* titleimage.JPG in Resources */,
+				60293290DCAFBA5BEFF344E6 /* titleImage.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

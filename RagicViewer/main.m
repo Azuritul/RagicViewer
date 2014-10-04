@@ -3,7 +3,7 @@
 //  RagicViewer
 //
 //  Created by azuritul on 2014/9/30.
-//  Copyright (c) 2014年 Labcule. All rights reserved.
+//  Copyright (c) 2014年 Azuritul. All rights reserved.
 //
 
 #import "AZAppDelegate.h"

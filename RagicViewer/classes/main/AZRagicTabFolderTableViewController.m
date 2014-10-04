@@ -68,8 +68,8 @@
     [button setTranslatesAutoresizingMaskIntoConstraints:NO];
     [dropdownView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-    button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    [button setTitleColor:[AZRagicUtils colorFromHexString:@"#636363"] forState:UIControlStateNormal];
     [button setTitle:@"Logout" forState:UIControlStateNormal];
     button.backgroundColor = [UIColor clearColor];
     [button addTarget:self action:@selector(confirmLogout) forControlEvents:UIControlEventTouchUpInside];
@@ -77,7 +77,7 @@
     self.dropdownMenu = dropdownView;
     [self.view addSubview:dropdownView];
 
-    NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=66)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(dropdownView)];
+    NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=90)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(dropdownView)];
     NSLayoutConstraint *xAxisToParentView = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:0 constant:0];
     NSLayoutConstraint *viewWidthConstraint = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     self.xAxisLayoutConstraint = xAxisToParentView;
@@ -186,7 +186,7 @@
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
-        cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#343434"];
+        cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#636363"];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
     }

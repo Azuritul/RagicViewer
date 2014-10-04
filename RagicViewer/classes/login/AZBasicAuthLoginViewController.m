@@ -7,6 +7,7 @@
 #import "AZRagicClient.h"
 #import "AZRagicTabFolderTableViewController.h"
 #import "SVProgressHUD.h"
+#import "AZRagicUtils.h"
 
 @interface AZBasicAuthLoginViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RagicClientDelegate, UITextViewDelegate, UIWebViewDelegate>
 
@@ -44,8 +45,11 @@
     self.navigationItem.leftBarButtonItem = customBarItem;
     self.navigationItem.rightBarButtonItem = loginBarItem;
     self.navigationItem.title = @"RagicViewer";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [AZRagicUtils colorFromHexString:@"#D70700"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
 
+    self.view.backgroundColor = [UIColor whiteColor];
     UITableView *tempTableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
 
     [tempTableView setTranslatesAutoresizingMaskIntoConstraints:NO];

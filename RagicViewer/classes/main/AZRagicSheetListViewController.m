@@ -53,7 +53,7 @@
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
-        cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#343434"];
+        cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#636363"];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
     }
