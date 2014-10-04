@@ -16,8 +16,8 @@ This project is still in early beta.
 A code signing key from Apple is required to deploy apps to a device. Without a developer key, the app can only be installed on the iPhone Simulator.
 
 ##Third party component
-* SVProgressHUD
-
+* [SVProgressHUD] (https://github.com/TransitApp/SVProgressHUD)
+* [Glyphicons] (http://glyphicons.com/)
 
 ## Installation
 * Clone the repo to your own hard drive (with `git clone  https://github.com/Azuritul/RagicViewer.git`)
