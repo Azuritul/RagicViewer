@@ -7,6 +7,7 @@
 #import "AZRagicDataListingViewController.h"
 #import "AZRagicClient.h"
 #import "AZRagicLeafViewController.h"
+#import "AZRagicUtils.h"
 
 @interface AZRagicDataListingViewController () <RagicClientDelegate>
 @end
@@ -32,6 +33,7 @@
     [super viewDidLoad];
     self.title = @"Ragic Viewer";
     self.tableView = [[[UITableView alloc] init] autorelease];
+    self.tableView.backgroundColor = [AZRagicUtils colorFromHexString:@"#F0F0F2"];
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
@@ -66,11 +68,11 @@
 
         if(item) {
             cell.backgroundColor = [UIColor clearColor];
-            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            cell.textLabel.textColor = [UIColor blackColor];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+            cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#343434"];
             cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
             cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
-            cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:9];
+            cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
             cell.detailTextLabel.numberOfLines = 2;
             cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;

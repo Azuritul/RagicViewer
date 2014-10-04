@@ -11,4 +11,5 @@
 + (NSString *)getUserMainAccount;
 + (void)removeUserInfo;
 
++ (UIColor *)colorFromHexString:(NSString *)hexString;
 @end
