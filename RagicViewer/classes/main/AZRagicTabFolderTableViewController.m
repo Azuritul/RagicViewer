@@ -37,20 +37,23 @@
 {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [AZRagicUtils colorFromHexString:@"#F0F0F2"];
     UIBarButtonItem *moreButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"glyphicons_187_more"]
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self action:@selector(moreButtonPressed)] autorelease];
 
     self.navigationItem.rightBarButtonItem = moreButton;
     self.title = @"Ragic Viewer";
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [AZRagicUtils colorFromHexString:@"#D70700"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     UITableView *tableView = [[[UITableView alloc] init] autorelease];
     [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.opaque = NO;
-    tableView.backgroundColor = [UIColor clearColor];
-    tableView.backgroundView = nil;
+    tableView.backgroundColor = [AZRagicUtils colorFromHexString:@"#F0F0F2"];
+    //tableView.backgroundView = nil;
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView = tableView;
     [self.view addSubview:self.tableView];
@@ -59,13 +62,14 @@
 
     //Add dropdown menu
     UIView *dropdownView = [[[UIView alloc] init] autorelease];
-    dropdownView.backgroundColor = [UIColor blackColor];
-    dropdownView.alpha = 0.9;
+    dropdownView.backgroundColor = [UIColor whiteColor];
+    dropdownView.alpha = 0.95;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTranslatesAutoresizingMaskIntoConstraints:NO];
     [dropdownView setTranslatesAutoresizingMaskIntoConstraints:NO];
+
     button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button setTitle:@"Logout" forState:UIControlStateNormal];
     button.backgroundColor = [UIColor clearColor];
     [button addTarget:self action:@selector(confirmLogout) forControlEvents:UIControlEventTouchUpInside];
@@ -73,12 +77,13 @@
     self.dropdownMenu = dropdownView;
     [self.view addSubview:dropdownView];
 
-    NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=44)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(dropdownView)];
+    NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=66)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(dropdownView)];
     NSLayoutConstraint *xAxisToParentView = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:0 constant:0];
     NSLayoutConstraint *viewWidthConstraint = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     self.xAxisLayoutConstraint = xAxisToParentView;
     [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
-    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];    [dropdownView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:dropdownView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
+//    [dropdownView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:dropdownView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.view addConstraint:viewWidthConstraint];
     [self.view addConstraints:menuHeightConstraint];
     [self.view addConstraint:self.xAxisLayoutConstraint];
@@ -181,14 +186,10 @@
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
-        cell.textLabel.textColor = [UIColor grayColor];
+        cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#343434"];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
     }
-    UIImage *icon = [[UIImage imageNamed:@"glyphicons_440_folder_closed.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    cell.imageView.image = icon;
-    cell.imageView.tintColor = [UIColor colorWithRed:98/255.0f green:126/255.0f blue:255/255.0f alpha:1.0];
-
     cell.textLabel.text=item.name;
     return cell;
 }

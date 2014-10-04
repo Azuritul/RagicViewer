@@ -6,6 +6,7 @@
 #import "AZRagicSheetListViewController.h"
 #import "AZRagicSheetItem.h"
 #import "AZRagicDataListingViewController.h"
+#import "AZRagicUtils.h"
 
 @implementation AZRagicSheetListViewController
 
@@ -28,6 +29,7 @@
     [super viewDidLoad];
     self.title = @"Ragic Viewer";
     self.tableView = [[[UITableView alloc] init] autorelease];
+    self.tableView.backgroundColor = [AZRagicUtils colorFromHexString:@"#F0F0F2"];
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
@@ -51,12 +53,10 @@
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
-        cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#343434"];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
     }
-    cell.imageView.image = [[UIImage imageNamed:@"glyphicons_440_folder_closed.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    cell.imageView.tintColor = [UIColor colorWithRed:98/255.0f green:126/255.0f blue:255/255.0f alpha:1.0];
     cell.textLabel.text=item.name;
     return cell;
 }
