@@ -28,6 +28,7 @@
         AZLoginHomeViewController * controller = [[[AZLoginHomeViewController alloc] init] autorelease];
         self.window.rootViewController = controller;
     }
+    [[UIApplication sharedApplication] setStatusBarStyle : UIStatusBarStyleLightContent ] ;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
