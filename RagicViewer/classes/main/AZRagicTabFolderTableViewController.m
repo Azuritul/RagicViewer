@@ -83,7 +83,6 @@
     self.xAxisLayoutConstraint = xAxisToParentView;
     [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
     [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
-//    [dropdownView addConstraint:[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:dropdownView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.view addConstraint:viewWidthConstraint];
     [self.view addConstraints:menuHeightConstraint];
     [self.view addConstraint:self.xAxisLayoutConstraint];
@@ -99,7 +98,7 @@
 - (void)showMenuAnimated {
     [self.view setNeedsUpdateConstraints];
     CGFloat axis = self.xAxisLayoutConstraint.constant > 0 ? -100 : 100;
-    [UIView animateWithDuration:0.6  animations:^{
+    [UIView animateWithDuration:0.3  animations:^{
          self.xAxisLayoutConstraint.constant = axis;
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
