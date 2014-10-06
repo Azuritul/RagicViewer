@@ -24,6 +24,8 @@ A code signing key from Apple is required to deploy apps to a device. Without a 
 * Use Xcode or other IDE to open the project
 * Build and run
 
+## Screenshot
+![Detail](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/detail.png)
 
 ## License
 MIT License (MIT)
