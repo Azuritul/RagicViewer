@@ -1,7 +1,7 @@
 RagicViewer
 ===========
 
-This is the repository for RagicViewer, an unofficial Ragic Builder client for iOS, mainly built for personal interest and study needs.
+This is the repository for RagicViewer, an unofficial Ragic client for iOS, mainly built for personal interest and study needs.
 
 If you find any issues, please fire an issue or send a pull request.
 
