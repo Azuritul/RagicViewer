@@ -25,6 +25,8 @@ A code signing key from Apple is required to deploy apps to a device. Without a 
 * Build and run
 
 ## Screenshot
+![Home](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/home.png)
+![Login](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/login.png)
 ![Detail](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/detail.png)
 
 ## License
