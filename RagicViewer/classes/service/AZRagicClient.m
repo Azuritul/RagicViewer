@@ -51,6 +51,7 @@
                                                                 [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"apikey"] forKey:@"ragic_apikey"];
                                                                 [[NSUserDefaults standardUserDefaults] setObject:resultDic[@"accounts"][@"account"] forKey:@"ragic_account"];
                                                                 [[NSUserDefaults standardUserDefaults] synchronize];
+                                                                [resultDic[@"allAccounts"] writeToFile:[AZRagicUtils accountsFilePath] atomically:YES];
                                                                 [self.delegate loginFinishedWithStatusCode:@"success" andResult:resultDic];
                                                             }
                                                         } else {
@@ -71,7 +72,6 @@
     [dataTask resume];
 }
 
-// showing all accounts
 - (void)loadTopLevel:(NSString *)apikey {
     NSString *url = @"https://api.ragic.com/";
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]] autorelease];
@@ -98,6 +98,34 @@
 
     [dataTask resume];
 }
+
+- (void)loadTopLevelContentByAPIKey:(NSString *)apikey andAccount:(NSString *) account {
+    NSString *url = @"https://api.ragic.com/";
+    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]] autorelease];
+    NSString *keyParam = [NSString stringWithFormat:@"Basic %@", apikey];
+    [request setValue:keyParam forHTTPHeaderField:@"Authorization"];
+    [request setHTTPShouldHandleCookies:NO];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                    if ([data length] > 0 && error == nil) {
+                                                        NSError *resultError;
+                                                        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&resultError];
+                                                        if ([self.delegate respondsToSelector:@selector(loadFinishedWithResult:)]) {
+                                                            [self.delegate loadFinishedWithResult:resultDic[account][@"children"]];
+                                                        }
+                                                    }
+                                                    else if ([data length] == 0 && error == nil) {
+                                                        NSLog(@"Nothing was downloaded.");
+                                                    }
+                                                    else if (error != nil) {
+                                                        NSLog(@"Error = %@", error);
+                                                    }
+                                                }];
+
+    [dataTask resume];
+}
+
 
 
 - (void)loadSheet:(NSString *)sheetUrl {

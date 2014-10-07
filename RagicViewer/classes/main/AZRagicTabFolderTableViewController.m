@@ -12,6 +12,7 @@
 #import "SVProgressHUD.h"
 #import "AZRagicUtils.h"
 #import "AZLoginHomeViewController.h"
+#import "AZRagicAccountListViewController.h"
 
 @interface AZRagicTabFolderTableViewController ()
 
@@ -62,27 +63,48 @@
 
     //Add dropdown menu
     UIView *dropdownView = [[[UIView alloc] init] autorelease];
+    [dropdownView setTranslatesAutoresizingMaskIntoConstraints:NO];
     dropdownView.backgroundColor = [UIColor whiteColor];
     dropdownView.alpha = 0.95;
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [dropdownView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-    button.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-    [button setTitleColor:[AZRagicUtils colorFromHexString:@"#636363"] forState:UIControlStateNormal];
-    [button setTitle:@"Logout" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor clearColor];
-    [button addTarget:self action:@selector(confirmLogout) forControlEvents:UIControlEventTouchUpInside];
-    [dropdownView addSubview:button];
+    UIButton *logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [logoutButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    logoutButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    logoutButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [logoutButton setTitleColor:[AZRagicUtils colorFromHexString:@"#636363"] forState:UIControlStateNormal];
+    [logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    logoutButton.backgroundColor = [UIColor clearColor];
+    [logoutButton addTarget:self action:@selector(confirmLogout) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *switchAccountButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [switchAccountButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    switchAccountButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    switchAccountButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [switchAccountButton setTitleColor:[AZRagicUtils colorFromHexString:@"#636363"] forState:UIControlStateNormal];
+    [switchAccountButton setTitle:@"Switch Account" forState:UIControlStateNormal];
+    switchAccountButton.backgroundColor = [UIColor clearColor];
+    [switchAccountButton addTarget:self action:@selector(popSwitchAccountController) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *line = [[[UIView alloc] init] autorelease];
+    [line setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [line setBackgroundColor:[AZRagicUtils colorFromHexString:@"#E0DDDD"]];
+
+    [dropdownView addSubview:switchAccountButton];
+    [dropdownView addSubview:line];
+    [dropdownView addSubview:logoutButton];
+
     self.dropdownMenu = dropdownView;
     [self.view addSubview:dropdownView];
 
-    NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=90)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(dropdownView)];
-    NSLayoutConstraint *xAxisToParentView = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:0 constant:0];
+    NSDictionary *viewBinding = NSDictionaryOfVariableBindings(logoutButton, line, switchAccountButton, dropdownView);
+    NSArray *menuHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dropdownView(>=130)]" options:0 metrics:nil views:viewBinding];
+    NSLayoutConstraint *xAxisToParentView = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     NSLayoutConstraint *viewWidthConstraint = [NSLayoutConstraint constraintWithItem:dropdownView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     self.xAxisLayoutConstraint = xAxisToParentView;
-    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
-    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[button]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
+    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[switchAccountButton]|" options:0 metrics:nil views:viewBinding]];
+    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-10-[line]-10-|" options:0 metrics:nil views:viewBinding]];
+    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[logoutButton]|" options:0 metrics:nil views:viewBinding]];
+    [dropdownView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[switchAccountButton(==60)][line(==1)][logoutButton(>=60)]|" options:0 metrics:nil views:viewBinding]];
     [self.view addConstraint:viewWidthConstraint];
     [self.view addConstraints:menuHeightConstraint];
     [self.view addConstraint:self.xAxisLayoutConstraint];
@@ -91,13 +113,26 @@
     [self loadData];
 }
 
+- (void)popSwitchAccountController {
+    AZRagicAccountListViewController *accountsViewController = [[[AZRagicAccountListViewController alloc] init] autorelease];
+    accountsViewController.delegate = self;
+    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:accountsViewController] autorelease];
+
+    navigationController.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *presentation = accountsViewController.popoverPresentationController;
+    presentation.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    presentation.sourceView = self.dropdownMenu;
+    [self presentViewController:navigationController animated:YES completion:^{}];
+    [self showMenuAnimated];
+}
+
 - (void)moreButtonPressed {
     [self showMenuAnimated];
 }
 
 - (void)showMenuAnimated {
     [self.view setNeedsUpdateConstraints];
-    CGFloat axis = self.xAxisLayoutConstraint.constant > 0 ? -100 : 100;
+    CGFloat axis = self.xAxisLayoutConstraint.constant > 0 ? -100 : 184;
     [UIView animateWithDuration:0.3  animations:^{
          self.xAxisLayoutConstraint.constant = axis;
         [self.view layoutIfNeeded];
@@ -157,14 +192,22 @@
     if(result) {
         NSMutableArray * resultArray = [NSMutableArray array];
         NSString *account = [[NSUserDefaults standardUserDefaults] objectForKey:@"ragic_account"];
+
         for(NSString *key in result.allKeys) {
             [resultArray addObject:[AZRagicSheetItem sheetItemFromDictionary:result[key] forKey:key andAccount:account]];
+        }
+        if (self.result.count > 0) {
+            [self.result removeAllObjects];
         }
         self.result = [[[self.result arrayByAddingObjectsFromArray:resultArray] mutableCopy] autorelease];
         [self reloadTable];
     }
 }
 
+- (void)didSwitchToAccount {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [self loadData];
+}
 
 - (void)didReceiveMemoryWarning
 {

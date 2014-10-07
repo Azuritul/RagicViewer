@@ -12,4 +12,8 @@
 + (void)removeUserInfo;
 
 + (UIColor *)colorFromHexString:(NSString *)hexString;
+
++ (NSString *)accountsFilePath;
+
++ (void)switchAccount:(NSString *)newAccount;
 @end
