@@ -23,6 +23,9 @@
 //Password Auth
 - (void)loginWithUsername:(NSString *)string password:(NSString *)pass;
 - (void)loadTopLevel:(NSString *)apikey;
+
+- (void)loadTopLevelContentByAPIKey:(NSString *)apikey andAccount:(NSString *)account;
+
 - (void)loadSheet:(NSString *)sheetUrl;
 
 + (NSURLRequest *)webviewRequestWithUrl:(NSString *)url;

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AZRagicClient.h"
+#import "AZRagicAccountListViewController.h"
 
-@interface AZRagicTabFolderTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, RagicClientDelegate>
+@interface AZRagicTabFolderTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, RagicClientDelegate, AZRagicAccountListViewControllerDelegate>
 
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray * result;

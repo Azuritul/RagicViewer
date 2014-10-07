@@ -24,4 +24,16 @@
     [scanner scanHexInt:&rgbValue];
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
+
++ (NSString *) accountsFilePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory =  [paths firstObject];
+    return  [documentsDirectory stringByAppendingPathComponent:@"ragic_accounts.plist"];
+}
+
++ (void) switchAccount:(NSString *) newAccount {
+    [[NSUserDefaults standardUserDefaults] setObject:newAccount forKey:@"ragic_account"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
 @end
