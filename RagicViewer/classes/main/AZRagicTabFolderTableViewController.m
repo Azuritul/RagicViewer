@@ -12,7 +12,6 @@
 #import "SVProgressHUD.h"
 #import "AZRagicUtils.h"
 #import "AZLoginHomeViewController.h"
-#import "AZRagicAccountListViewController.h"
 
 @interface AZRagicTabFolderTableViewController ()
 
@@ -227,10 +226,11 @@
     AZRagicSheetItem * item = [self.result objectAtIndex:(NSUInteger) indexPath.row];
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#636363"];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text=item.name;
     return cell;
@@ -243,6 +243,25 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.result.count;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = [[[UIView alloc] init] autorelease];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.bounds.size.width, 44)] autorelease];
+    label.text = [AZRagicUtils getUserMainAccount];
+    label.font = [UIFont boldSystemFontOfSize:14.0f];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    header.backgroundColor = [AZRagicUtils colorFromHexString:@"#A12B28"];
+    header.alpha = 0.9;
+    [header addSubview:label];
+    return header;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -60,7 +60,6 @@
                                                                 [self.delegate loginFinishedWithStatusCode:@"fail" andResult:resultDic];
                                                             }
                                                         }
-
                                                     } else if (error != nil) {
                                                         if ([self.delegate respondsToSelector:@selector(loginFinishedWithStatusCode:andResult:)]) {
                                                             [self.delegate loginFinishedWithStatusCode:@"fail" andResult:@{}];
@@ -68,7 +67,6 @@
                                                     }
 
                                                 }];
-
     [dataTask resume];
 }
 
@@ -95,7 +93,6 @@
                                                         NSLog(@"Error = %@", error);
                                                     }
                                                 }];
-
     [dataTask resume];
 }
 
@@ -122,7 +119,6 @@
                                                         NSLog(@"Error = %@", error);
                                                     }
                                                 }];
-
     [dataTask resume];
 }
 
