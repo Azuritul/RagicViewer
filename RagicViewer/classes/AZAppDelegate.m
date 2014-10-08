@@ -1,6 +1,6 @@
 //
 //  AZAppDelegate.m
-//  RagicRestClient
+//  RagicViewer
 //
 //  Created by azuritul on 2014/8/25.
 //  Copyright (c) 2014 Azuritul. All rights reserved.
