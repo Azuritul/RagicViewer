@@ -10,6 +10,7 @@
 @interface AZRagicAccountListViewController ()
 @property(nonatomic, retain) NSMutableArray *dataArray;
 @property(nonatomic, retain) UITableView *tableView;
+@property(nonatomic, assign) Boolean accountChanged;
 @end
 
 @implementation AZRagicAccountListViewController
@@ -17,6 +18,7 @@
 @synthesize dataArray = _dataArray;
 @synthesize tableView = _tableView;
 @synthesize delegate = _delegate;
+@synthesize accountChanged = _accountChanged;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +48,9 @@
 - (void)dismissPressed {
     [self dismissViewControllerAnimated:YES completion:^{
         if([self.delegate respondsToSelector:@selector(didSwitchToAccount)]) {
-            [self.delegate didSwitchToAccount];
+            if(self.accountChanged) {
+                [self.delegate didSwitchToAccount];
+            }
         }
     }];
 }
@@ -89,11 +93,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if(cell) {
-        NSDictionary *dict = self.dataArray[(NSUInteger) indexPath.row];
-        [AZRagicUtils switchAccount:dict[@"account"]];
-    }
+    NSString *lastAccount = [AZRagicUtils getUserMainAccount];
+    NSDictionary *dict = self.dataArray[(NSUInteger) indexPath.row];
+    self.accountChanged = ![lastAccount isEqualToString:dict[@"account"]];
+    [AZRagicUtils switchAccount:dict[@"account"]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView reloadData];
 }
