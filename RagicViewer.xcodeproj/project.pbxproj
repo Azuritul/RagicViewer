@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		002A81A419DD0E0200A68324 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 002A81A319DD0E0200A68324 /* Images.xcassets */; };
+		006FBCE919E5138400CA0973 /* AZRagicSwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */; };
 		00F8897119DA9DAC00BBC01D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8897019DA9DAC00BBC01D /* main.m */; };
 		00F8898219DA9DAC00BBC01D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8898019DA9DAC00BBC01D /* LaunchScreen.xib */; };
 		00F8898E19DA9DAC00BBC01D /* RagicViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8898D19DA9DAC00BBC01D /* RagicViewerTests.m */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		002A81A319DD0E0200A68324 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		006FBCE719E5138400CA0973 /* RagicViewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RagicViewer-Bridging-Header.h"; sourceTree = "<group>"; };
+		006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZRagicSwiftUtils.swift; sourceTree = "<group>"; };
 		00F8896B19DA9DAC00BBC01D /* RagicViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RagicViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F8896F19DA9DAC00BBC01D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00F8897019DA9DAC00BBC01D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 			children = (
 				60293176089032930097E7EC /* AZRagicUtils.m */,
 				60293EC27E7636DE6E02E4E6 /* AZRagicUtils.h */,
+				006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */,
+				006FBCE719E5138400CA0973 /* RagicViewer-Bridging-Header.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				60293FEE8E03815805E21686 /* AZRagicSheetListViewController.m in Sources */,
 				60293A022FF7351A0A03A395 /* AZRagicTabFolderTableViewController.m in Sources */,
 				6029347F9A38CA4863442C4A /* AZRagicClient.m in Sources */,
+				006FBCE919E5138400CA0973 /* AZRagicSwiftUtils.swift in Sources */,
 				60293714ABB92EC78B05C7DB /* AZAppDelegate.m in Sources */,
 				602938C00F0E058D365A3005 /* AZRagicUtils.m in Sources */,
 				60293ADD045122B88F9920E5 /* AZRagicDataListingViewController.m in Sources */,
@@ -531,6 +537,7 @@
 			baseConfigurationReference = 222F3C8EA801428285EA6F77 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -538,6 +545,8 @@
 				INFOPLIST_FILE = RagicViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewer/classes/util/RagicViewer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 			};
@@ -548,6 +557,7 @@
 			baseConfigurationReference = 222F3C8EA801428285EA6F77 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -555,6 +565,7 @@
 				INFOPLIST_FILE = RagicViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewer/classes/util/RagicViewer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 			};
