@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0005BC6E19E66BCC005E1A23 /* AZRagicSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005BC6D19E66BCC005E1A23 /* AZRagicSheetItem.swift */; };
 		002A81A419DD0E0200A68324 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 002A81A319DD0E0200A68324 /* Images.xcassets */; };
 		006FBCE919E5138400CA0973 /* AZRagicSwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */; };
 		00F8897119DA9DAC00BBC01D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8897019DA9DAC00BBC01D /* main.m */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0005BC6D19E66BCC005E1A23 /* AZRagicSheetItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZRagicSheetItem.swift; sourceTree = "<group>"; };
 		002A81A319DD0E0200A68324 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		006FBCE719E5138400CA0973 /* RagicViewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RagicViewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZRagicSwiftUtils.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				60293E607B3A28CE20AA3CAB /* AZRagicSheetItem.h */,
 				602935249D4438D3BD308DF8 /* AZRagicSheetItem.m */,
+				0005BC6D19E66BCC005E1A23 /* AZRagicSheetItem.swift */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				602939FC734D58E47938BBC9 /* AZRagicSheetItem.m in Sources */,
 				60293484169B4847FBB9D7BC /* AZBasicAuthLoginViewController.m in Sources */,
 				60293159173C1A6F5A8F527B /* AZLoginHomeViewController.m in Sources */,
+				0005BC6E19E66BCC005E1A23 /* AZRagicSheetItem.swift in Sources */,
 				60293F6D00EC76A3B58E95AF /* AZRagicLeafViewController.m in Sources */,
 				60293FEE8E03815805E21686 /* AZRagicSheetListViewController.m in Sources */,
 				60293A022FF7351A0A03A395 /* AZRagicTabFolderTableViewController.m in Sources */,
