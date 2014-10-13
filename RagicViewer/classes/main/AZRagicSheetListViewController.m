@@ -64,7 +64,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellKey = @"gg";
+    NSString *cellKey = @"keyForCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellKey];
     if(!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellKey] autorelease];
@@ -72,7 +72,7 @@
     AZRagicSheetItem * item = [self.dataArray objectAtIndex:(NSUInteger) indexPath.row];
     if(item) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         cell.textLabel.textColor = [AZRagicUtils colorFromHexString:@"#636363"];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[[UIView alloc] init] autorelease];
