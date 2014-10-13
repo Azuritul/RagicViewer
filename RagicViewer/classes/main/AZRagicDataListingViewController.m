@@ -134,6 +134,7 @@
     if(result) {
         [self.dataDict addEntriesFromDictionary:result];
         [self reloadData];
+        self.navigationController.hidesBarsOnSwipe = result.count > 10;
     } else {
         [SVProgressHUD performSelectorOnMainThread:@selector(dismiss) withObject:nil waitUntilDone:NO];
     }
