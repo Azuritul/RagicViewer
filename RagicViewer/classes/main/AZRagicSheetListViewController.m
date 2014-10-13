@@ -39,6 +39,11 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:viewDict]];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = NO;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if(self.dataArray.count == 0) {
         UILabel *messageLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];

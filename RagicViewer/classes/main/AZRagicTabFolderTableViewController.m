@@ -33,6 +33,12 @@
     return self;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = NO;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
