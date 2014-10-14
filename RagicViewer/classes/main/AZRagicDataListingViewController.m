@@ -82,7 +82,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellKey] autorelease];
     }
 
-    NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+    NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
     if(item.count > 0) {
         NSString * title = item[item.allKeys[0]];
 
@@ -123,7 +123,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+    NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
     NSString *nodeId = item[@"_ragicId"];
     NSString *detailViewURL = [NSString stringWithFormat:@"%@/%@.xhtml", self.url, nodeId];
     AZRagicLeafViewController *webViewController = [[[AZRagicLeafViewController alloc] initWithUrl:detailViewURL] autorelease];
