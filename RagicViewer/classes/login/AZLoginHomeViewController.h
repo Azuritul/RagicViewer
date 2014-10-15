@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+__attribute__ ((deprecated))
 @interface AZLoginHomeViewController : UIViewController
 
 @end

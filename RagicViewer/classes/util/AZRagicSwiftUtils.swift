@@ -10,46 +10,53 @@ import UIKit
 import Foundation
 
 @objc
-class AZRagicSwiftUtils:NSObject {
+class AZRagicSwiftUtils {
     
-    var k = "variable"
-    let g:String = "constant"
+    class func getUserMainAccount() -> String? {
+        return NSUserDefaults.standardUserDefaults().stringForKey("ragic_accont")
+    }
     
-    //Ways to declare array
-    var arr1:[String] = [String]()
-    var arr2:Array<String> = Array<String>()
+    class func getUserAPIKey() -> String? {
+        return NSUserDefaults.standardUserDefaults().stringForKey("ragic_apikey")
+    }
     
-    //Ways to declare dictionary
-    var dict1:Dictionary<String,Int> = Dictionary<String,Int>()
-    var dict2 = ["key":"title", "value":"The lean startup"]
-    
-    func helloWorld() -> String {
-        return "Hello world"
+    class func removeUserInfo() {
+        let standardStore = NSUserDefaults.standardUserDefaults()
+        standardStore.removeObjectForKey("ragic_account")
+        standardStore.removeObjectForKey("ragic_apikey")
+        standardStore.synchronize()
     }
     
     
-    func getUserMainAccount() -> String {
-        return ""
-    }
-    
-    func removeUserInfo() {
+    class func colorFromHexString(hexString:String) -> UIColor {
         
-    }
-    
-    func colorFromHexString(hexString:String) -> UIColor {
-        return UIColor .whiteColor()
-    }
-    
-    func accountsFilePath() -> String {
-        return ""
-    }
-    
-    func switchAccount(newAccount:String) {
+        var rgbValue:UInt32 = 0
+        let scanner : NSScanner = NSScanner(string: hexString)
+        if hexString.rangeOfString("#") != nil {
+            scanner.scanLocation = 1
+        } else {
+            scanner.scanLocation = 0
+        }
         
+        scanner.scanHexInt(&rgbValue)
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    class func accountsFilePath() -> String {
+        var path:Array = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        var documentsDirectory:String = path[0] as String
+        return  documentsDirectory + "ragic_accounts.plist";
+    }
+    
+    class func switchAccount(newAccount:String) {
+        NSUserDefaults.standardUserDefaults().setObject(newAccount, forKey: "ragic_account")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
    
 }
-
-
-

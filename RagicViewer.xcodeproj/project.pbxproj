@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		0005BC6E19E66BCC005E1A23 /* AZRagicSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005BC6D19E66BCC005E1A23 /* AZRagicSheetItem.swift */; };
 		002A81A419DD0E0200A68324 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 002A81A319DD0E0200A68324 /* Images.xcassets */; };
+		00458F1D19ED175200118046 /* LoginHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00458F1C19ED175200118046 /* LoginHomeViewController.swift */; };
+		00458F1F19ED2B6B00118046 /* BasicAuthLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00458F1E19ED2B6B00118046 /* BasicAuthLoginViewController.swift */; };
 		006FBCE919E5138400CA0973 /* AZRagicSwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */; };
+		00965A8F19ED5FC4001062F5 /* LeafViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00965A8E19ED5FC4001062F5 /* LeafViewController.swift */; };
+		00965A9119EE1041001062F5 /* RagicClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00965A9019EE1041001062F5 /* RagicClient.swift */; };
 		00F8897119DA9DAC00BBC01D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8897019DA9DAC00BBC01D /* main.m */; };
 		00F8898219DA9DAC00BBC01D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8898019DA9DAC00BBC01D /* LaunchScreen.xib */; };
 		00F8898E19DA9DAC00BBC01D /* RagicViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8898D19DA9DAC00BBC01D /* RagicViewerTests.m */; };
@@ -49,8 +53,12 @@
 /* Begin PBXFileReference section */
 		0005BC6D19E66BCC005E1A23 /* AZRagicSheetItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZRagicSheetItem.swift; sourceTree = "<group>"; };
 		002A81A319DD0E0200A68324 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		00458F1C19ED175200118046 /* LoginHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHomeViewController.swift; sourceTree = "<group>"; };
+		00458F1E19ED2B6B00118046 /* BasicAuthLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthLoginViewController.swift; sourceTree = "<group>"; };
 		006FBCE719E5138400CA0973 /* RagicViewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RagicViewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		006FBCE819E5138400CA0973 /* AZRagicSwiftUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZRagicSwiftUtils.swift; sourceTree = "<group>"; };
+		00965A8E19ED5FC4001062F5 /* LeafViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafViewController.swift; sourceTree = "<group>"; };
+		00965A9019EE1041001062F5 /* RagicClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RagicClient.swift; sourceTree = "<group>"; };
 		00F8896B19DA9DAC00BBC01D /* RagicViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RagicViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F8896F19DA9DAC00BBC01D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00F8897019DA9DAC00BBC01D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -183,12 +191,13 @@
 			children = (
 				60293D6110EA0977DBB143A7 /* AZRagicLeafViewController.h */,
 				60293A910BCAA86F9A742001 /* AZRagicLeafViewController.m */,
+				00965A8E19ED5FC4001062F5 /* LeafViewController.swift */,
 				60293C70025AFA36058D2DBE /* AZRagicSheetListViewController.h */,
 				602931BB39EABA3BE1380BDD /* AZRagicSheetListViewController.m */,
 				60293B51F2364B1111D19044 /* AZRagicTabFolderTableViewController.h */,
 				602936C85C3D3F637BD7EACD /* AZRagicTabFolderTableViewController.m */,
-				60293E149A6FF6B56E112A5B /* AZRagicDataListingViewController.m */,
 				602936FF5C3C07B1BFCBDFFD /* AZRagicDataListingViewController.h */,
+				60293E149A6FF6B56E112A5B /* AZRagicDataListingViewController.m */,
 				6029364A4DC3FC2FDF0A78D6 /* AZRagicAccountListViewController.m */,
 				60293E65F923EFA90C5D5D8B /* AZRagicAccountListViewController.h */,
 			);
@@ -248,6 +257,7 @@
 			children = (
 				60293A9664D5139542D404FC /* AZRagicClient.h */,
 				602938DC0D7A653BC4269BB4 /* AZRagicClient.m */,
+				00965A9019EE1041001062F5 /* RagicClient.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -259,6 +269,8 @@
 				6029389E24E947812ACD46CE /* AZBasicAuthLoginViewController.m */,
 				602939F8423B69ED8AE7273E /* AZLoginHomeViewController.h */,
 				60293B6790BB672B959E85DC /* AZLoginHomeViewController.m */,
+				00458F1C19ED175200118046 /* LoginHomeViewController.swift */,
+				00458F1E19ED2B6B00118046 /* BasicAuthLoginViewController.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -411,10 +423,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00458F1D19ED175200118046 /* LoginHomeViewController.swift in Sources */,
+				00965A9119EE1041001062F5 /* RagicClient.swift in Sources */,
 				00F8897119DA9DAC00BBC01D /* main.m in Sources */,
 				602939FC734D58E47938BBC9 /* AZRagicSheetItem.m in Sources */,
 				60293484169B4847FBB9D7BC /* AZBasicAuthLoginViewController.m in Sources */,
 				60293159173C1A6F5A8F527B /* AZLoginHomeViewController.m in Sources */,
+				00965A8F19ED5FC4001062F5 /* LeafViewController.swift in Sources */,
 				0005BC6E19E66BCC005E1A23 /* AZRagicSheetItem.swift in Sources */,
 				60293F6D00EC76A3B58E95AF /* AZRagicLeafViewController.m in Sources */,
 				60293FEE8E03815805E21686 /* AZRagicSheetListViewController.m in Sources */,
@@ -423,6 +438,7 @@
 				006FBCE919E5138400CA0973 /* AZRagicSwiftUtils.swift in Sources */,
 				60293714ABB92EC78B05C7DB /* AZAppDelegate.m in Sources */,
 				602938C00F0E058D365A3005 /* AZRagicUtils.m in Sources */,
+				00458F1F19ED2B6B00118046 /* BasicAuthLoginViewController.swift in Sources */,
 				60293ADD045122B88F9920E5 /* AZRagicDataListingViewController.m in Sources */,
 				6029358482F4A7FCF9A8DCCB /* AZRagicAccountListViewController.m in Sources */,
 			);
@@ -544,6 +560,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
@@ -564,6 +581,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;

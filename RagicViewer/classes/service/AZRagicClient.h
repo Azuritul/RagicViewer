@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol RagicClientDelegate<NSObject>
+
 @optional
 -(void) loginFinishedWithStatusCode:(NSString*) code andResult:(NSDictionary*)result;
 -(void) loadFinishedWithResult:(NSDictionary *) result;
@@ -22,12 +23,13 @@
 
 //Password Auth
 - (void)loginWithUsername:(NSString *)string password:(NSString *)pass;
+
+//Loading Data
 - (void)loadTopLevel:(NSString *)apikey;
-
 - (void)loadTopLevelContentByAPIKey:(NSString *)apikey andAccount:(NSString *)account;
-
 - (void)loadSheet:(NSString *)sheetUrl;
 
+//Accessing webview
 + (NSURLRequest *)webviewRequestWithUrl:(NSString *)url;
 
 @property (assign) id<RagicClientDelegate> delegate;

@@ -8,7 +8,7 @@
 
 #import "AZAppDelegate.h"
 #import "AZRagicTabFolderTableViewController.h"
-#import "AZLoginHomeViewController.h"
+#import "RagicViewer-Swift.h"
 
 @implementation AZAppDelegate
 
@@ -18,14 +18,14 @@
     // Override point for customization after application launch.
     
     //should check credentials before dispatching viewcontroller
-    NSString * apikey = [[NSUserDefaults standardUserDefaults] objectForKey:@"ragic_apikey"];
+    NSString * apikey = [AZRagicSwiftUtils getUserAPIKey];
     if(apikey != nil) {
         AZRagicTabFolderTableViewController * leftMenuViewController = [[[AZRagicTabFolderTableViewController alloc] init] autorelease];
         UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:leftMenuViewController] autorelease];
         self.window.rootViewController = navigationController;
         
     } else { //Dispatch to login view controller
-        AZLoginHomeViewController * controller = [[[AZLoginHomeViewController alloc] init] autorelease];
+        LoginHomeViewController * controller = [[[LoginHomeViewController alloc] init] autorelease];
         self.window.rootViewController = controller;
     }
     [[UIApplication sharedApplication] setStatusBarStyle : UIStatusBarStyleLightContent ] ;

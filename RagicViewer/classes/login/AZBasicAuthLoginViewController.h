@@ -6,6 +6,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-
+__deprecated
 @interface AZBasicAuthLoginViewController : UIViewController
 @end

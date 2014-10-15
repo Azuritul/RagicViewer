@@ -10,13 +10,19 @@ import Foundation
 
 let BASE_URL = "https://api.ragic.com"
 
-class AZRagicSheetItem:NSObject {
+class AZRagicSheetItem {
 
     var key:String?
     var name:String?
     var seq:Int?
     var children:[AZRagicSheetItem]?
     var itemUrl:String?
+    var description : String {
+        if key != nil {
+            return "key : { \(key) }"
+        }
+        return "nothing"
+    }
     
     class func createSheetItem(fromDictionary dict:[String:Any], forKey key:String, andAccount account:String) -> AZRagicSheetItem {
 
