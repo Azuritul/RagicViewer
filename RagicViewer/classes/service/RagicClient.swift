@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Foundation
 
+@objc
 class RagicClient: NSObject {
 
     var delegate:ClientDelegate?
@@ -28,18 +30,24 @@ class RagicClient: NSObject {
             // Might need to document the returning json because the structure is pretty complicated
             if let json = jsonOptional as?Dictionary<String, AnyObject> {
                 if let key = json["apikey"] as AnyObject? as? String {
-                    NSUserDefaults.standardUserDefaults().setObject(key, forKey:"ragic_apikey")
+                    NSUserDefaults.standardUserDefaults().setObject(key, forKey:Constants.KEY_APIKEY)
                 }
                 if let accounts = json["accounts"] as AnyObject? as? Dictionary<String,AnyObject> {
                     if let account = accounts["account"] as AnyObject? as? String {
-                        NSUserDefaults.standardUserDefaults().setObject(account, forKey:"ragic_account")
+                        NSUserDefaults.standardUserDefaults().setObject(account, forKey:Constants.KEY_ACCOUNT)
+
                     }
                 }
+                
                 NSUserDefaults.standardUserDefaults().synchronize()
-                self.delegate?.loginFinishedWithStatusCode("success", result:json)
+                if let allAccount = json["allAccounts"] as? NSArray {
+                    var success = allAccount.writeToFile(AZRagicSwiftUtils.accountsFilePath(), atomically:true)
+                    println("saved: \(success)")
+                }
+                
+                self.delegate?.loginFinishedWithStatusCode?("success", result:json)
             } else {
-                //something is wrong
-                self.delegate?.loginFinishedWithStatusCode("fail", result: nil)
+                self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
             }
             
         })
@@ -47,25 +55,32 @@ class RagicClient: NSObject {
         
     }
     
-    func loadTopLevel(apikey:String) {
-        let request = self.buildRequest("https://api.ragic.com")
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data : NSData!, response : NSURLResponse!, error : NSError!) in
+    func loadTopLevel() {
+        var request = self.buildRequest("https://api.ragic.com")
+        var dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data : NSData!, response : NSURLResponse!, error : NSError!) in
             var resultError:NSError?
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error:&resultError)
-            
-            // Might need to document the returning json because the structure is pretty complicated
+            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error:&resultError)
+
             if let json = jsonOptional as? Dictionary<String, AnyObject> {
-                let currentUserAccount = AZRagicSwiftUtils.getUserMainAccount()!
-                if let mainAccount = json[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
-                    if let children = mainAccount["children"] as AnyObject? as? Dictionary<String, AnyObject> {
-                        self.delegate?.loadFinishedWithResult(children)
+                if let currentUserAccount:String = AZRagicSwiftUtils.getUserMainAccount() {
+                    if let mainAccount = json[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
+                        //println(mainAccount)
+                        if let children = mainAccount["children"] as AnyObject? as? Dictionary<String, NSDictionary> {
+                            //println(children)
+                            
+                            self.delegate?.loadFinishedWithResult?(children)
+                        }
+
+                    } else {
+                        self.delegate?.loadFinishedWithResult?(nil)
                     }
+                } else {
+                    self.delegate?.loadFinishedWithResult?(nil)
                 }
                 
             } else {
                 //something is wrong
-                self.delegate?.loginFinishedWithStatusCode("fail", result: nil)
+                self.delegate?.loadFinishedWithResult?(nil)
             }
             
         })
@@ -84,9 +99,9 @@ class RagicClient: NSObject {
             
             // Might need to document the returning json because the structure is pretty complicated
             if let resultDic = jsonOptional as? Dictionary<String, AnyObject> {
-                self.delegate?.loadFinishedWithResult(resultDic)
+                self.delegate?.loadFinishedWithResult?(resultDic)
             } else {
-                self.delegate?.loginFinishedWithStatusCode("fail", result: nil)
+                self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
             }
             
         })
@@ -106,22 +121,23 @@ class RagicClient: NSObject {
     }
     
     // MARK: Utility methods
-    func buildRequest(url:String) -> NSURLRequest {
-        let apikey = NSUserDefaults.standardUserDefaults().objectForKey("ragic_apikey") as String
-        let request = NSMutableURLRequest(URL: NSURL(string: url))
+    func buildRequest(url:String) -> NSMutableURLRequest {
+        let apikey = AZRagicSwiftUtils.getUserAPIKey()!
+        var request = NSMutableURLRequest(URL: NSURL(string: url))
         let keyParam = "Basic \(apikey)"
         request.setValue(keyParam, forHTTPHeaderField: "Authorization")
         request.HTTPShouldHandleCookies = false
-        request.HTTPMethod = "POST"
         return request
     }
     
     
 }
 
+@objc
 protocol ClientDelegate {
-    func loginFinishedWithStatusCode(code:String, result:Dictionary<String, AnyObject>?)
-    func loadFinishedWithResult(result:Dictionary<String, AnyObject>?)
+
+    optional func loginFinishedWithStatusCode(code:String, result:Dictionary<String, AnyObject>?)
+    optional func loadFinishedWithResult(result:Dictionary<String, AnyObject>?)
 }
 
 

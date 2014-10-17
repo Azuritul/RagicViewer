@@ -13,17 +13,17 @@ import Foundation
 class AZRagicSwiftUtils {
     
     class func getUserMainAccount() -> String? {
-        return NSUserDefaults.standardUserDefaults().stringForKey("ragic_accont")
+        return NSUserDefaults.standardUserDefaults().objectForKey(Constants.KEY_ACCOUNT) as? String
     }
     
     class func getUserAPIKey() -> String? {
-        return NSUserDefaults.standardUserDefaults().stringForKey("ragic_apikey")
+        return NSUserDefaults.standardUserDefaults().objectForKey(Constants.KEY_APIKEY) as? String
     }
     
     class func removeUserInfo() {
         let standardStore = NSUserDefaults.standardUserDefaults()
-        standardStore.removeObjectForKey("ragic_account")
-        standardStore.removeObjectForKey("ragic_apikey")
+        standardStore.removeObjectForKey(Constants.KEY_ACCOUNT)
+        standardStore.removeObjectForKey(Constants.KEY_APIKEY)
         standardStore.synchronize()
     }
     
@@ -49,12 +49,14 @@ class AZRagicSwiftUtils {
     
     class func accountsFilePath() -> String {
         var path:Array = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        var documentsDirectory:String = path[0] as String
-        return  documentsDirectory + "ragic_accounts.plist";
+        var documentsDirectory:String = path.first as String
+        var fullPath = documentsDirectory.stringByAppendingPathComponent("ragic_accounts.plist")
+        println("accounts file path: \(fullPath)")
+        return fullPath;
     }
     
     class func switchAccount(newAccount:String) {
-        NSUserDefaults.standardUserDefaults().setObject(newAccount, forKey: "ragic_account")
+        NSUserDefaults.standardUserDefaults().setObject(newAccount, forKey: Constants.KEY_ACCOUNT)
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     

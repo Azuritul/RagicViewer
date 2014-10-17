@@ -20,8 +20,8 @@
     //should check credentials before dispatching viewcontroller
     NSString * apikey = [AZRagicSwiftUtils getUserAPIKey];
     if(apikey != nil) {
-        AZRagicTabFolderTableViewController * leftMenuViewController = [[[AZRagicTabFolderTableViewController alloc] init] autorelease];
-        UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:leftMenuViewController] autorelease];
+        TabFolderViewController * rootViewController = [[[TabFolderViewController alloc] init] autorelease];
+        UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:rootViewController] autorelease];
         self.window.rootViewController = navigationController;
         
     } else { //Dispatch to login view controller

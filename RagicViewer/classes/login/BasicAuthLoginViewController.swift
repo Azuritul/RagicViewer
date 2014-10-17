@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RagicClientDelegate {
+class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClientDelegate {
     
     var tableView:UITableView?
     var accountField:UITextField?
@@ -52,17 +52,16 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    // MARK: Services
+    // MARK: - Services
     func back(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func login() {
-        let client:AZRagicClient = AZRagicClient()
+        let client:RagicClient = RagicClient()
         client.delegate = self;
-        client.loginWithUsername(self.accountField?.text, password: self.passwordField?.text)
+        client.login(self.accountField!.text, password: self.passwordField!.text)
     }
-    
     
     /**
      * Validate form field
@@ -108,12 +107,24 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
         if SVProgressHUD.isVisible() {
             SVProgressHUD.dismiss()
         }
-        let controller:AZRagicTabFolderTableViewController = AZRagicTabFolderTableViewController()
+        let controller:TabFolderViewController = TabFolderViewController()
         let nav:UINavigationController = UINavigationController(rootViewController: controller)
         self.presentViewController(nav, animated: true, completion: nil)
     }
+    
+    // MARK: - Client Delegate
+    func loginFinishedWithStatusCode(code: String, result: Dictionary<String, AnyObject>?) {
+        if code == "success" {
+            dispatch_async(dispatch_get_main_queue(), { self.dispatchToMainView()})
+        } else {
+            dispatch_async(dispatch_get_main_queue(), {
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showErrorWithStatus("Login failed")
+            })
+        }
+    }
 
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
