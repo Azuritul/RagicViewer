@@ -6,7 +6,6 @@
 //  Copyright (c) 2014年 Azuritul. All rights reserved.
 //
 
-#import "AZAppDelegate.h"
 #import "RagicViewer-Swift.h"
 
 int main(int argc, char * argv[]) {
