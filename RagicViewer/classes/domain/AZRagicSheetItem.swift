@@ -21,10 +21,17 @@ class AZRagicSheetItem : NSObject {
     var children:[AZRagicSheetItem]?
     var itemUrl:String?
     override var description : String {
-        if key != nil {
-            return "##Item## : { KEY: [\(key)] NAME: [\(name)] SEQ: [\(seq)] URL: [\(itemUrl)] }"
+        var childArr = [String]()
+        if children != nil {
+            
+            for child in children! {
+                var childItem = "##Child## : { KEY: [\(child.key)] NAME: [\(child.name))] SEQ: [\(child.seq)] URL: [\(child.itemUrl)] }"
+                childArr.append(childItem)
+            }
+            
         }
-        return "Item is not associated with a key"
+        return "##Item## : { KEY: [\(key)] NAME: [\(name)] SEQ: [\(seq)] URL: [\(itemUrl)] Child: [\(childArr)] }"
+            
     }
     
     class func createSheetItem(fromDictionary dict:Dictionary<String, AnyObject>, forKey key:String, andAccount account:String) -> AZRagicSheetItem {

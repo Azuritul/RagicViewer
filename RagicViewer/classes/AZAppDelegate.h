@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+__deprecated
 @interface AZAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 

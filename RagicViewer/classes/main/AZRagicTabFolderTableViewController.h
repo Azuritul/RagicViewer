@@ -10,6 +10,7 @@
 #import "AZRagicClient.h"
 #import "AZRagicAccountListViewController.h"
 
+__deprecated
 @interface AZRagicTabFolderTableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, RagicClientDelegate, AZRagicAccountListViewControllerDelegate>
 
 @property (nonatomic, retain) UITableView *tableView;

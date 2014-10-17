@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+__deprecated
 @interface AZRagicSheetItem : NSObject
 
 @property (nonatomic, copy) NSString * key;  // == url segment

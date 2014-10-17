@@ -5,11 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
+__deprecated
 @protocol AZRagicAccountListViewControllerDelegate<NSObject>
 @optional
 -(void) didSwitchToAccount;
 @end
 
+__deprecated
 @interface AZRagicAccountListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic,assign) id<AZRagicAccountListViewControllerDelegate> delegate;

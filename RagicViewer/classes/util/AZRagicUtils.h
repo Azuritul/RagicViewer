@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+__deprecated
 @interface AZRagicUtils : NSObject
 
 + (NSString *)getUserMainAccount;

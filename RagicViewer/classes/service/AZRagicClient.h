@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+__deprecated
 @protocol RagicClientDelegate<NSObject>
 
 @optional
@@ -15,7 +16,7 @@
 -(void) loadFinishedWithResult:(NSDictionary *) result;
 @end
 
-
+__deprecated
 @interface AZRagicClient : NSObject
 
 //Basic Auth

@@ -33,14 +33,13 @@ class LeafViewController: UIViewController, UIWebViewDelegate {
         let bindings = ["webView":webView]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: .allZeros, metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.webView?.loadRequest(AZRagicClient.webviewRequestWithUrl(self.url!))
+        self.webView?.loadRequest(RagicClient.webviewRequestWithUrl(self.url!))
         self.webView?.scalesPageToFit = true
         SVProgressHUD.showWithMaskType(.Gradient)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {

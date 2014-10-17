@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-class TabFolderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClientDelegate, AZRagicAccountListViewControllerDelegate {
+class TabFolderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClientDelegate, AccountListViewControllerDelegate {
 
     var tableView:UITableView?
     var result:Array<AZRagicSheetItem>?
@@ -49,7 +49,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         dropdownView.backgroundColor = UIColor.whiteColor()
         dropdownView.alpha = 0.95;
         
-        let logoutButton = self.createButtonForDropdownMenu("Logout")
+        let logoutButton = self.createButtonForDropdownMenu("Log out")
         logoutButton.addTarget(self, action: "confirmLogout", forControlEvents: .TouchUpInside)
         
         let switchAccountButton = self.createButtonForDropdownMenu("Switch Account")
@@ -113,7 +113,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Utility methods
     func popSwitchAccountController() {
-        let accountsViewController = AZRagicAccountListViewController()
+        let accountsViewController = AccountListViewController()
         accountsViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: accountsViewController)
         navigationController.modalPresentationStyle = .Popover
@@ -146,7 +146,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
             (alert: UIAlertAction!) in
                 AZRagicSwiftUtils.removeUserInfo()
-                //self.forwardToLoginView()
+                self.forwardToLoginView()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alert: UIAlertAction!) in }
@@ -202,25 +202,6 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
             self.reloadTable()
         }
         
-//        if let resultDic = result as Dictionary<String, AnyObject>! {
-//            var resultArray:Array<AZRagicSheetItem> = [AZRagicSheetItem]()
-//            let account = AZRagicSwiftUtils.getUserMainAccount()!
-//            println( "Result:   \(resultDic)")
-//            for key in resultDic.keys {
-//                var item = AZRagicSheetItem.createSheetItem(fromDictionary: resultDic, forKey: key, andAccount: account)
-//                resultArray.append(item)
-//            }
-//            if self.result?.count > 0 {
-//                self.result?.removeAll(keepCapacity: false)
-//            }
-//            self.result! += resultArray
-//            self.reloadTable()
-//        } else {
-//            //should show err msg instead of just dismissing the progress hud
-//            if SVProgressHUD.isVisible() {
-//                SVProgressHUD.dismiss()
-//            }
-//        }
     }
 
     
@@ -246,10 +227,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let result = self.result {
-            return result.count
-        }
-        return 0
+        return result?.count ?? 0
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -298,8 +276,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let item = self.result?[indexPath.row]
-        println(item)
-        let children = AZRagicSheetListViewController(array: item?.children)
+        let children = SheetListViewController(array: item!.children!)
         self.navigationController?.pushViewController(children, animated: true)
     }
     

@@ -41,8 +41,7 @@ class RagicClient: NSObject {
                 
                 NSUserDefaults.standardUserDefaults().synchronize()
                 if let allAccount = json["allAccounts"] as? NSArray {
-                    var success = allAccount.writeToFile(AZRagicSwiftUtils.accountsFilePath(), atomically:true)
-                    println("saved: \(success)")
+                    allAccount.writeToFile(AZRagicSwiftUtils.accountsFilePath(), atomically:true)
                 }
                 
                 self.delegate?.loginFinishedWithStatusCode?("success", result:json)

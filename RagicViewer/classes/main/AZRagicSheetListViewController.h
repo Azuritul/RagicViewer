@@ -6,7 +6,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-
+__deprecated
 @interface AZRagicSheetListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 -(AZRagicSheetListViewController *) initWithArray:(NSArray *) array;
