@@ -8,6 +8,7 @@
 #import "AZRagicClient.h"
 #import "AZRagicLeafViewController.h"
 #import "AZRagicUtils.h"
+#import "RagicViewer-Swift.h"
 
 @interface AZRagicDataListingViewController () <RagicClientDelegate>
 @end
@@ -126,7 +127,7 @@
     NSDictionary * item = [self.dataDict objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
     NSString *nodeId = item[@"_ragicId"];
     NSString *detailViewURL = [NSString stringWithFormat:@"%@/%@.xhtml", self.url, nodeId];
-    AZRagicLeafViewController *webViewController = [[[AZRagicLeafViewController alloc] initWithUrl:detailViewURL] autorelease];
+    LeafViewController *webViewController = [[[LeafViewController alloc] initWithUrl:detailViewURL] autorelease];
     [self.navigationController pushViewController:webViewController animated:YES];
 }
 

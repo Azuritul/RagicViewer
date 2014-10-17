@@ -7,9 +7,11 @@
 //
 
 #import "AZAppDelegate.h"
+#import "RagicViewer-Swift.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AZAppDelegate class]));
+        //return UIApplicationMain(argc, argv, nil, NSStringFromClass([AZAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

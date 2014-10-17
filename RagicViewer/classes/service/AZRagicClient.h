@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+__deprecated
 @protocol RagicClientDelegate<NSObject>
+
 @optional
 -(void) loginFinishedWithStatusCode:(NSString*) code andResult:(NSDictionary*)result;
 -(void) loadFinishedWithResult:(NSDictionary *) result;
 @end
 
-
+__deprecated
 @interface AZRagicClient : NSObject
 
 //Basic Auth
@@ -22,12 +24,13 @@
 
 //Password Auth
 - (void)loginWithUsername:(NSString *)string password:(NSString *)pass;
+
+//Loading Data
 - (void)loadTopLevel:(NSString *)apikey;
-
 - (void)loadTopLevelContentByAPIKey:(NSString *)apikey andAccount:(NSString *)account;
-
 - (void)loadSheet:(NSString *)sheetUrl;
 
+//Accessing webview
 + (NSURLRequest *)webviewRequestWithUrl:(NSString *)url;
 
 @property (assign) id<RagicClientDelegate> delegate;

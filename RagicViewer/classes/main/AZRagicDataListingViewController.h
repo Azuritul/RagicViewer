@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+__deprecated
 @interface AZRagicDataListingViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 - (AZRagicDataListingViewController *)initWithURL:(NSString *)url;

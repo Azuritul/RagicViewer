@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+__deprecated
 @interface AZLoginHomeViewController : UIViewController
 
 @end

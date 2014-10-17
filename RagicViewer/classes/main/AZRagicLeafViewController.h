@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+__deprecated
 @interface AZRagicLeafViewController : UIViewController<UIWebViewDelegate>
 
 @property (nonatomic, retain) UIWebView* webView;
