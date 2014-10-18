@@ -146,10 +146,14 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
         if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
             let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
-            let nodeId = item["_ragicId"] as AnyObject? as? String
-            let detailViewURL = "\(self.url)/\(nodeId).xhtml"
-            let webViewController = LeafViewController(url: detailViewURL)
-            self.navigationController?.pushViewController(webViewController, animated: true)
+            println(item)
+            if let nodeId = item["_ragicId"] as AnyObject? as Int! {
+                let detailViewURL = "\(self.url)/\(nodeId).xhtml"
+                println(detailViewURL)
+                let webViewController = LeafViewController(url: detailViewURL)
+                self.navigationController?.pushViewController(webViewController, animated: true)
+            }
+            
         }
     }
     

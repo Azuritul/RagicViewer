@@ -109,7 +109,7 @@ class RagicClient: NSObject {
     }
     
     class func webviewRequestWithUrl(url:String) -> NSURLRequest {
-        let webViewURL = url.stringByReplacingOccurrencesOfString(url, withString: "www", options: .LiteralSearch, range: nil)
+        let webViewURL = url.stringByReplacingOccurrencesOfString("api", withString: "www")
         let apikey = NSUserDefaults.standardUserDefaults().objectForKey("ragic_apikey") as String
         let request = NSMutableURLRequest(URL: NSURL(string: webViewURL))
         let keyParam = "Basic \(apikey)"
