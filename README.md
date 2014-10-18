@@ -13,6 +13,9 @@ If you find any issues, please fire an issue or send a pull request.
 
 A code signing key from Apple is required to deploy apps to a device. Without a developer key, the app can only be installed on the iPhone Simulator.
 
+##Notice
+From version 1.1.0, the codebase is migrated to Swift.  If you need Objective-C codebase, please checkout using tag `v1.0.0`
+
 ##Third party component
 * [SVProgressHUD] (https://github.com/TransitApp/SVProgressHUD)
 * [Glyphicons] (http://glyphicons.com/)
