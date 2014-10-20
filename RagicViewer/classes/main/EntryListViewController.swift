@@ -57,7 +57,7 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
         client.loadSheet(self.url)
     }
     
-    func detailTextFromResultDict(dict:[String:AnyObject]) -> String? {
+    private func detailTextFromResultDict(dict:[String:AnyObject]) -> String? {
         var text:String = ""
         for (key, value) in dict {
             if key.hasPrefix("_") && key.hasSuffix("_") {
@@ -65,7 +65,7 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
             }
             if value is String {
                 text += "\(value)"
-                text += "   "
+                text += "  "
             }
             
         }
@@ -115,12 +115,13 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
         if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
             
             let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
+            //println(item)
             
-            var title = ""
-            if item.values.array[0] is String {
-                title = item.values.array[0] as String
-            }
-
+            //Testing result shows that _index_title_ might be missing in some earlier apps,
+            //so here ragic_id would be used for the situation if _index_title_ is missing.
+            var title : String? =  item["_index_title_"] as AnyObject? as? String
+            var placeholder : Int = item["_ragicId"] as AnyObject? as Int
+            
             cell?.backgroundColor = UIColor.clearColor()
             cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16.0)
             cell?.textLabel?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
@@ -130,7 +131,7 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
             cell?.detailTextLabel?.textColor = UIColor.lightGrayColor()
             cell?.detailTextLabel?.numberOfLines = 2
             cell?.detailTextLabel?.lineBreakMode = .ByWordWrapping;
-            cell?.textLabel?.text = title
+            cell?.textLabel?.text = title ?? "\(placeholder)"
             cell?.detailTextLabel?.text = self.detailTextFromResultDict(item)
         }
         
