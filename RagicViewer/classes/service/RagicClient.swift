@@ -16,7 +16,7 @@ class RagicClient: NSObject {
     
     func login(username:String, password:String) {
         let url = "https://api.ragic.com/AUTH";
-        let request = NSMutableURLRequest(URL:NSURL(string:url))
+        let request = NSMutableURLRequest(URL:NSURL(string:url)!)
         var loginStr = "u=\(username)&p=\(password)&login_type=sessionId&json=1&apikey"
         request.HTTPMethod = "POST"
         request.HTTPBody = loginStr.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -111,7 +111,7 @@ class RagicClient: NSObject {
     class func webviewRequestWithUrl(url:String) -> NSURLRequest {
         let webViewURL = url.stringByReplacingOccurrencesOfString("api", withString: "www")
         let apikey = NSUserDefaults.standardUserDefaults().objectForKey("ragic_apikey") as String
-        let request = NSMutableURLRequest(URL: NSURL(string: webViewURL))
+        let request = NSMutableURLRequest(URL: NSURL(string: webViewURL)!)
         let keyParam = "Basic \(apikey)"
         request.setValue(keyParam, forHTTPHeaderField: "Authorization")
         request.HTTPShouldHandleCookies = false
@@ -122,7 +122,7 @@ class RagicClient: NSObject {
     // MARK: Utility methods
     func buildRequest(url:String) -> NSMutableURLRequest {
         let apikey = AZRagicSwiftUtils.getUserAPIKey()!
-        var request = NSMutableURLRequest(URL: NSURL(string: url))
+        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         let keyParam = "Basic \(apikey)"
         request.setValue(keyParam, forHTTPHeaderField: "Authorization")
         request.HTTPShouldHandleCookies = false

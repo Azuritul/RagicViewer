@@ -123,15 +123,15 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
             var placeholder : Int = item["_ragicId"] as AnyObject? as Int
             
             cell?.backgroundColor = UIColor.clearColor()
-            cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            cell?.textLabel?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
+            cell?.textLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            cell?.textLabel.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+            cell?.textLabel.highlightedTextColor = UIColor.lightGrayColor()
             cell?.selectedBackgroundView = UIView()
             cell?.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
             cell?.detailTextLabel?.textColor = UIColor.lightGrayColor()
             cell?.detailTextLabel?.numberOfLines = 2
             cell?.detailTextLabel?.lineBreakMode = .ByWordWrapping;
-            cell?.textLabel?.text = title ?? "\(placeholder)"
+            cell?.textLabel.text = title ?? "\(placeholder)"
             cell?.detailTextLabel?.text = self.detailTextFromResultDict(item)
         }
         
