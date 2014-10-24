@@ -51,7 +51,6 @@ class AZRagicSwiftUtils {
         var path:Array = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var documentsDirectory:String = path.first as String
         var fullPath = documentsDirectory.stringByAppendingPathComponent("ragic_accounts.plist")
-        println("accounts file path: \(fullPath)")
         return fullPath;
     }
     

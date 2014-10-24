@@ -62,7 +62,6 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     //MARK: - Utility methods
     func dismissPressed(){
         self.dismissViewControllerAnimated(true, completion:{() in
-            println(self.accountChanged)
             if(self.accountChanged) {
                 self.delegate?.didSwitchToAccount?()
             }

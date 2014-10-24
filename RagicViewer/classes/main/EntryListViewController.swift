@@ -115,7 +115,6 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
         if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
             
             let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
-            //println(item)
             
             //Testing result shows that _index_title_ might be missing in some earlier apps,
             //so here ragic_id would be used for the situation if _index_title_ is missing.
@@ -147,10 +146,8 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
         if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
             let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
-            println(item)
             if let nodeId = item["_ragicId"] as AnyObject? as Int! {
                 let detailViewURL = "\(self.url)/\(nodeId).xhtml"
-                println(detailViewURL)
                 let webViewController = LeafViewController(url: detailViewURL)
                 self.navigationController?.pushViewController(webViewController, animated: true)
             }
