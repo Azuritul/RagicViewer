@@ -16,8 +16,16 @@ class AZRagicSwiftUtils {
         return NSUserDefaults.standardUserDefaults().objectForKey(Constants.KEY_ACCOUNT) as? String
     }
     
+    
     class func getUserAPIKey() -> String? {
         return NSUserDefaults.standardUserDefaults().objectForKey(Constants.KEY_APIKEY) as? String
+    }
+
+    class func isMainAccountExist() -> Bool {
+        if let account = AZRagicSwiftUtils.getUserMainAccount() {
+            return true
+        }
+        return false
     }
     
     class func removeUserInfo() {
