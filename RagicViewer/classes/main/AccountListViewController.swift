@@ -97,11 +97,8 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         cell?.textLabel.highlightedTextColor = UIColor.lightGrayColor()
         cell?.selectedBackgroundView = UIView()
         cell?.textLabel.text = name
-        if name == AZRagicSwiftUtils.getUserMainAccount() {
-            cell?.accessoryType = .Checkmark
-        } else {
-            cell?.accessoryType = .None
-        }
+        cell?.accessoryType = AZRagicSwiftUtils.isMainAccountExist() ? .Checkmark : .None
+        
         return cell!
     }
     
