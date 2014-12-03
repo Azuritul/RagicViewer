@@ -19,9 +19,9 @@ class LoginHomeViewController: UIViewController {
         var imageView:UIImageView = UIImageView(image:UIImage(named:"titleImage.JPG"))
         let blurEffect:UIBlurEffect = UIBlurEffect(style:.ExtraLight)
         let blurView:UIVisualEffectView = UIVisualEffectView(effect:blurEffect)
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         blurView.setTranslatesAutoresizingMaskIntoConstraints(false)
-
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
         //Configure title label
         var titleLabel:UILabel = UILabel()
         titleLabel.text = "Ragic Viewer"

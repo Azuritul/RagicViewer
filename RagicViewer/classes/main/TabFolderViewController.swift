@@ -216,13 +216,13 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
         if sheetItem != nil {
             cell?.backgroundColor = UIColor.clearColor()
-            cell?.textLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            cell?.textLabel.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            cell?.textLabel.highlightedTextColor = UIColor.lightGrayColor()
+            cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            cell?.textLabel?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+            cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
             cell?.selectedBackgroundView = UIView()
             cell?.accessoryType = .DisclosureIndicator
         }
-        cell?.textLabel.text = sheetItem?.name
+        cell?.textLabel?.text = sheetItem?.name
         return cell!
     }
     

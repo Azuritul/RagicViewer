@@ -92,11 +92,11 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         let name = dict!["account"] as AnyObject? as String
         
         cell?.backgroundColor = UIColor.clearColor()
-        cell?.textLabel.font = UIFont(name: "HelveticaNeue", size: 18)
-        cell?.textLabel.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-        cell?.textLabel.highlightedTextColor = UIColor.lightGrayColor()
+        cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 18)
+        cell?.textLabel?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+        cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
         cell?.selectedBackgroundView = UIView()
-        cell?.textLabel.text = name
+        cell?.textLabel?.text = name
         cell?.accessoryType = AZRagicSwiftUtils.isMainAccountExist() ? .Checkmark : .None
         
         return cell!
