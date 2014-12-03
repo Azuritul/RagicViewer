@@ -1,4 +1,4 @@
-RagicViewer [![Build Status](https://travis-ci.org/Azuritul/RagicViewer.svg?branch=travis-configuratio)](https://travis-ci.org/Azuritul/RagicViewer) 
+RagicViewer [![Build Status](https://travis-ci.org/Azuritul/RagicViewer.svg?branch=master)](https://travis-ci.org/Azuritul/RagicViewer) 
 ===========
 
 This is the repository for RagicViewer, an unofficial Ragic client for iOS, mainly built for personal interest and study needs.
