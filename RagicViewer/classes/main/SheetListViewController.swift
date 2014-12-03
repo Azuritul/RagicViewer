@@ -114,7 +114,7 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
         label?.highlightedTextColor = UIColor.lightGrayColor()
         cell?.selectedBackgroundView = UIView()
-        cell?.textLabel!.text = item.name
+        label?.text = item.name
         return cell!;
     }
     
