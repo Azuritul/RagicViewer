@@ -109,9 +109,10 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         let item = self.dataArray[indexPath.row]
         
         cell?.backgroundColor = UIColor.clearColor()
-        cell?.textLabel!.font = UIFont(name: "HelveticaNeue", size: 16)
-        cell?.textLabel!.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-        cell?.textLabel!.highlightedTextColor = UIColor.lightGrayColor()
+        let label = cell?.textLabel
+        label?.font = UIFont(name: "HelveticaNeue", size: 16)
+        label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+        label?.highlightedTextColor = UIColor.lightGrayColor()
         cell?.selectedBackgroundView = UIView()
         cell?.textLabel!.text = item.name
         return cell!;
