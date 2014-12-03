@@ -22,7 +22,6 @@
 		00965A9519EF8D6D001062F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00965A9419EF8D6D001062F5 /* Constants.swift */; };
 		00B4229B19FE2FC0002545CE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4229A19FE2FC0002545CE /* BaseViewController.swift */; };
 		00DF6D4C19F901BF00441888 /* AZUSimpleDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DF6D4B19F901BF00441888 /* AZUSimpleDropdownMenu.swift */; };
-		00DF6D4F19FA534C00441888 /* AZDropdownMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DF6D4E19FA534C00441888 /* AZDropdownMenuItem.swift */; };
 		00F8897119DA9DAC00BBC01D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8897019DA9DAC00BBC01D /* main.m */; };
 		00F8898219DA9DAC00BBC01D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8898019DA9DAC00BBC01D /* LaunchScreen.xib */; };
 		00F8898E19DA9DAC00BBC01D /* RagicViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8898D19DA9DAC00BBC01D /* RagicViewerTests.m */; };
@@ -65,7 +64,6 @@
 		00965A9419EF8D6D001062F5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00B4229A19FE2FC0002545CE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		00DF6D4B19F901BF00441888 /* AZUSimpleDropdownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AZUSimpleDropdownMenu.swift; path = ui/AZUSimpleDropdownMenu.swift; sourceTree = "<group>"; };
-		00DF6D4E19FA534C00441888 /* AZDropdownMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AZDropdownMenuItem.swift; path = ui/AZDropdownMenuItem.swift; sourceTree = "<group>"; };
 		00F8896B19DA9DAC00BBC01D /* RagicViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RagicViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F8896F19DA9DAC00BBC01D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00F8897019DA9DAC00BBC01D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				00DF6D4B19F901BF00441888 /* AZUSimpleDropdownMenu.swift */,
-				00DF6D4E19FA534C00441888 /* AZDropdownMenuItem.swift */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -408,7 +405,6 @@
 				00458F1D19ED175200118046 /* LoginHomeViewController.swift in Sources */,
 				00965A9119EE1041001062F5 /* RagicClient.swift in Sources */,
 				00F8897119DA9DAC00BBC01D /* main.m in Sources */,
-				00DF6D4F19FA534C00441888 /* AZDropdownMenuItem.swift in Sources */,
 				00965A9319EE60A0001062F5 /* TabFolderViewController.swift in Sources */,
 				00DF6D4C19F901BF00441888 /* AZUSimpleDropdownMenu.swift in Sources */,
 				00965A8F19ED5FC4001062F5 /* LeafViewController.swift in Sources */,

@@ -13,7 +13,8 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
 
     var tableView:UITableView?
     var dataArray:[AZRagicSheetItem]
-
+    var menuWindow:AZUSimpleDropdownMenu?
+    
     init(array:[AZRagicSheetItem]){
         self.dataArray = array
         super.init(nibName: nil, bundle: nil)
@@ -29,7 +30,8 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.title = "Ragic Viewer";
         let tableView = UITableView()
-        
+        var moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed")
+        self.navigationItem.rightBarButtonItem = moreButton
         tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
         tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
@@ -43,6 +45,24 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
         
+    }
+    
+    func moreButtonPressed(){
+        let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["menu1", "menu2", "menu3"])
+        
+        menu.attachMethodTo(self, forItemIndex: 2, action: "alert", forControlEvents: .TouchUpInside)
+        if self.menuWindow == nil {
+            //self.menuWindow?.removeFromSuperview()
+            self.menuWindow = menu
+            self.view.addSubview(menu)
+            self.view.setNeedsUpdateConstraints()
+        }
+        
+    }
+    
+    func alert(){
+        let alertController = UIAlertController(title:"Logout", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
