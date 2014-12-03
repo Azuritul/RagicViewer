@@ -121,17 +121,21 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
             var title : String? =  item["_index_title_"] as AnyObject? as? String
             var placeholder : Int = item["_ragicId"] as AnyObject? as Int
             
+            let label = cell?.textLabel
+            let detailLabel = cell?.detailTextLabel
             cell?.backgroundColor = UIColor.clearColor()
-            cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            cell?.textLabel?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
             cell?.selectedBackgroundView = UIView()
-            cell?.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
-            cell?.detailTextLabel?.textColor = UIColor.lightGrayColor()
-            cell?.detailTextLabel?.numberOfLines = 2
-            cell?.detailTextLabel?.lineBreakMode = .ByWordWrapping;
-            cell?.textLabel?.text = title ?? "\(placeholder)"
-            cell?.detailTextLabel?.text = self.detailTextFromResultDict(item)
+            
+            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+            label?.highlightedTextColor = UIColor.lightGrayColor()
+            label?.text = title ?? "\(placeholder)"
+            
+            detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
+            detailLabel?.textColor = UIColor.lightGrayColor()
+            detailLabel?.numberOfLines = 2
+            detailLabel?.lineBreakMode = .ByWordWrapping;
+            detailLabel?.text = self.detailTextFromResultDict(item)
         }
         
         return cell!;

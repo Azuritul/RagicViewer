@@ -207,22 +207,24 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellKey = "ekk"
+        let cellKey = "cellKey"
         var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
         }
         
         let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
+        let label = cell?.textLabel
         if sheetItem != nil {
             cell?.backgroundColor = UIColor.clearColor()
-            cell?.textLabel?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            cell?.textLabel?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            cell?.textLabel?.highlightedTextColor = UIColor.lightGrayColor()
             cell?.selectedBackgroundView = UIView()
             cell?.accessoryType = .DisclosureIndicator
+            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+            label?.highlightedTextColor = UIColor.lightGrayColor()
+            
         }
-        cell?.textLabel?.text = sheetItem?.name
+        label?.text = sheetItem?.name
         return cell!
     }
     
