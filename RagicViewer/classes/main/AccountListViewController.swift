@@ -84,7 +84,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         let cellKey = "keyForCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
         
-        if(cell == nil) {
+        if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
         }
         
@@ -98,7 +98,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         label?.highlightedTextColor = UIColor.lightGrayColor()
         cell?.selectedBackgroundView = UIView()
         label?.text = name
-        cell?.accessoryType = AZRagicSwiftUtils.isMainAccountExist() ? .Checkmark : .None
+        cell?.accessoryType = (AZRagicSwiftUtils.getUserMainAccount() == name) ? .Checkmark : .None
         
         return cell!
     }
