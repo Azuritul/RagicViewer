@@ -13,15 +13,15 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
 
     var tableView:UITableView?
     var result:Array<AZRagicSheetItem>?
-    var dropdownMenu:UIView?
     var xAxisLayoutConstraint:NSLayoutConstraint?
+    var menuWindow:AZUSimpleDropdownMenu?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = false
         self.view.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        var moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed")
+        var moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed2")
 
         self.navigationItem.rightBarButtonItem = moreButton
         self.title = "Ragic Viewer";
@@ -43,65 +43,10 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .allZeros, metrics: nil, views: tableViewBindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .allZeros, metrics: nil, views: tableViewBindings))
         
-        //Add dropdown menu
-        var dropdownView = UIView()
-        dropdownView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        dropdownView.backgroundColor = UIColor.whiteColor()
-        dropdownView.alpha = 0.95;
-        
-        let logoutButton = self.createButtonForDropdownMenu("Log out")
-        logoutButton.addTarget(self, action: "confirmLogout", forControlEvents: .TouchUpInside)
-        
-        let switchAccountButton = self.createButtonForDropdownMenu("Switch Account")
-        switchAccountButton.addTarget(self, action:"popSwitchAccountController", forControlEvents: .TouchUpInside)
-        
-        let line = UIView()
-        line.setTranslatesAutoresizingMaskIntoConstraints(false)
-        line.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#E0DDDD")
-        
-        dropdownView.addSubview(switchAccountButton)
-        dropdownView.addSubview(line)
-        dropdownView.addSubview(logoutButton)
-        
-        self.dropdownMenu = dropdownView
-        self.view.addSubview(dropdownView)
-        
-        let bindings = ["logoutButton": logoutButton, "line":line,
-                        "switchAccountButton":switchAccountButton, "dropdownView":dropdownView]
-        
-        let menuHeightConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[dropdownView(>=130)]", options: .allZeros, metrics: nil, views: bindings)
-        
-        let xAxisToParentView = NSLayoutConstraint(item: dropdownView, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0)
-        
-        let viewWidthConstraint = NSLayoutConstraint(item: dropdownView, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 1, constant: 0)
-        
-        self.xAxisLayoutConstraint = xAxisToParentView;
-        
-        dropdownView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[switchAccountButton]|", options: .allZeros, metrics: nil, views: bindings))
-        dropdownView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-10-[line]-10-|", options: .allZeros, metrics: nil, views: bindings))
-        dropdownView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[logoutButton]|", options: .allZeros, metrics: nil, views: bindings))
-        dropdownView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[switchAccountButton(==60)][line(==1)][logoutButton(>=60)]|", options: .allZeros, metrics: nil, views: bindings))
-        
-        self.view.addConstraint(viewWidthConstraint);
-        self.view.addConstraints(menuHeightConstraint);
-        self.view.addConstraint(self.xAxisLayoutConstraint!);
-        
         SVProgressHUD.showWithMaskType(.Gradient)
         self.loadData()
-        
     }
     
-    func createButtonForDropdownMenu(title:String) -> UIButton {
-        let button = UIButton.buttonWithType(.Custom) as UIButton
-        button.setTranslatesAutoresizingMaskIntoConstraints(false)
-        button.titleLabel!.font = UIFont.boldSystemFontOfSize(16.0)
-        button.titleLabel!.textAlignment = .Center
-        button.setTitleColor(AZRagicSwiftUtils.colorFromHexString("#636363"), forState: .Normal)
-        button.setTitle(title, forState: .Normal)
-        button.backgroundColor = UIColor.clearColor()
-        return button
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -114,30 +59,30 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Utility methods
     func popSwitchAccountController() {
         let accountsViewController = AccountListViewController()
-        accountsViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: accountsViewController)
-        navigationController.modalPresentationStyle = .Popover
         let presentation = accountsViewController.popoverPresentationController
+        
+        accountsViewController.delegate = self
+        navigationController.modalPresentationStyle = .Popover
         presentation?.permittedArrowDirections = .Any
-        presentation?.sourceView = self.dropdownMenu
+        presentation?.sourceView = self.menuWindow
         self.presentViewController(navigationController, animated: true, completion: nil)
-        self.showMenuAnimated()
     }
     
-    func showMenuAnimated() {
-        self.view.setNeedsUpdateConstraints()
-        var axis:CGFloat = 184.0
-        if self.xAxisLayoutConstraint?.constant > 0 {
-            axis = -100
+    func moreButtonPressed(){
+        if (self.menuWindow?.isDescendantOfView(self.view) == true ) {
+            self.menuWindow?.hideView()
+            self.view.setNeedsUpdateConstraints()
+        } else {
+            let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["Switch Account", "Logout"])
+            
+            menu.attachMethodTo(self, forItemIndex: 0, action: "popSwitchAccountController", forControlEvents: .TouchUpInside)
+            menu.attachMethodTo(self, forItemIndex: 1, action: "confirmLogout", forControlEvents: .TouchUpInside)
+            
+            self.menuWindow = menu
+            self.menuWindow?.showFromView(self.view)
+            self.view.setNeedsUpdateConstraints()
         }
-        UIView.animateWithDuration(0.3, animations:{
-                self.xAxisLayoutConstraint?.constant = axis
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-    }
-    
-    func moreButtonPressed() {
-        self.showMenuAnimated()
     }
     
     func confirmLogout() {
@@ -149,8 +94,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.forwardToLoginView()
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alert: UIAlertAction!) in }
-        )
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alert: UIAlertAction!) in } )
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -285,6 +229,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - AccountList Delegate
     func didSwitchToAccount() {
         SVProgressHUD.showWithMaskType(.Gradient)
+        self.menuWindow?.hideView()
         self.loadData()
     }
 

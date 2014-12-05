@@ -56,27 +56,35 @@ class AZUSimpleDropdownMenu : UIView {
         //Constraint for self
         let selfBindings = ["rootview": self]
         let viewHeight = self.titles.count * 60
+        
         self.superview?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: .allZeros, metrics: nil, views:selfBindings))
         self.superview?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[rootview(==\(viewHeight))]", options: .allZeros, metrics: nil, views:selfBindings))
+//        let line = UIView()
+//        line.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        line.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#E0DDDD")
+        
+        let xAxisToParentView = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: self.superview, attribute: .Top, multiplier: 1, constant: 0)
+        self.dropdownConstraint = xAxisToParentView
+        
         
         //Assign constraint for each item(button)
         for (idx, button) in enumerate(itemsArray) {
-            
+            button.setTranslatesAutoresizingMaskIntoConstraints(false)
             let buttonHeight = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: ITEM_HEIGHT)
             let pinLeft = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: 0)
             
             self.addConstraint(itemWidthConstraint(button, targetView: self))
             self.addConstraint(buttonHeight)
             self.addConstraint(pinLeft)
-            self.addConstraint(vAlignmentConstraint(button, targetView:itemsArray[idx-1], buttonIndex:idx))
+            if idx == 0 {
+                self.addConstraint(vAlignmentConstraint(button, targetView:nil, buttonIndex:idx))
+            } else {
+                self.addConstraint(vAlignmentConstraint(button, targetView:itemsArray[idx-1], buttonIndex:idx))
+            }
         }
         
         //update layout when attached on superview
         self.setNeedsUpdateConstraints()
-    }
-    
-    func showFromView() {
-        
     }
     
     //MARK: - Constraint creation methods
@@ -84,16 +92,28 @@ class AZUSimpleDropdownMenu : UIView {
         return NSLayoutConstraint(item: sourceView, attribute: .Width, relatedBy: .Equal, toItem: targetView, attribute: .Width, multiplier: 1, constant: 0)
     }
     
-    private func vAlignmentConstraint(sourceView:UIView, targetView:UIView, buttonIndex:Int) -> NSLayoutConstraint {
+    private func vAlignmentConstraint(sourceView:UIView, targetView:UIView?, buttonIndex:Int) -> NSLayoutConstraint {
         //Pin first button to top of superview
         if buttonIndex == 0 {
             return NSLayoutConstraint(item: sourceView, attribute: .Top, relatedBy: .Equal, toItem: self,
                 attribute: .Top, multiplier:1, constant: 0)
         } else { //Pin other buttons to the bottom of the previous button
-            return NSLayoutConstraint(item: sourceView, attribute: .Top, relatedBy: .Equal, toItem: targetView, attribute: .Bottom, multiplier:1, constant: 0)
+            return NSLayoutConstraint(item: sourceView, attribute: .Top, relatedBy: .Equal, toItem: targetView!, attribute: .Bottom, multiplier:1, constant: 0)
         }
-        
     }
+    
+    /** @todo Remove from the source **/
+//    func showMenuAnimated() {
+//        self.view.setNeedsUpdateConstraints()
+//        var axis:CGFloat = 184.0
+//        if self.xAxisLayoutConstraint?.constant > 0 {
+//            axis = -100
+//        }
+//        UIView.animateWithDuration(0.3, animations:{
+//            self.xAxisLayoutConstraint?.constant = axis
+//            self.view.layoutIfNeeded()
+//            }, completion: nil)
+//    }
     
     //MARK: - Utility methods
     private func defaultButton(title:String) -> UIButton {
@@ -123,6 +143,30 @@ class AZUSimpleDropdownMenu : UIView {
     func attachMethodTo(target: AnyObject, forItemIndex index: Int, action: Selector, forControlEvents controlEvents: UIControlEvents) {
         let button = self.itemsArray[index]
         button.addTarget(target, action: action, forControlEvents: controlEvents)
+    }
+    
+    func showFromView(view:UIView){
+        view.addSubview(self)
+        let transition:CATransition = CATransition()
+        transition.duration = 0.2;//kAnimationDuration
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromBottom
+        self.layer.addAnimation(transition,forKey: kCATransition)
+    }
+    
+    func hideView() {
+        UIView.animateWithDuration(0.3, animations: {
+            self.alpha = 0
+            }, completion: { finished in
+                if self.superview != nil {
+                    self.removeFromSuperview()
+                }
+        })
+    }
+    
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        println("animation stopped")
     }
     
 }
