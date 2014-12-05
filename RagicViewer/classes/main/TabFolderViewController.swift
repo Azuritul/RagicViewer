@@ -21,7 +21,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = false
         self.view.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        var moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed2")
+        var moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed")
 
         self.navigationItem.rightBarButtonItem = moreButton
         self.title = "Ragic Viewer";
@@ -81,7 +81,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
             
             self.menuWindow = menu
             self.menuWindow?.showFromView(self.view)
-            self.view.setNeedsUpdateConstraints()
+            
         }
     }
     
