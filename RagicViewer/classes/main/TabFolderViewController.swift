@@ -72,7 +72,7 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     func moreButtonPressed(){
         if (self.menuWindow?.isDescendantOfView(self.view) == true ) {
             self.menuWindow?.hideView()
-            self.view.setNeedsUpdateConstraints()
+            
         } else {
             let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["Switch Account", "Logout"])
             
