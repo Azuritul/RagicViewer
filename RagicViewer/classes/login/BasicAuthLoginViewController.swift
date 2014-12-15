@@ -8,10 +8,16 @@
 
 import UIKit
 
-class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClientDelegate {
+/**
+  Actual login view controller for the app.
+ */
+class BasicAuthLoginViewController: UIViewController {
     
+    /// The base view that contains the username and password field
     var tableView:UITableView?
+    
     var accountField:UITextField?
+    
     var passwordField:UITextField?
     
     // MARK: - View Lifecycle
@@ -52,11 +58,18 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    // MARK: - Services
+    // MARK: - Services methods
+    
+    /**
+      Called when back button is pressed. Would cancel login operation.
+     */
     func back(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /**
+      Called if user info is input correctly. Asking the service class to login.
+     */
     func login() {
         let client:RagicClient = RagicClient()
         client.delegate = self;
@@ -64,7 +77,9 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     /**
-     * Validate form field
+      Validate the account and password provided by the user.
+    
+      :return: Boolean value indicating whether the validation is passed or not.
      */
     func isFormValid() -> Bool {
 
@@ -81,6 +96,9 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
         return true;
     }
     
+    /**
+      Called when login button is pressed.
+     */
     func loginButtonPressed(){
         SVProgressHUD.showWithStatus("Loading", maskType: .Gradient)
         if self.isFormValid() {
@@ -91,19 +109,7 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func loginFinishedWithStatusCode(code: String!, andResult result: [NSObject : AnyObject]!) {
-        if(code=="success") {
-            dispatch_sync(dispatch_get_main_queue()) { self.dispatchToMainView() }
-        } else {
-            dispatch_sync(dispatch_get_main_queue()) {
-                SVProgressHUD.dismiss();
-                SVProgressHUD.showErrorWithStatus("Login failed")
-                
-            }
-        }
-    }
-    
-    func dispatchToMainView() {
+    private func dispatchToMainView() {
         if SVProgressHUD.isVisible() {
             SVProgressHUD.dismiss()
         }
@@ -112,29 +118,13 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
         self.presentViewController(nav, animated: true, completion: nil)
     }
     
-    // MARK: - Client Delegate
-    func loginFinishedWithStatusCode(code: String, result: Dictionary<String, AnyObject>?) {
-        if code == "success" {
-            dispatch_async(dispatch_get_main_queue(), { self.dispatchToMainView()})
-        } else {
-            dispatch_async(dispatch_get_main_queue(), {
-                SVProgressHUD.dismiss()
-                SVProgressHUD.showErrorWithStatus("Login failed")
-            })
-        }
-    }
+}
 
-    // MARK: - UITableViewDataSource
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
+// MARK: - UITableViewDataSource
+extension BasicAuthLoginViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -146,33 +136,45 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
         }
         cell?.selectionStyle = .None
         switch (indexPath.row) {
-            case 0:
-                var field:UITextField = UITextField()
-                field.setTranslatesAutoresizingMaskIntoConstraints(false)
-                field.placeholder = "email address"
-                field.autocapitalizationType = .None
-                field.keyboardType = .EmailAddress
-                self.accountField = field;
-                cell?.contentView.addSubview(self.accountField!)
-                let bindings = ["field":field]
-                cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: .allZeros, metrics: nil, views: bindings))
-                cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: .allZeros, metrics: nil, views: bindings))
-            case 1:
-                var field = UITextField()
-                field.setTranslatesAutoresizingMaskIntoConstraints(false)
-                field.placeholder = "password"
-                field.secureTextEntry = true
-                self.passwordField = field
-                cell?.contentView.addSubview(self.passwordField!)
-                let bindings = ["field":field]
-                cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: .allZeros, metrics: nil, views: bindings))
-                cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: .allZeros, metrics: nil, views: bindings))
-            default:
-                break;
+        case 0:
+            var field:UITextField = UITextField()
+            field.setTranslatesAutoresizingMaskIntoConstraints(false)
+            field.placeholder = "email address"
+            field.autocapitalizationType = .None
+            field.keyboardType = .EmailAddress
+            self.accountField = field;
+            cell?.contentView.addSubview(self.accountField!)
+            let bindings = ["field":field]
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: .allZeros, metrics: nil, views: bindings))
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: .allZeros, metrics: nil, views: bindings))
+        case 1:
+            var field = UITextField()
+            field.setTranslatesAutoresizingMaskIntoConstraints(false)
+            field.placeholder = "password"
+            field.secureTextEntry = true
+            self.passwordField = field
+            cell?.contentView.addSubview(self.passwordField!)
+            let bindings = ["field":field]
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: .allZeros, metrics: nil, views: bindings))
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: .allZeros, metrics: nil, views: bindings))
+        default:
+            break;
         }
         
         return cell!
-        
+    }
+    
+}
+
+// MARK: - UITableViewDelegate
+extension BasicAuthLoginViewController : UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -187,5 +189,19 @@ class BasicAuthLoginViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+}
+
+// MARK: - ClientDelegate
+extension BasicAuthLoginViewController : ClientDelegate {
     
+    func loginFinishedWithStatusCode(code: String, result: Dictionary<String, AnyObject>?) {
+        if code == "success" {
+            dispatch_async(dispatch_get_main_queue(), { self.dispatchToMainView()})
+        } else {
+            dispatch_async(dispatch_get_main_queue(), {
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showErrorWithStatus("Login failed")
+            })
+        }
+    }
 }
