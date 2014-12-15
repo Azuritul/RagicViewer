@@ -10,16 +10,29 @@ import Foundation
 
 let BASE_URL = "https://api.ragic.com"
 
+/**
+  The domain class for Ragic sheet.
+ */
 @objc
 class AZRagicSheetItem : NSObject {
     
     typealias Entry = Dictionary<String, AnyObject>
     
+    ///  The key representing the sheet
     var key:String?
+    
+    ///  Human-friendly name of the sheet
     var name:String?
+
+    ///  Sequence of the sheet, provided by server
     var seq:Int?
+    
+    /// Every sheet item can contain children
     var children:[AZRagicSheetItem]?
+    
+    /// The actual url representation of the sheet
     var itemUrl:String?
+    
     override var description : String {
         var childArr = [String]()
         if children != nil {
@@ -34,6 +47,14 @@ class AZRagicSheetItem : NSObject {
             
     }
     
+    /**
+      Create sheet item from Dictionary.
+    
+      :param: dict The dictionary
+      :param: key The key
+      :param: account Under which account
+      :return: An instance of AZRagicSheetItem created from the dictionary
+     */
     class func createSheetItem(fromDictionary dict:Dictionary<String, AnyObject>, forKey key:String, andAccount account:String) -> AZRagicSheetItem {
         typealias Entry = Dictionary<String, AnyObject>
         
@@ -58,12 +79,5 @@ class AZRagicSheetItem : NSObject {
         item.children = childArray
         return item
     }
-    
-    class func mappingFieldForDictionaryAndItem(dict:Entry) -> AZRagicSheetItem {
-        let item = AZRagicSheetItem()
-        
-        return item
-    }
-    
     
 }

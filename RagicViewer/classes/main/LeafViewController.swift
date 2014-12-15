@@ -8,10 +8,13 @@
 
 import UIKit
 
+/**
+  View controller for showing the detail view of a specific data entry.
+ */
 class LeafViewController: UIViewController, UIWebViewDelegate {
     
-    var webView:UIWebView?
-    var url:String?
+    private var webView:UIWebView?
+    private var url:String?
     
     init(url:String) {
         self.url = url

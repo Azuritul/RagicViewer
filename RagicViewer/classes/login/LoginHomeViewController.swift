@@ -8,10 +8,12 @@
 
 import UIKit
 
+/**
+  Welcome page of the app.
+ */
 @objc
 class LoginHomeViewController: UIViewController {
     
-    var tableView:UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,7 @@ class LoginHomeViewController: UIViewController {
         var button:UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
         button.setTitle("Login", forState:.Normal)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.addTarget(self, action:"loginOption", forControlEvents:UIControlEvents.TouchUpInside)
+        button.addTarget(self, action:"loginPressed", forControlEvents:UIControlEvents.TouchUpInside)
         button.setTranslatesAutoresizingMaskIntoConstraints(false)
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
         button.layer.cornerRadius = 5
@@ -76,7 +78,10 @@ class LoginHomeViewController: UIViewController {
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[button(==52)]-20-|", options: .allZeros, metrics: nil, views: bindings))
     }
     
-    func loginOption() {
+    /**
+      Called when login button is pressed.
+     */
+    func loginPressed() {
         let tabs:BasicAuthLoginViewController = BasicAuthLoginViewController()
         let nav:UINavigationController = UINavigationController(rootViewController: tabs)
         nav.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
