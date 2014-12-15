@@ -8,15 +8,29 @@
 
 import UIKit
 
+/**
+  View class for the dropdown menu. Currently using UIButton as selectable objects in the menu.
+ */
 class AZUSimpleDropdownMenu : UIView {
-
+    
     let seperator:DropdownSeperatorStyle = .None
+    
+    /// The base view for the dropdown menu
     let containerView:UIView = UIView()
+    
+    /// The dark overlay behind the menu
     let overlay:CALayer = CALayer()
+    
+    /// Array of titles for the menu
     let titles = [String]()
+    
+    /// Collection of buttons in the dropdown menu
     let itemsArray = [UIButton]()
+    
+    /// View constraint for the dropdown menu
     var dropdownConstraint:NSLayoutConstraint?
     
+    /// Height for each button
     let ITEM_HEIGHT:CGFloat = 60.0
     
     // MARK: - Initializer
@@ -59,9 +73,9 @@ class AZUSimpleDropdownMenu : UIView {
         
         self.superview?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: .allZeros, metrics: nil, views:selfBindings))
         self.superview?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[rootview(==\(viewHeight))]", options: .allZeros, metrics: nil, views:selfBindings))
-//        let line = UIView()
-//        line.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        line.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#E0DDDD")
+        //let line = UIView()
+        //line.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //line.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#E0DDDD")
         
         let xAxisToParentView = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: self.superview, attribute: .Top, multiplier: 1, constant: 0)
         self.dropdownConstraint = xAxisToParentView
@@ -102,19 +116,6 @@ class AZUSimpleDropdownMenu : UIView {
         }
     }
     
-    /** @todo Remove from the source **/
-//    func showMenuAnimated() {
-//        self.view.setNeedsUpdateConstraints()
-//        var axis:CGFloat = 184.0
-//        if self.xAxisLayoutConstraint?.constant > 0 {
-//            axis = -100
-//        }
-//        UIView.animateWithDuration(0.3, animations:{
-//            self.xAxisLayoutConstraint?.constant = axis
-//            self.view.layoutIfNeeded()
-//            }, completion: nil)
-//    }
-    
     //MARK: - Utility methods
     private func defaultButton(title:String) -> UIButton {
         let button = UIButton.buttonWithType(.Custom) as UIButton
@@ -140,7 +141,7 @@ class AZUSimpleDropdownMenu : UIView {
         return seperator
     }
     
-    func attachMethodTo(target: AnyObject, forItemIndex index: Int, action: Selector, forControlEvents controlEvents: UIControlEvents) {
+    func attachMethodFor(target: AnyObject, forItemIndex index: Int, action: Selector, forControlEvents controlEvents: UIControlEvents) {
         let button = self.itemsArray[index]
         button.addTarget(target, action: action, forControlEvents: controlEvents)
     }
