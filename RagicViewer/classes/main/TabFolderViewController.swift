@@ -8,12 +8,22 @@
 
 import UIKit
 
+/**
+  The topmost view controller. Showing all the sheets under specific user account.
+ */
 @objc
-class TabFolderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClientDelegate, AccountListViewControllerDelegate {
-
+class TabFolderViewController: UIViewController {
+    
+    /// The base view that holds all the data
     var tableView:UITableView?
+    
+    /// Object to store fetched data
     var result:Array<AZRagicSheetItem>?
+    
+    /// Layout constraint for dropdown menu
     var xAxisLayoutConstraint:NSLayoutConstraint?
+    
+    /// The view for dropdown menu
     var menuWindow:AZUSimpleDropdownMenu?
     
     // MARK: - View Lifecycle
@@ -76,8 +86,8 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["Switch Account", "Logout"])
             
-            menu.attachMethodTo(self, forItemIndex: 0, action: "popSwitchAccountController", forControlEvents: .TouchUpInside)
-            menu.attachMethodTo(self, forItemIndex: 1, action: "confirmLogout", forControlEvents: .TouchUpInside)
+            menu.attachMethodFor(self, forItemIndex: 0, action: "popSwitchAccountController", forControlEvents: .TouchUpInside)
+            menu.attachMethodFor(self, forItemIndex: 1, action: "confirmLogout", forControlEvents: .TouchUpInside)
             
             self.menuWindow = menu
             self.menuWindow?.showFromView(self.view)
@@ -115,62 +125,52 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func reloadTable() {
-        dispatch_async(dispatch_get_main_queue(), { self.reload() } )
+        dispatch_async(dispatch_get_main_queue(), {
+            if SVProgressHUD.isVisible() {
+                SVProgressHUD.dismiss()
+            }
+            self.tableView?.reloadData()
+        })
     }
     
-    func reload() {
-        if SVProgressHUD.isVisible() {
-            SVProgressHUD.dismiss()
-        }
-        self.tableView?.reloadData()
-    }
-    
-    // MARK: - ClientDelegate
-    func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
-        if result != nil {
-            var resultArray:Array<AZRagicSheetItem> = [AZRagicSheetItem]()
-            let account:String! = AZRagicSwiftUtils.getUserMainAccount()
-            for key in result!.keys {
-                let extractedItem = result![key]! as Dictionary<String, AnyObject>
-                var item = AZRagicSheetItem.createSheetItem(fromDictionary: extractedItem, forKey: key, andAccount: account)
-                resultArray.append(item)
-                
-            }
-            if self.result?.count > 0 {
-                self.result?.removeAll(keepCapacity: false)
-            }
-            if self.result == nil {
-                self.result = [AZRagicSheetItem]()
-            }
-            self.result! += resultArray
-            self.reloadTable()
-        }
-        
-    }
+}
 
+// MARK: - UITableViewDelegate
+extension TabFolderViewController : UITableViewDelegate {
     
-    // MARK: - UITableViewDataSource
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellKey = "cellKey"
-        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
-        }
-        
-        let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
-        let label = cell?.textLabel
-        if sheetItem != nil {
-            cell?.backgroundColor = UIColor.clearColor()
-            cell?.selectedBackgroundView = UIView()
-            cell?.accessoryType = .DisclosureIndicator
-            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            label?.highlightedTextColor = UIColor.lightGrayColor()
-            
-        }
-        label?.text = sheetItem?.name
-        return cell!
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if self.tableView != nil {
+            let header = UIView()
+            let label = UILabel(frame: CGRectMake(self.tableView!.frame.origin.x,
+                self.tableView!.frame.origin.y,
+                self.tableView!.bounds.size.width, 44))
+            label.text = AZRagicSwiftUtils.getUserMainAccount()
+            label.font = UIFont.boldSystemFontOfSize(14)
+            label.textColor = UIColor.whiteColor()
+            label.textAlignment = .Center
+            header.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#A12B28")
+            header.alpha = 0.9
+            header.addSubview(label)
+            return header
+        }
+        return nil
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let item = self.result?[indexPath.row]
+        let children = SheetListViewController(array: item!.children!)
+        self.navigationController?.pushViewController(children, animated: true)
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension TabFolderViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return result?.count ?? 0
@@ -195,42 +195,59 @@ class TabFolderViewController: UIViewController, UITableViewDelegate, UITableVie
         return 1
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if self.tableView != nil {
-            let header = UIView()
-            let label = UILabel(frame: CGRectMake(self.tableView!.frame.origin.x,
-                                                  self.tableView!.frame.origin.y,
-                                                  self.tableView!.bounds.size.width, 44))
-            label.text = AZRagicSwiftUtils.getUserMainAccount()
-            label.font = UIFont.boldSystemFontOfSize(14)
-            label.textColor = UIColor.whiteColor()
-            label.textAlignment = .Center
-            header.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#A12B28")
-            header.alpha = 0.9
-            header.addSubview(label)
-            return header
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cellKey = "cellKey"
+        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
         }
-        return nil
+        
+        let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
+        let label = cell?.textLabel
+        if sheetItem != nil {
+            cell?.backgroundColor = UIColor.clearColor()
+            cell?.selectedBackgroundView = UIView()
+            cell?.accessoryType = .DisclosureIndicator
+            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+            label?.highlightedTextColor = UIColor.lightGrayColor()
+            
+        }
+        label?.text = sheetItem?.name
+        return cell!
     }
-    
-    // MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let item = self.result?[indexPath.row]
-        let children = SheetListViewController(array: item!.children!)
-        self.navigationController?.pushViewController(children, animated: true)
-    }
-    
-    // MARK: - AccountList Delegate
+}
+
+// MARK: - AccountListViewControllerDelegate
+extension TabFolderViewController : AccountListViewControllerDelegate {
     func didSwitchToAccount() {
         SVProgressHUD.showWithMaskType(.Gradient)
         self.menuWindow?.hideView()
         self.loadData()
     }
+}
 
+// MARK: - ClientDelegate
+extension TabFolderViewController : ClientDelegate {
+    
+    func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
+        if result != nil {
+            var resultArray:Array<AZRagicSheetItem> = [AZRagicSheetItem]()
+            let account:String! = AZRagicSwiftUtils.getUserMainAccount()
+            for key in result!.keys {
+                let extractedItem = result![key]! as Dictionary<String, AnyObject>
+                var item = AZRagicSheetItem.createSheetItem(fromDictionary: extractedItem, forKey: key, andAccount: account)
+                resultArray.append(item)
+                
+            }
+            if self.result?.count > 0 {
+                self.result?.removeAll(keepCapacity: false)
+            }
+            if self.result == nil {
+                self.result = [AZRagicSheetItem]()
+            }
+            self.result! += resultArray
+            self.reloadTable()
+        }
+    }
 }
