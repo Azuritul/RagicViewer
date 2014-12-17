@@ -69,7 +69,7 @@ class AZUSimpleDropdownMenu : UIView {
         
     }
     
-    func setupOverlay(){
+    private func setupOverlay(){
         let frame = UIScreen.mainScreen().applicationFrame
         self.overlay.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height * 2)
         self.overlay.backgroundColor = UIColor.blackColor().CGColor
@@ -77,7 +77,7 @@ class AZUSimpleDropdownMenu : UIView {
         self.layer.addSublayer(self.overlay)
     }
     
-    func setupInitialLayout(){
+    private func setupInitialLayout(){
         
         let selfBindings = ["rootview": self]
         let viewHeight = CGFloat(self.titles.count * 60)
@@ -95,7 +95,7 @@ class AZUSimpleDropdownMenu : UIView {
         
     }
     
-    func setupButtonLayout(){
+    private func setupButtonLayout(){
         
         for (idx, button) in enumerate(itemsArray) {
             
