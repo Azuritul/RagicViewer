@@ -23,7 +23,6 @@
 		00B4229B19FE2FC0002545CE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4229A19FE2FC0002545CE /* BaseViewController.swift */; };
 		00DF6D4C19F901BF00441888 /* AZUSimpleDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DF6D4B19F901BF00441888 /* AZUSimpleDropdownMenu.swift */; };
 		00F8897119DA9DAC00BBC01D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8897019DA9DAC00BBC01D /* main.m */; };
-		00F8898219DA9DAC00BBC01D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8898019DA9DAC00BBC01D /* LaunchScreen.xib */; };
 		00F8898E19DA9DAC00BBC01D /* RagicViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F8898D19DA9DAC00BBC01D /* RagicViewerTests.m */; };
 		00F8899C19DAA39800BBC01D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F8899B19DAA39800BBC01D /* UIKit.framework */; };
 		00F8899E19DAA3BA00BBC01D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F8899D19DAA3BA00BBC01D /* Foundation.framework */; };
@@ -50,6 +49,7 @@
 /* Begin PBXFileReference section */
 		0005BC6D19E66BCC005E1A23 /* AZRagicSheetItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AZRagicSheetItem.swift; sourceTree = "<group>"; };
 		002A81A319DD0E0200A68324 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0034539E1A3E9837009435FC /* RagicViewerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RagicViewerTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		0035FB7B19F0F04800C5B5C8 /* SheetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetListViewController.swift; sourceTree = "<group>"; };
 		0035FB7D19F10F4500C5B5C8 /* EntryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryListViewController.swift; sourceTree = "<group>"; };
 		0035FB7F19F1579A00C5B5C8 /* AccountListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountListViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				00F8898D19DA9DAC00BBC01D /* RagicViewerTests.m */,
+				0034539E1A3E9837009435FC /* RagicViewerTests-Bridging-Header.h */,
 				00F8898B19DA9DAC00BBC01D /* Supporting Files */,
 			);
 			path = RagicViewerTests;
@@ -342,7 +343,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F8898219DA9DAC00BBC01D /* LaunchScreen.xib in Resources */,
 				602935346FF1AB55D4AF1B61 /* glyphicons_187_more.png in Resources */,
 				6029377E45E9E3BEE35A604A /* glyphicons_158_show_lines.png in Resources */,
 				002A81A419DD0E0200A68324 /* Images.xcassets in Resources */,
@@ -571,6 +571,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -582,6 +583,8 @@
 				INFOPLIST_FILE = RagicViewerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewerTests/RagicViewerTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RagicViewer.app/RagicViewer";
 			};
 			name = Debug;
@@ -590,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -597,6 +601,7 @@
 				INFOPLIST_FILE = RagicViewerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewerTests/RagicViewerTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RagicViewer.app/RagicViewer";
 			};
 			name = Release;

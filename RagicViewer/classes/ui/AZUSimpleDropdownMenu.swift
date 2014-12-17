@@ -13,13 +13,10 @@ import UIKit
  */
 class AZUSimpleDropdownMenu : UIView {
     
-    let seperator:DropdownSeperatorStyle = .None
-    
-    /// The base view for the dropdown menu
-    let containerView:UIView = UIView()
+    private let seperator:DropdownSeperatorStyle = .None
     
     /// The dark overlay behind the menu
-    let overlay:CALayer = CALayer()
+    private let overlay:CALayer = CALayer()
     
     /// Array of titles for the menu
     let titles = [String]()
@@ -28,23 +25,28 @@ class AZUSimpleDropdownMenu : UIView {
     let itemsArray = [UIButton]()
     
     /// View constraint for the dropdown menu
-    var dropdownConstraint:NSLayoutConstraint?
+    private var dropdownConstraint:NSLayoutConstraint?
     
     /// Height for each button
-    let ITEM_HEIGHT:CGFloat = 60.0
+    private let ITEM_HEIGHT:CGFloat = 60.0
+    
+    /// Property to figure out if initial layout has been configured
+    private var isSetUpFinished : Bool
     
     // MARK: - Initializer
     init(frame: CGRect, titles:[String]) {
-        super.init(frame:frame)
+        self.isSetUpFinished = false
         self.titles = titles
+        super.init(frame:frame)
         self.backgroundColor = UIColor.clearColor()
         self.alpha = 0.95;
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         for title in titles {
-            let button = self.defaultButton(title)
+            let button = createButton(title)
             self.itemsArray.append(button)
         }
+        
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -52,38 +54,51 @@ class AZUSimpleDropdownMenu : UIView {
     }
     
     // MARK: - View lifecycle
-    override class func requiresConstraintBasedLayout() -> Bool {
-        return true
-    }
     
     override func layoutSubviews() {
-        
-        self.overlay.frame = UIScreen.mainScreen().applicationFrame
-        self.overlay.backgroundColor = UIColor.blackColor().CGColor
-        self.overlay.opacity = 0.8
-        self.layer.addSublayer(self.overlay)
+        setupOverlay()
 
-        for button in itemsArray {
-            self.addSubview(button)
+        if self.isSetUpFinished == false {
+            for button in self.itemsArray {
+                button.setTranslatesAutoresizingMaskIntoConstraints(false)
+                self.addSubview(button)
+            }
+            setupInitialLayout()
+            setupButtonLayout()
         }
         
-        //Constraint for self
+    }
+    
+    func setupOverlay(){
+        let frame = UIScreen.mainScreen().applicationFrame
+        self.overlay.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height * 2)
+        self.overlay.backgroundColor = UIColor.blackColor().CGColor
+        self.overlay.opacity = 0.0
+        self.layer.addSublayer(self.overlay)
+    }
+    
+    func setupInitialLayout(){
+        
         let selfBindings = ["rootview": self]
-        let viewHeight = self.titles.count * 60
+        let viewHeight = CGFloat(self.titles.count * 60)
         
-        self.superview?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: .allZeros, metrics: nil, views:selfBindings))
-        self.superview?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[rootview(==\(viewHeight))]", options: .allZeros, metrics: nil, views:selfBindings))
-        //let line = UIView()
-        //line.setTranslatesAutoresizingMaskIntoConstraints(false)
-        //line.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#E0DDDD")
+        // Initialize an array to store the constraints
+        var constraintsArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: .allZeros, metrics: nil, views:selfBindings)
         
-        let xAxisToParentView = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: self.superview, attribute: .Top, multiplier: 1, constant: 0)
-        self.dropdownConstraint = xAxisToParentView
+        self.dropdownConstraint = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: self.superview, attribute: .Top, multiplier: 1, constant: 64)
+        let height = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: viewHeight)
         
+        constraintsArray.append(self.dropdownConstraint!)
+        constraintsArray.append(height)
         
-        //Assign constraint for each item(button)
+        self.superview?.addConstraints(constraintsArray)
+        
+    }
+    
+    func setupButtonLayout(){
+        
         for (idx, button) in enumerate(itemsArray) {
-            button.setTranslatesAutoresizingMaskIntoConstraints(false)
+            
             let buttonHeight = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: ITEM_HEIGHT)
             let pinLeft = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: 0)
             
@@ -96,9 +111,8 @@ class AZUSimpleDropdownMenu : UIView {
                 self.addConstraint(vAlignmentConstraint(button, targetView:itemsArray[idx-1], buttonIndex:idx))
             }
         }
+        self.isSetUpFinished = true
         
-        //update layout when attached on superview
-        self.setNeedsUpdateConstraints()
     }
     
     //MARK: - Constraint creation methods
@@ -117,7 +131,7 @@ class AZUSimpleDropdownMenu : UIView {
     }
     
     //MARK: - Utility methods
-    private func defaultButton(title:String) -> UIButton {
+    private func createButton(title:String) -> UIButton {
         let button = UIButton.buttonWithType(.Custom) as UIButton
         button.setTitle(title, forState: .Normal)
         button.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -129,18 +143,6 @@ class AZUSimpleDropdownMenu : UIView {
         return button
     }
     
-    func itemAtIndex(index:Int) -> UIButton {
-        return self.itemsArray[index]
-    }
-    
-    private func defaultSeperator(_ hexColor:NSString = "#E0DDDD") -> UIView {
-        let seperator = UIView()
-        seperator.setTranslatesAutoresizingMaskIntoConstraints(false)
-        println("adding colored line \(hexColor)")
-        seperator.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexColor)
-        return seperator
-    }
-    
     func attachMethodFor(target: AnyObject, forItemIndex index: Int, action: Selector, forControlEvents controlEvents: UIControlEvents) {
         let button = self.itemsArray[index]
         button.addTarget(target, action: action, forControlEvents: controlEvents)
@@ -148,34 +150,54 @@ class AZUSimpleDropdownMenu : UIView {
     
     func showFromView(view:UIView){
         view.addSubview(self)
+        
         let transition:CATransition = CATransition()
-        transition.duration = 0.2;//kAnimationDuration
+        transition.duration = 0.2;
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.type = kCATransitionMoveIn
         transition.subtype = kCATransitionFromBottom
-        self.layer.addAnimation(transition,forKey: kCATransition)
+        transition.delegate = self
+        transition.setValue("show", forKey: "showAction")
+        self.layer.addAnimation(transition,forKey: kCATransitionFromBottom)
     }
     
     func hideView() {
-        UIView.animateWithDuration(0.3, animations: {
-            self.alpha = 0
-            }, completion: { finished in
-                if self.superview != nil {
-                    self.removeFromSuperview()
-                }
-        })
+        self.dropdownConstraint?.constant = -1200
+        self.overlay.opacity = 0.0
+        
+        self.superview?.setNeedsUpdateConstraints()
+        
+        let transition:CATransition = CATransition()
+        transition.duration = 0.2;
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromTop
+        transition.delegate = self
+        transition.setValue("hide", forKey: "showAction")
+        self.layer.addAnimation(transition, forKey: kCATransitionFromTop)
+
     }
     
     override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
-        println("animation stopped")
+        switch anim.valueForKey("showAction") as String {
+            case "show":
+                //fade in the background view
+                UIView.animateWithDuration(0.08, animations: {
+                    self.overlay.opacity = 0.95
+                })
+            case "hide":
+                self.removeFromSuperview()
+            default:
+                break
+        }
     }
     
 }
-
 
 enum DropdownSeperatorStyle {
     case Singleline, None
 }
+
 
 
 
