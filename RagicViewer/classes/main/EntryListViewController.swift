@@ -12,9 +12,9 @@ import UIKit
 class EntryListViewController: UIViewController {
     
     var tableView:UITableView?
-    var dataDict:[String:AnyObject]?
+    var dataArray:Array<AnyObject> = []
     var url:String
-    
+
     init(url:String) {
         self.url = url
         super.init(nibName: nil, bundle: nil)
@@ -33,7 +33,15 @@ class EntryListViewController: UIViewController {
         tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         tableView.delegate = self
         tableView.dataSource = self
-        
+
+        let button:UIButton = UIButton.buttonWithType(.Custom) as UIButton
+        button.frame = CGRectMake(0,0,320,44)
+        button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
+        button.setTitle("Load more...", forState: .Normal)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.addTarget(self, action: "loadMore", forControlEvents: .TouchUpInside)
+        tableView.tableFooterView = button
+
         let bindings = ["tableView":tableView]
         self.tableView = tableView
         self.view.addSubview(tableView)
@@ -41,7 +49,7 @@ class EntryListViewController: UIViewController {
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
         
-        self.loadData()
+        self.loadData(0, count: 20)
         SVProgressHUD.showWithMaskType(.Gradient)
 
     }
@@ -51,10 +59,15 @@ class EntryListViewController: UIViewController {
     }
     
     //MARK: - Utility methods
-    func loadData() {
+    func loadData(offset:Int, count:Int) {
         let client = RagicClient()
         client.delegate = self;
-        client.loadSheet(self.url)
+        client.loadEntries(self.url, offset:offset, count:count)
+    }
+
+    func loadMore() {
+        SVProgressHUD.showWithMaskType(.Gradient)
+        self.loadData(self.dataArray.count + 1, count: 20)
     }
     
     private func detailTextFromResultDict(dict:[String:AnyObject]) -> String? {
@@ -67,7 +80,6 @@ class EntryListViewController: UIViewController {
                 text += "\(value)"
                 text += "  "
             }
-            
         }
         return text
     }
@@ -75,6 +87,7 @@ class EntryListViewController: UIViewController {
     func reloadData(){
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView?.reloadData()
+            self.tableView?.flashScrollIndicators()
             SVProgressHUD.dismiss()
         })
     }
@@ -85,7 +98,7 @@ class EntryListViewController: UIViewController {
 extension EntryListViewController: UITableViewDataSource {
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if self.dataDict?.count == 0 {
+        if self.dataArray.isEmpty {
             let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             messageLabel.text = "There is currently no data."
             messageLabel.textColor = UIColor.blackColor()
@@ -104,7 +117,7 @@ extension EntryListViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataDict?.count ?? 0
+        return self.dataArray.count ?? 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -115,31 +128,28 @@ extension EntryListViewController: UITableViewDataSource {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellKey)
         }
 
-        if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
+        let item = self.dataArray[indexPath.row] as [String:AnyObject]
 
-            let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
+        //Testing result shows that _index_title_ might be missing in some earlier apps,
+        //so here ragic_id would be used for the situation if _index_title_ is missing.
+        var title: String? = item["_index_title_"] as AnyObject? as? String
+        var placeholder: Int = item["_ragicId"] as AnyObject? as Int
 
-            //Testing result shows that _index_title_ might be missing in some earlier apps,
-            //so here ragic_id would be used for the situation if _index_title_ is missing.
-            var title: String? = item["_index_title_"] as AnyObject? as? String
-            var placeholder: Int = item["_ragicId"] as AnyObject? as Int
+        let label = cell?.textLabel
+        let detailLabel = cell?.detailTextLabel
+        cell?.backgroundColor = UIColor.clearColor()
+        cell?.selectedBackgroundView = UIView()
 
-            let label = cell?.textLabel
-            let detailLabel = cell?.detailTextLabel
-            cell?.backgroundColor = UIColor.clearColor()
-            cell?.selectedBackgroundView = UIView()
+        label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+        label?.highlightedTextColor = UIColor.lightGrayColor()
+        label?.text = title ?? "\(placeholder)"
 
-            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            label?.highlightedTextColor = UIColor.lightGrayColor()
-            label?.text = title ?? "\(placeholder)"
-
-            detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
-            detailLabel?.textColor = UIColor.lightGrayColor()
-            detailLabel?.numberOfLines = 2
-            detailLabel?.lineBreakMode = .ByWordWrapping;
-            detailLabel?.text = self.detailTextFromResultDict(item)
-        }
+        detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
+        detailLabel?.textColor = UIColor.lightGrayColor()
+        detailLabel?.numberOfLines = 2
+        detailLabel?.lineBreakMode = .ByWordWrapping;
+        detailLabel?.text = self.detailTextFromResultDict(item)
         return cell!;
     }
 }
@@ -154,29 +164,41 @@ extension EntryListViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
-        if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
-            let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
+            let item = self.dataArray[indexPath.row] as [String:AnyObject]
             if let nodeId = item["_ragicId"] as AnyObject? as Int! {
                 let detailViewURL = "\(self.url)/\(nodeId).xhtml"
                 let webViewController = LeafViewController(url: detailViewURL)
                 self.navigationController?.pushViewController(webViewController, animated: true)
             }
-        }
     }
 }
 
 
 // MARK: - ClientDelegate
 extension EntryListViewController: ClientDelegate {
+
     func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
         if result != nil {
-            self.dataDict = result
-            self.reloadData()
+            for(key, value) in result! {
+                self.dataArray.append(value)
+            }
             self.navigationController?.hidesBarsOnSwipe = result?.count > 10
+            self.reloadData()
+            if(self.dataArray.count < 20) {
+                self.tableView?.tableFooterView?.hidden = true
+            } else {
+                self.tableView?.tableFooterView?.hidden = false
+            }
         } else {
             dispatch_async(dispatch_get_main_queue(), {
                 SVProgressHUD.dismiss()
             })
         }
+    }
+
+    func loginFinishedWithStatusCode(code:String, result:Dictionary<String, AnyObject>?) {
+        dispatch_async(dispatch_get_main_queue(), {
+            SVProgressHUD.dismiss()
+        })
     }
 }

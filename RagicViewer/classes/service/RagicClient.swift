@@ -84,8 +84,6 @@ class RagicClient: NSObject {
                     if let mainAccount = jsonResponse[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
                         //println(mainAccount)
                         if let children = mainAccount["children"] as AnyObject? as? Dictionary<String, NSDictionary> {
-                            //println(children)
-                            
                             self.delegate?.loadFinishedWithResult?(children)
                         }
 
@@ -100,7 +98,6 @@ class RagicClient: NSObject {
                 //something is wrong
                 self.delegate?.loadFinishedWithResult?(nil)
             }
-            
         })
         
         dataTask.resume()
@@ -121,18 +118,39 @@ class RagicClient: NSObject {
             } else {
                 self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
             }
-            
         })
-        
         dataTask.resume()
     }
-    
-    
+
+    /**
+      Loading data entries.
+
+      :param: entryUrl
+      :param: offset  The offset of the data to be fetched
+     */
+    func loadEntries(entryUrl:String, offset:Int, count:Int) {
+        let request = self.buildRequest(entryUrl + "?limit=\(offset),\(count)")
+
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+            var resultError:NSError?
+            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error:&resultError)
+            if let resultArray = jsonOptional as? Dictionary<String, AnyObject> {
+                self.delegate?.loadFinishedWithResult?(resultArray)
+            } else {
+                self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
+            }
+        })
+
+        dataTask.resume()
+    }
+
     
     // MARK: Utility methods
     
     /**
-      Building request from the argument. This method calls www.ragic.com instead of api.ragic.com since we are requesting web pages.
+      Building request from the argument.
+      This method calls www.ragic.com instead of api.ragic.com since we are requesting web pages.
     
       :param: The URL of the requested resource
       :return: An NSURLRequest instance representing the URL
@@ -149,7 +167,8 @@ class RagicClient: NSObject {
     }
     
     /**
-      Building request from the argument. Common URL parameters required by Ragic server is appended in the method.
+      Building request from the argument.
+      Common URL parameters required by Ragic server is appended in the method.
         
       :param: The URL of the requested resource
       :return: An NSMutableURLRequest instance representing the url
