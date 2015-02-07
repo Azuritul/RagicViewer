@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-class EntryListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, ClientDelegate {
+class EntryListViewController: UIViewController {
     
     var tableView:UITableView?
     var dataDict:[String:AnyObject]?
@@ -78,9 +78,12 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
             SVProgressHUD.dismiss()
         })
     }
-    
 
-    //MARK: - UITableViewDataSource
+}
+
+//MARK: - UITableViewDataSource
+extension EntryListViewController: UITableViewDataSource {
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.dataDict?.count == 0 {
             let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
@@ -99,53 +102,56 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
         }
         return 1
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataDict?.count ?? 0
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellKey = "keyForCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
-        
-        if(cell == nil) {
+
+        if (cell == nil) {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellKey)
         }
 
         if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
-            
+
             let item = itemDict.values.array[indexPath.row] as [String:AnyObject]
-            
+
             //Testing result shows that _index_title_ might be missing in some earlier apps,
             //so here ragic_id would be used for the situation if _index_title_ is missing.
-            var title : String? =  item["_index_title_"] as AnyObject? as? String
-            var placeholder : Int = item["_ragicId"] as AnyObject? as Int
-            
+            var title: String? = item["_index_title_"] as AnyObject? as? String
+            var placeholder: Int = item["_ragicId"] as AnyObject? as Int
+
             let label = cell?.textLabel
             let detailLabel = cell?.detailTextLabel
             cell?.backgroundColor = UIColor.clearColor()
             cell?.selectedBackgroundView = UIView()
-            
+
             label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
             label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
             label?.highlightedTextColor = UIColor.lightGrayColor()
             label?.text = title ?? "\(placeholder)"
-            
+
             detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
             detailLabel?.textColor = UIColor.lightGrayColor()
             detailLabel?.numberOfLines = 2
             detailLabel?.lineBreakMode = .ByWordWrapping;
             detailLabel?.text = self.detailTextFromResultDict(item)
         }
-        
         return cell!;
     }
-    
-    //MARK: - UITableViewDelegate
+}
+
+
+//MARK: - UITableViewDelegate
+extension EntryListViewController: UITableViewDelegate {
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60.0
     }
-   
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
         if let itemDict = self.dataDict as AnyObject? as? [String:AnyObject] {
@@ -155,11 +161,13 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
                 let webViewController = LeafViewController(url: detailViewURL)
                 self.navigationController?.pushViewController(webViewController, animated: true)
             }
-            
         }
     }
-    
-    //MARK: ClientDelegate
+}
+
+
+// MARK: - ClientDelegate
+extension EntryListViewController: ClientDelegate {
     func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
         if result != nil {
             self.dataDict = result
@@ -171,5 +179,4 @@ class EntryListViewController: UIViewController,UITableViewDataSource, UITableVi
             })
         }
     }
-    
 }
