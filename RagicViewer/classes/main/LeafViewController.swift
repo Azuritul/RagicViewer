@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import WebKit
 
 /**
   View controller for showing the detail view of a specific data entry.
  */
-class LeafViewController: UIViewController, UIWebViewDelegate {
+class LeafViewController: UIViewController, UIWebViewDelegate, WKNavigationDelegate {
     
-    private var webView:UIWebView?
+    private var webView:WKWebView?
     private var url:String?
     
     init(url:String) {
@@ -27,9 +28,9 @@ class LeafViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "RagicViewer";
-        let webView = UIWebView()
-        webView.delegate = self
+        self.title = "RagicViewer"
+        let webView = WKWebView()
+        webView.navigationDelegate = self
         webView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.webView = webView
         self.view.addSubview(webView)
@@ -37,22 +38,21 @@ class LeafViewController: UIViewController, UIWebViewDelegate {
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: .allZeros, metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: .allZeros, metrics: nil, views: bindings))
         self.webView?.loadRequest(RagicClient.webviewRequestWithUrl(self.url!))
-        self.webView?.scalesPageToFit = true
         SVProgressHUD.showWithMaskType(.Gradient)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        dispatch_async(dispatch_get_main_queue(), {SVProgressHUD.dismiss()})
-    }
-    
-    func webViewDidFinishLoad(webView: UIWebView) {
+
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         dispatch_async(dispatch_get_main_queue()){
             SVProgressHUD.dismiss()
         }
+    }
+
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+        dispatch_async(dispatch_get_main_queue(), {SVProgressHUD.dismiss()})
     }
 
 }
