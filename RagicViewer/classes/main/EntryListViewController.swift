@@ -178,11 +178,12 @@ extension EntryListViewController: UITableViewDelegate {
 extension EntryListViewController: ClientDelegate {
 
     func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
-        if result != nil {
-            for(key, value) in result! {
-                self.dataArray.append(value)
+        if let result = result {
+            var sortedKeys = sorted(result.keys, { $0 < $1 })
+            for key in sortedKeys {
+                self.dataArray.append(result[key]!)
             }
-            self.navigationController?.hidesBarsOnSwipe = result?.count > 10
+            self.navigationController?.hidesBarsOnSwipe = result.count > 10
             self.reloadData()
             if(self.dataArray.count < 20) {
                 self.tableView?.tableFooterView?.hidden = true
