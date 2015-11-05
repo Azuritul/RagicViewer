@@ -30,11 +30,11 @@ class EntryListViewController: UIViewController {
         self.title = "Ragic Viewer"
         let tableView = UITableView()
         tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
 
-        let button:UIButton = UIButton.buttonWithType(.Custom) as UIButton
+        let button:UIButton = UIButton(type: .Custom)
         button.frame = CGRectMake(0,0,320,44)
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
         button.setTitle("Load more...", forState: .Normal)
@@ -46,8 +46,8 @@ class EntryListViewController: UIViewController {
         self.tableView = tableView
         self.view.addSubview(tableView)
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
         self.loadData(0, count: 20)
         SVProgressHUD.showWithMaskType(.Gradient)
@@ -179,7 +179,7 @@ extension EntryListViewController: ClientDelegate {
 
     func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
         if let result = result {
-            var sortedKeys = sorted(result.keys, { $0 < $1 })
+            let sortedKeys = sorted(result.keys, { $0 < $1 })
             for key in sortedKeys {
                 self.dataArray.append(result[key]!)
             }

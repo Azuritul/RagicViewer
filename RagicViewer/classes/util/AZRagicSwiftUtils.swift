@@ -13,7 +13,7 @@ import Foundation
   All utility methods
  */
 @objc
-class AZRagicSwiftUtils {
+class AZRagicSwiftUtils : NSObject {
     
     /**
         Retrieving user's account from iOS's user defaults.

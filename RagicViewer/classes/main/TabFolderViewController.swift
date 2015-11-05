@@ -40,7 +40,7 @@ class TabFolderViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         let tableView = UITableView()
-        tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        tableView.translatesAutoresizingMaskIntoConstraints = true
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = false;
@@ -50,8 +50,8 @@ class TabFolderViewController: UIViewController {
         self.view.addSubview(tableView)
         
         let tableViewBindings = ["tableView": tableView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .allZeros, metrics: nil, views: tableViewBindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .allZeros, metrics: nil, views: tableViewBindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
         
         SVProgressHUD.showWithMaskType(.Gradient)
         self.loadData()

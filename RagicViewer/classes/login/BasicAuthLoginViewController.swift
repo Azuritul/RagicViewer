@@ -37,7 +37,7 @@ class BasicAuthLoginViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.whiteColor();
         let tempTableView = UITableView(frame: CGRectZero, style:.Grouped)
-        tempTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        tempTableView.translatesAutoresizingMaskIntoConstraints = false
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.backgroundColor = UIColor.whiteColor()
@@ -47,9 +47,9 @@ class BasicAuthLoginViewController: UIViewController {
         
         let bindings = ["tempTableView":tempTableView]
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tempTableView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[tempTableView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[tempTableView]", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[tempTableView]", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
     }
 
@@ -138,25 +138,25 @@ extension BasicAuthLoginViewController : UITableViewDataSource {
         switch (indexPath.row) {
         case 0:
             var field:UITextField = UITextField()
-            field.setTranslatesAutoresizingMaskIntoConstraints(false)
+            field.translatesAutoresizingMaskIntoConstraints = false
             field.placeholder = "email address"
             field.autocapitalizationType = .None
             field.keyboardType = .EmailAddress
             self.accountField = field;
             cell?.contentView.addSubview(self.accountField!)
             let bindings = ["field":field]
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: .allZeros, metrics: nil, views: bindings))
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: .allZeros, metrics: nil, views: bindings))
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         case 1:
             var field = UITextField()
-            field.setTranslatesAutoresizingMaskIntoConstraints(false)
+            field.translatesAutoresizingMaskIntoConstraints = false
             field.placeholder = "password"
             field.secureTextEntry = true
             self.passwordField = field
             cell?.contentView.addSubview(self.passwordField!)
             let bindings = ["field":field]
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: .allZeros, metrics: nil, views: bindings))
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: .allZeros, metrics: nil, views: bindings))
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         default:
             break;
         }

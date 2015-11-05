@@ -30,7 +30,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var dismissButton = UIBarButtonItem(image: UIImage(named: "glyphicons_207_remove_2.png"), style: .Done, target: self, action: "dismissPressed")
+        let dismissButton = UIBarButtonItem(image: UIImage(named: "glyphicons_207_remove_2.png"), style: .Done, target: self, action: "dismissPressed")
         self.navigationItem.rightBarButtonItem = dismissButton;
         self.title = "Switch Account";
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -39,7 +39,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()];
         
         let temp = UITableView()
-        temp.setTranslatesAutoresizingMaskIntoConstraints(false)
+        temp.translatesAutoresizingMaskIntoConstraints = false
         temp.delegate = self
         temp.dataSource = self
         
@@ -47,8 +47,8 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView = temp;
         let bindings = ["tableView": temp]
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
         self.loadData()
         
@@ -69,7 +69,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func loadData(){
-        var array = NSArray(contentsOfFile:AZRagicSwiftUtils.accountsFilePath())
+        let array = NSArray(contentsOfFile:AZRagicSwiftUtils.accountsFilePath())
         self.dataArray = array
         self.tableView?.reloadData()
     }

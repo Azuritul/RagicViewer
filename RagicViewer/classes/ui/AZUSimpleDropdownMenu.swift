@@ -40,8 +40,7 @@ class AZUSimpleDropdownMenu : UIView {
         super.init(frame:frame)
         self.backgroundColor = UIColor.clearColor()
         self.alpha = 0.95;
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
+        self.translatesAutoresizingMaskIntoConstraints = false
         for title in titles {
             let button = createButton(title)
             self.itemsArray.append(button)
@@ -60,7 +59,7 @@ class AZUSimpleDropdownMenu : UIView {
 
         if self.isSetUpFinished == false {
             for button in self.itemsArray {
-                button.setTranslatesAutoresizingMaskIntoConstraints(false)
+                button.translatesAutoresizingMaskIntoConstraints = false
                 self.addSubview(button)
             }
             setupInitialLayout()
@@ -83,7 +82,7 @@ class AZUSimpleDropdownMenu : UIView {
         let viewHeight = CGFloat(self.titles.count * 60)
         
         // Initialize an array to store the constraints
-        var constraintsArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: .allZeros, metrics: nil, views:selfBindings)
+        var constraintsArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views:selfBindings)
         
         self.dropdownConstraint = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: self.superview, attribute: .Top, multiplier: 1, constant: 64)
         let height = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: viewHeight)
@@ -132,9 +131,9 @@ class AZUSimpleDropdownMenu : UIView {
     
     //MARK: - Utility methods
     private func createButton(title:String) -> UIButton {
-        let button = UIButton.buttonWithType(.Custom) as UIButton
+        let button = UIButton(type: .Custom)
         button.setTitle(title, forState: .Normal)
-        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel!.font = UIFont.boldSystemFontOfSize(16.0)
         button.titleLabel!.textAlignment = .Center
         button.setTitleColor(AZRagicSwiftUtils.colorFromHexString("#636363"), forState: .Normal)
@@ -178,7 +177,7 @@ class AZUSimpleDropdownMenu : UIView {
 
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         switch anim.valueForKey("showAction") as String {
             case "show":
                 //fade in the background view

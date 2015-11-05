@@ -74,7 +74,8 @@
 		00F8899B19DAA39800BBC01D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		00F8899D19DAA3BA00BBC01D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00F8899F19DAA3C400BBC01D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		222F3C8EA801428285EA6F77 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2DF1941D037BC68308ED0BAB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5C15DDE2ABCB6BFD9DC442E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6029304F4A23EC3B83E82FEC /* titleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titleImage.JPG; sourceTree = "<group>"; };
 		602931794D045C07852897F6 /* glyphicons_207_remove_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_207_remove_2.png; sourceTree = "<group>"; };
 		602936B6AA52D2E4D0DEB67E /* glyphicons_206_ok_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_206_ok_2.png; sourceTree = "<group>"; };
@@ -124,8 +125,8 @@
 				00F8896D19DA9DAC00BBC01D /* RagicViewer */,
 				00F8898A19DA9DAC00BBC01D /* RagicViewerTests */,
 				00F8896C19DA9DAC00BBC01D /* Products */,
-				222F3C8EA801428285EA6F77 /* Pods.xcconfig */,
 				D1D41F52AABC4B2B9AFC8326 /* Frameworks */,
+				C7EF50CFF0A232107021950E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,6 +254,15 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		C7EF50CFF0A232107021950E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C15DDE2ABCB6BFD9DC442E2 /* Pods.debug.xcconfig */,
+				2DF1941D037BC68308ED0BAB /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D1D41F52AABC4B2B9AFC8326 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,7 +317,8 @@
 		00F8896319DA9DAC00BBC01D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Labcule;
 				TargetAttributes = {
 					00F8896A19DA9DAC00BBC01D = {
@@ -390,7 +401,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -528,7 +539,7 @@
 		};
 		00F8899219DA9DAC00BBC01D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 222F3C8EA801428285EA6F77 /* Pods.xcconfig */;
+			baseConfigurationReference = 5C15DDE2ABCB6BFD9DC442E2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -539,6 +550,7 @@
 				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azuritul.RagicViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewer/classes/util/RagicViewer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -549,7 +561,7 @@
 		};
 		00F8899319DA9DAC00BBC01D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 222F3C8EA801428285EA6F77 /* Pods.xcconfig */;
+			baseConfigurationReference = 2DF1941D037BC68308ED0BAB /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -560,6 +572,7 @@
 				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azuritul.RagicViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewer/classes/util/RagicViewer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;

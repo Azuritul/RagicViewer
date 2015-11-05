@@ -31,12 +31,12 @@ class LeafViewController: UIViewController, UIWebViewDelegate, WKNavigationDeleg
         self.title = "RagicViewer"
         let webView = WKWebView()
         webView.navigationDelegate = self
-        webView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         self.webView = webView
         self.view.addSubview(webView)
         let bindings = ["webView":webView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         self.webView?.loadRequest(RagicClient.webviewRequestWithUrl(self.url!))
         SVProgressHUD.showWithMaskType(.Gradient)
     }

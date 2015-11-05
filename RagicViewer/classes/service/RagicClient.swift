@@ -32,15 +32,15 @@ class RagicClient: NSObject {
     func login(username:String, password:String) {
         let url = "https://api.ragic.com/AUTH";
         let request = NSMutableURLRequest(URL:NSURL(string:url)!)
-        var loginStr = "u=\(username)&p=\(password)&login_type=sessionId&json=1&apikey"
+        let loginStr = "u=\(username)&p=\(password)&login_type=sessionId&json=1&apikey"
         request.HTTPMethod = "POST"
         request.HTTPBody = loginStr.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         request.HTTPShouldHandleCookies = false
         
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-            var resultError:NSError?
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error:&resultError)
+            
+            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
             
             // Might need to document the returning json because the structure is pretty complicated
             if let json = jsonOptional as?Dictionary<String, AnyObject> {
@@ -77,7 +77,7 @@ class RagicClient: NSObject {
         var request = self.buildRequest("https://api.ragic.com")
         var dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data, response, error) in
             var resultError:NSError?
-            let jsonResponse:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error:&resultError)
+            let jsonResponse:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros)
 
             if let jsonResponse = jsonResponse as? Dictionary<String, AnyObject> {
                 if let currentUserAccount:String = AZRagicSwiftUtils.getUserMainAccount() {
@@ -110,7 +110,7 @@ class RagicClient: NSObject {
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
             var resultError:NSError?
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error:&resultError)
+            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros)
             
             // Might need to document the returning json because the structure is pretty complicated
             if let resultDic = jsonOptional as? Dictionary<String, AnyObject> {
@@ -133,8 +133,9 @@ class RagicClient: NSObject {
 
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-            var resultError:NSError?
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error:&resultError)
+
+            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0) )
+
             if let resultArray = jsonOptional as? Dictionary<String, AnyObject> {
                 self.delegate?.loadFinishedWithResult?(resultArray)
             } else {
@@ -175,7 +176,7 @@ class RagicClient: NSObject {
      */
     private func buildRequest(url:String) -> NSMutableURLRequest {
         let apikey = AZRagicSwiftUtils.getUserAPIKey()!
-        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
         let keyParam = "Basic \(apikey)"
         request.setValue(keyParam, forHTTPHeaderField: "Authorization")
         request.HTTPShouldHandleCookies = false

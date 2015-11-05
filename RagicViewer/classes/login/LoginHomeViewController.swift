@@ -18,32 +18,32 @@ class LoginHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var imageView:UIImageView = UIImageView(image:UIImage(named:"titleImage.JPG"))
+        let imageView:UIImageView = UIImageView(image:UIImage(named:"titleImage.JPG"))
         let blurEffect:UIBlurEffect = UIBlurEffect(style:.ExtraLight)
         let blurView:UIVisualEffectView = UIVisualEffectView(effect:blurEffect)
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        blurView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView.translatesAutoresizingMaskIntoConstraints = true
+        blurView.translatesAutoresizingMaskIntoConstraints = true
         
         //Configure title label
-        var titleLabel:UILabel = UILabel()
+        let titleLabel:UILabel = UILabel()
         titleLabel.text = "Ragic Viewer"
         titleLabel.font = UIFont.boldSystemFontOfSize(34)
         titleLabel.textColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
-        titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = true
 
         //Configure subtitle
-        var subtitle:UILabel = UILabel()
+        let subtitle:UILabel = UILabel()
         subtitle.text = "An Unofficial Viewer for Ragic Cloud DB"
         subtitle.font = UIFont.boldSystemFontOfSize(13)
         subtitle.textColor = AZRagicSwiftUtils.colorFromHexString("#B0B0B0")
-        subtitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        subtitle.translatesAutoresizingMaskIntoConstraints = true
         
         //Configure login button
-        var button:UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        let button:UIButton = UIButton(type: UIButtonType.System)
         button.setTitle("Login", forState:.Normal)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.addTarget(self, action:"loginPressed", forControlEvents:UIControlEvents.TouchUpInside)
-        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+        button.translatesAutoresizingMaskIntoConstraints = true
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(18)
@@ -57,11 +57,11 @@ class LoginHomeViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         
         //Setup constraints
-        var bindings = ["imageView":imageView, "blurView":blurView,
+        let bindings = ["imageView":imageView, "blurView":blurView,
                         "titleLabel":titleLabel, "subtitle":subtitle, "button":button]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[blurView]|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[blurView]|", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[blurView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[blurView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
 
         //View constraints for title label
         self.view.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
@@ -69,13 +69,13 @@ class LoginHomeViewController: UIViewController {
         
         //View constraints for subtitle
         self.view.addConstraint(NSLayoutConstraint(item: subtitle, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[titleLabel]-6-[subtitle]", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[titleLabel]-6-[subtitle]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         
         //View constraints for login button
         self.view.addConstraint(NSLayoutConstraint(item: button, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-40-[button]-40-|", options: .allZeros, metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[button(==52)]-20-|", options: .allZeros, metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-40-[button]-40-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[button(==52)]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
     }
     
     /**
