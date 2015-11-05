@@ -38,7 +38,9 @@ class LeafViewController: UIViewController, UIWebViewDelegate, WKNavigationDeleg
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         self.webView?.loadRequest(RagicClient.webviewRequestWithUrl(self.url!))
-        SVProgressHUD.showWithMaskType(.Gradient)
+        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.show()
+        
     }
 
     override func didReceiveMemoryWarning() {

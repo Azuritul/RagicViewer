@@ -31,7 +31,7 @@ class TabFolderViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = false
         self.view.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        var moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed")
+        let moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed")
 
         self.navigationItem.rightBarButtonItem = moreButton
         self.title = "Ragic Viewer";
@@ -53,7 +53,8 @@ class TabFolderViewController: UIViewController {
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
         
-        SVProgressHUD.showWithMaskType(.Gradient)
+        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.show()
         self.loadData()
     }
     
@@ -221,7 +222,10 @@ extension TabFolderViewController : UITableViewDataSource {
 // MARK: - AccountListViewControllerDelegate
 extension TabFolderViewController : AccountListViewControllerDelegate {
     func didSwitchToAccount() {
-        SVProgressHUD.showWithMaskType(.Gradient)
+        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.show()
+
+        SVProgressHUD.show()
         self.menuWindow?.hideView()
         self.loadData()
     }

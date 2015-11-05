@@ -7,7 +7,7 @@ If you find any issues, please fire an issue or send a pull request.
 
 ##Requirement
 
-* XCode 6
+* XCode 7
 * iOS 8
 * An iPhone
 
