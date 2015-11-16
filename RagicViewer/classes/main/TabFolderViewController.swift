@@ -198,7 +198,7 @@ extension TabFolderViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellKey = "cellKey"
-        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
+        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
         }

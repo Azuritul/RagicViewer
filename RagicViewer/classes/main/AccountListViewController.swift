@@ -82,7 +82,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellKey = "keyForCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellKey)
         
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
