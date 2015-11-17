@@ -39,30 +39,34 @@ class RagicClient: NSObject {
         
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-            
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
-            
-            // Might need to document the returning json because the structure is pretty complicated
-            if let json = jsonOptional as?Dictionary<String, AnyObject> {
-                if let key = json["apikey"] as AnyObject? as? String {
-                    // API key returned by server is saved because it will be used afterwards for building HTTP request
-                    NSUserDefaults.standardUserDefaults().setObject(key, forKey:Constants.KEY_APIKEY)
-                }
-                if let accounts = json["accounts"] as AnyObject? as? Dictionary<String,AnyObject> {
-                    if let account = accounts["account"] as AnyObject? as? String {
-                        NSUserDefaults.standardUserDefaults().setObject(account, forKey:Constants.KEY_ACCOUNT)
+            do {
+                let jsonOptional:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
+                
+                // Might need to document the returning json because the structure is pretty complicated
+                if let json = jsonOptional as?Dictionary<String, AnyObject> {
+                    if let key = json["apikey"] as AnyObject? as? String {
+                        // API key returned by server is saved because it will be used afterwards for building HTTP request
+                        NSUserDefaults.standardUserDefaults().setObject(key, forKey:Constants.KEY_APIKEY)
                     }
+                    if let accounts = json["accounts"] as AnyObject? as? Dictionary<String,AnyObject> {
+                        if let account = accounts["account"] as AnyObject? as? String {
+                            NSUserDefaults.standardUserDefaults().setObject(account, forKey:Constants.KEY_ACCOUNT)
+                        }
+                    }
+                    
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    if let allAccount = json["allAccounts"] as? NSArray {
+                        allAccount.writeToFile(AZRagicSwiftUtils.accountsFilePath(), atomically:true)
+                    }
+                    
+                    self.delegate?.loginFinishedWithStatusCode?("success", result:json)
+                } else {
+                    self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
                 }
-                
-                NSUserDefaults.standardUserDefaults().synchronize()
-                if let allAccount = json["allAccounts"] as? NSArray {
-                    allAccount.writeToFile(AZRagicSwiftUtils.accountsFilePath(), atomically:true)
-                }
-                
-                self.delegate?.loginFinishedWithStatusCode?("success", result:json)
-            } else {
-                self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
+            } catch {
+                print("Error occurred.")
             }
+            
             
         })
         dataTask.resume()
@@ -74,24 +78,31 @@ class RagicClient: NSObject {
     
      */
     func loadTopLevel() {
-        var request = self.buildRequest("https://api.ragic.com")
-        var dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-            var resultError:NSError?
-            let jsonResponse:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros)
-
-            if let jsonResponse = jsonResponse as? Dictionary<String, AnyObject> {
-                if let currentUserAccount:String = AZRagicSwiftUtils.getUserMainAccount() {
-                    if let mainAccount = jsonResponse[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
-                        //println(mainAccount)
-                        if let children = mainAccount["children"] as AnyObject? as? Dictionary<String, NSDictionary> {
-                            self.delegate?.loadFinishedWithResult?(children)
+        let request = self.buildRequest("https://api.ragic.com")
+        let dataTask = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+            
+            if let data = data {
+                do {
+                    let jsonResponse:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers)
+                    
+                    if let jsonResponse = jsonResponse as? Dictionary<String, AnyObject> {
+                        if let currentUserAccount:String = AZRagicSwiftUtils.getUserMainAccount() {
+                            if let mainAccount = jsonResponse[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
+                                //println(mainAccount)
+                                if let children = mainAccount["children"] as AnyObject? as? Dictionary<String, NSDictionary> {
+                                    self.delegate?.loadFinishedWithResult?(children)
+                                }
+                                
+                            } else {
+                                self.delegate?.loadFinishedWithResult?(nil)
+                            }
+                        } else {
+                            self.delegate?.loadFinishedWithResult?(nil)
                         }
-
-                    } else {
-                        self.delegate?.loadFinishedWithResult?(nil)
+                        
                     }
-                } else {
-                    self.delegate?.loadFinishedWithResult?(nil)
+                } catch {
+                    print("it's totally wrong")
                 }
                 
             } else {
@@ -109,14 +120,21 @@ class RagicClient: NSObject {
         let request = self.buildRequest(sheetUrl)
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-            var resultError:NSError?
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros)
-            
-            // Might need to document the returning json because the structure is pretty complicated
-            if let resultDic = jsonOptional as? Dictionary<String, AnyObject> {
-                self.delegate?.loadFinishedWithResult?(resultDic)
-            } else {
-                self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
+            if let data = data {
+                do {
+                    let jsonOptional:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data, options:.MutableContainers)
+                    
+                    // Might need to document the returning json because the structure is pretty complicated
+                    if let resultDic = jsonOptional as? Dictionary<String, AnyObject> {
+                        self.delegate?.loadFinishedWithResult?(resultDic)
+                    } else {
+                        self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
+                    }
+                    
+                } catch {
+                    print("Error occurred.")
+                }
+
             }
         })
         dataTask.resume()
@@ -133,14 +151,21 @@ class RagicClient: NSObject {
 
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
-
-            let jsonOptional:AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0) )
-
-            if let resultArray = jsonOptional as? Dictionary<String, AnyObject> {
-                self.delegate?.loadFinishedWithResult?(resultArray)
-            } else {
-                self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
+            if let data = data {
+                do {
+                    let jsonOptional:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0) )
+                    
+                    if let resultArray = jsonOptional as? Dictionary<String, AnyObject> {
+                        self.delegate?.loadFinishedWithResult?(resultArray)
+                    } else {
+                        self.delegate?.loginFinishedWithStatusCode?("fail", result: nil)
+                    }
+                } catch {
+                    print("Error occurred.")
+                }
+                
             }
+            
         })
 
         dataTask.resume()
@@ -158,13 +183,16 @@ class RagicClient: NSObject {
      */
     class func webviewRequestWithUrl(url:String) -> NSURLRequest {
         let webViewURL = url.stringByReplacingOccurrencesOfString("api", withString: "www")
-        let apikey = NSUserDefaults.standardUserDefaults().objectForKey("ragic_apikey") as String
-        let request = NSMutableURLRequest(URL: NSURL(string: webViewURL)!)
-        let keyParam = "Basic \(apikey)"
-        request.setValue(keyParam, forHTTPHeaderField: "Authorization")
-        request.HTTPShouldHandleCookies = false
-        request.HTTPMethod = "GET"
-        return request.copy() as NSURLRequest
+        if let apikey = NSUserDefaults.standardUserDefaults().objectForKey("ragic_apikey") {
+            let request = NSMutableURLRequest(URL: NSURL(string: webViewURL)!)
+            let keyParam = "Basic \(apikey)"
+            request.setValue(keyParam, forHTTPHeaderField: "Authorization")
+            request.HTTPShouldHandleCookies = false
+            request.HTTPMethod = "GET"
+            
+            return request.copy() as! NSURLRequest
+        }
+        return NSURLRequest()
     }
     
     /**

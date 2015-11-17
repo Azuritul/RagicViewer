@@ -198,24 +198,24 @@ extension TabFolderViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellKey = "cellKey"
-        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
-        }
-        
-        let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
-        let label = cell?.textLabel
-        if sheetItem != nil {
-            cell?.backgroundColor = UIColor.clearColor()
-            cell?.selectedBackgroundView = UIView()
-            cell?.accessoryType = .DisclosureIndicator
-            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            label?.highlightedTextColor = UIColor.lightGrayColor()
+//        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)
+        if let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey) {
             
+            let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
+            let label = cell.textLabel
+            if sheetItem != nil {
+                cell.backgroundColor = UIColor.clearColor()
+                cell.selectedBackgroundView = UIView()
+                cell.accessoryType = .DisclosureIndicator
+                label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+                label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+                label?.highlightedTextColor = UIColor.lightGrayColor()
+                
+            }
+            label?.text = sheetItem?.name
+            return cell
         }
-        label?.text = sheetItem?.name
-        return cell!
+        return nil;
     }
 }
 
