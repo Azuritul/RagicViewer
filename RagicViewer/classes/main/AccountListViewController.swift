@@ -17,7 +17,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     var delegate:AnyObject?
     
     //MARK: - Initializer
-    override init() {
+     init() {
         self.accountChanged = false
         super.init(nibName: nil, bundle: nil)
     }
@@ -89,7 +89,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         let dict = self.dataArray![indexPath.row] as AnyObject? as? [String:AnyObject]
-        let name = dict!["account"] as AnyObject? as String
+        let name = dict!["account"] as AnyObject? as! String
         
         let label = cell?.textLabel
         cell?.backgroundColor = UIColor.clearColor()
@@ -104,9 +104,9 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var lastAccount = AZRagicSwiftUtils.getUserMainAccount()
+        let lastAccount = AZRagicSwiftUtils.getUserMainAccount()
         let dict = self.dataArray![indexPath.row] as AnyObject? as? [String:AnyObject]
-        let selectedAccount = dict!["account"] as AnyObject? as String
+        let selectedAccount = dict!["account"] as AnyObject? as! String
         
         self.accountChanged = !(lastAccount == selectedAccount)
         

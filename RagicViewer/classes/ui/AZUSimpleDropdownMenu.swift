@@ -19,10 +19,10 @@ class AZUSimpleDropdownMenu : UIView {
     private let overlay:CALayer = CALayer()
     
     /// Array of titles for the menu
-    let titles = [String]()
+    var titles = [String]()
     
     /// Collection of buttons in the dropdown menu
-    let itemsArray = [UIButton]()
+    var itemsArray = [UIButton]()
     
     /// View constraint for the dropdown menu
     private var dropdownConstraint:NSLayoutConstraint?
@@ -96,7 +96,7 @@ class AZUSimpleDropdownMenu : UIView {
     
     private func setupButtonLayout(){
         
-        for (idx, button) in enumerate(itemsArray) {
+        for (idx, button) in itemsArray.enumerate() {
             
             let buttonHeight = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: ITEM_HEIGHT)
             let pinLeft = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: 0)
@@ -178,7 +178,7 @@ class AZUSimpleDropdownMenu : UIView {
     }
     
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        switch anim.valueForKey("showAction") as String {
+        switch anim.valueForKey("showAction") as! String {
             case "show":
                 //fade in the background view
                 UIView.animateWithDuration(0.08, animations: {

@@ -122,36 +122,38 @@ extension EntryListViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellKey = "keyForCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
 
-        if (cell == nil) {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellKey)
+        if let cell = tableView.dequeueReusableCellWithIdentifier(cellKey) {
+            
+            let item = self.dataArray[indexPath.row] as! [String:AnyObject]
+            
+            //Testing result shows that _index_title_ might be missing in some earlier apps,
+            //so here ragic_id would be used for the situation if _index_title_ is missing.
+            let title: String? = item["_index_title_"] as AnyObject? as? String
+            let placeholder: Int = item["_ragicId"] as AnyObject? as! Int
+            
+            let label = cell.textLabel
+            let detailLabel = cell.detailTextLabel
+            cell.backgroundColor = UIColor.clearColor()
+            cell.selectedBackgroundView = UIView()
+            
+            label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
+            label?.highlightedTextColor = UIColor.lightGrayColor()
+            label?.text = title ?? "\(placeholder)"
+            
+            detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
+            detailLabel?.textColor = UIColor.lightGrayColor()
+            detailLabel?.numberOfLines = 2
+            detailLabel?.lineBreakMode = .ByWordWrapping;
+            detailLabel?.text = self.detailTextFromResultDict(item)
+            return cell
         }
+        
+        return UITableViewCell()
 
-        let item = self.dataArray[indexPath.row] as [String:AnyObject]
-
-        //Testing result shows that _index_title_ might be missing in some earlier apps,
-        //so here ragic_id would be used for the situation if _index_title_ is missing.
-        var title: String? = item["_index_title_"] as AnyObject? as? String
-        var placeholder: Int = item["_ragicId"] as AnyObject? as Int
-
-        let label = cell?.textLabel
-        let detailLabel = cell?.detailTextLabel
-        cell?.backgroundColor = UIColor.clearColor()
-        cell?.selectedBackgroundView = UIView()
-
-        label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-        label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-        label?.highlightedTextColor = UIColor.lightGrayColor()
-        label?.text = title ?? "\(placeholder)"
-
-        detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
-        detailLabel?.textColor = UIColor.lightGrayColor()
-        detailLabel?.numberOfLines = 2
-        detailLabel?.lineBreakMode = .ByWordWrapping;
-        detailLabel?.text = self.detailTextFromResultDict(item)
-        return cell!;
     }
+
 }
 
 
@@ -164,8 +166,8 @@ extension EntryListViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
-            let item = self.dataArray[indexPath.row] as [String:AnyObject]
-            if let nodeId = item["_ragicId"] as AnyObject? as Int! {
+            let item = self.dataArray[indexPath.row] as! [String:AnyObject]
+            if let nodeId = item["_ragicId"] as AnyObject? as! Int! {
                 let detailViewURL = "\(self.url)/\(nodeId).xhtml"
                 let webViewController = LeafViewController(url: detailViewURL)
                 self.navigationController?.pushViewController(webViewController, animated: true)
@@ -179,7 +181,7 @@ extension EntryListViewController: ClientDelegate {
 
     func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
         if let result = result {
-            let sortedKeys = sorted(result.keys, { $0 < $1 })
+            let sortedKeys  = result.keys.sort();
             for key in sortedKeys {
                 self.dataArray.append(result[key]!)
             }

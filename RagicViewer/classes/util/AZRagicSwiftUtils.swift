@@ -85,10 +85,11 @@ class AZRagicSwiftUtils : NSObject {
       :return: String that represents the account file path.
      */
     class func accountsFilePath() -> String {
-        var path:Array = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        var documentsDirectory:String = path.first as String
-        var fullPath = documentsDirectory.stringByAppendingPathComponent("ragic_accounts.plist")
-        return fullPath;
+        let path:Array = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory:String = path.first! as String
+        let fullPath = NSURL(string:documentsDirectory)?.URLByAppendingPathComponent("ragic_accounts.plist")
+        
+        return fullPath!.path!;
     }
     
     

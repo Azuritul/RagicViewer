@@ -23,11 +23,11 @@ class RagicClient: NSObject {
     // MARK: Service methods
     
     /**
-      Login with username and password.  
-      If succeed, user's apikey and account lists will be saved for later use.
+     * Login with username and password.
+     * If succeed, user's apikey and account lists will be saved for later use.
       
-      :param: username
-      :param: password
+     * :param: username
+     * :param: password
      */
     func login(username:String, password:String) {
         let url = "https://api.ragic.com/AUTH";

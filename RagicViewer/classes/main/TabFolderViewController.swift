@@ -215,7 +215,7 @@ extension TabFolderViewController : UITableViewDataSource {
             label?.text = sheetItem?.name
             return cell
         }
-        return nil;
+        return UITableViewCell()
     }
 }
 
@@ -239,8 +239,8 @@ extension TabFolderViewController : ClientDelegate {
             var resultArray:Array<AZRagicSheetItem> = [AZRagicSheetItem]()
             let account:String! = AZRagicSwiftUtils.getUserMainAccount()
             for key in result!.keys {
-                let extractedItem = result![key]! as Dictionary<String, AnyObject>
-                var item = AZRagicSheetItem.createSheetItem(fromDictionary: extractedItem, forKey: key, andAccount: account)
+                let extractedItem = result![key]! as! Dictionary<String, AnyObject>
+                let item = AZRagicSheetItem.createSheetItem(fromDictionary: extractedItem, forKey: key, andAccount: account)
                 resultArray.append(item)
                 
             }

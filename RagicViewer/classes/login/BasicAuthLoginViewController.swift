@@ -73,7 +73,7 @@ class BasicAuthLoginViewController: UIViewController {
     func login() {
         let client:RagicClient = RagicClient()
         client.delegate = self;
-        client.login(self.accountField!.text, password: self.passwordField!.text)
+        client.login(self.accountField!.text!, password: self.passwordField!.text!)
     }
     
     /**
@@ -130,38 +130,36 @@ extension BasicAuthLoginViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellKey = "inputCell"
         
-        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellKey) as? UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
-        }
-        cell?.selectionStyle = .None
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)!
+
+        cell.selectionStyle = .None
         switch (indexPath.row) {
         case 0:
-            var field:UITextField = UITextField()
+            let field:UITextField = UITextField()
             field.translatesAutoresizingMaskIntoConstraints = false
             field.placeholder = "email address"
             field.autocapitalizationType = .None
             field.keyboardType = .EmailAddress
             self.accountField = field;
-            cell?.contentView.addSubview(self.accountField!)
+            cell.contentView.addSubview(self.accountField!)
             let bindings = ["field":field]
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         case 1:
-            var field = UITextField()
+            let field = UITextField()
             field.translatesAutoresizingMaskIntoConstraints = false
             field.placeholder = "password"
             field.secureTextEntry = true
             self.passwordField = field
-            cell?.contentView.addSubview(self.passwordField!)
+            cell.contentView.addSubview(self.passwordField!)
             let bindings = ["field":field]
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-            cell?.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         default:
             break;
         }
         
-        return cell!
+        return cell
     }
     
 }

@@ -58,16 +58,16 @@ class AZRagicSheetItem : NSObject {
     class func createSheetItem(fromDictionary dict:Dictionary<String, AnyObject>, forKey key:String, andAccount account:String) -> AZRagicSheetItem {
         typealias Entry = Dictionary<String, AnyObject>
         
-        var item = AZRagicSheetItem()
+        let item = AZRagicSheetItem()
         item.key = key
         item.name = dict["name"] as AnyObject? as? String
         item.seq = dict["seq"] as AnyObject? as? Int
 
         var childArray = [AZRagicSheetItem]()
-        let childDict = dict["children"] as AnyObject? as Entry
+        let childDict = dict["children"] as AnyObject? as! Entry
         
         for (childKey, childValue) in childDict {
-            var childItem = AZRagicSheetItem()
+            let childItem = AZRagicSheetItem()
             childItem.key = childKey
             //childValue is also a dictionary
             childItem.name = childValue["name"] as AnyObject? as? String
