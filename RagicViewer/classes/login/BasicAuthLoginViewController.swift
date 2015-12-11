@@ -20,6 +20,8 @@ class BasicAuthLoginViewController: UIViewController {
     
     var passwordField:UITextField?
     
+    let cellKey = "inputCell"
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,8 @@ class BasicAuthLoginViewController: UIViewController {
         tempTableView.dataSource = self
         tempTableView.backgroundColor = UIColor.whiteColor()
         tempTableView.separatorStyle = .SingleLine
+        tempTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellKey)
+
         self.tableView = tempTableView
         self.view.addSubview(tempTableView)
         
@@ -128,7 +132,7 @@ extension BasicAuthLoginViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellKey = "inputCell"
+        
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)!
 

@@ -21,29 +21,29 @@ class LoginHomeViewController: UIViewController {
         let imageView:UIImageView = UIImageView(image:UIImage(named:"titleImage.JPG"))
         let blurEffect:UIBlurEffect = UIBlurEffect(style:.ExtraLight)
         let blurView:UIVisualEffectView = UIVisualEffectView(effect:blurEffect)
-        imageView.translatesAutoresizingMaskIntoConstraints = true
-        blurView.translatesAutoresizingMaskIntoConstraints = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        blurView.translatesAutoresizingMaskIntoConstraints = false
         
         //Configure title label
         let titleLabel:UILabel = UILabel()
         titleLabel.text = "Ragic Viewer"
         titleLabel.font = UIFont.boldSystemFontOfSize(34)
         titleLabel.textColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
-        titleLabel.translatesAutoresizingMaskIntoConstraints = true
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         //Configure subtitle
         let subtitle:UILabel = UILabel()
         subtitle.text = "An Unofficial Viewer for Ragic Cloud DB"
         subtitle.font = UIFont.boldSystemFontOfSize(13)
         subtitle.textColor = AZRagicSwiftUtils.colorFromHexString("#B0B0B0")
-        subtitle.translatesAutoresizingMaskIntoConstraints = true
+        subtitle.translatesAutoresizingMaskIntoConstraints = false
         
         //Configure login button
         let button:UIButton = UIButton(type: UIButtonType.System)
         button.setTitle("Login", forState:.Normal)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.addTarget(self, action:"loginPressed", forControlEvents:UIControlEvents.TouchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(18)
@@ -57,8 +57,8 @@ class LoginHomeViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         
         //Setup constraints
-        let bindings = ["imageView":imageView, "blurView":blurView,
-                        "titleLabel":titleLabel, "subtitle":subtitle, "button":button]
+        let bindings = ["imageView": imageView,"blurView":blurView,
+            "titleLabel":titleLabel, "subtitle":subtitle, "button":button]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[imageView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[blurView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[blurView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
