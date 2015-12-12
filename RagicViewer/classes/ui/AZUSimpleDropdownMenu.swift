@@ -11,13 +11,14 @@ import UIKit
 /**
   View class for the dropdown menu. Currently using UIButton as selectable objects in the menu.
  */
-class AZUSimpleDropdownMenu : UIView {
+@objc
+class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
     
     private let seperator:DropdownSeperatorStyle = .None
     
     /// The dark overlay behind the menu
-    private let overlay:CALayer = CALayer()
-    
+    private let overlay:UIView = UIView()
+
     /// Array of titles for the menu
     var titles = [String]()
     
@@ -65,15 +66,25 @@ class AZUSimpleDropdownMenu : UIView {
             setupInitialLayout()
             setupButtonLayout()
         }
-        
+
+        for (_, button) in itemsArray.enumerate() {
+            self.bringSubviewToFront(button)
+        }
+
     }
     
     private func setupOverlay(){
         let frame = UIScreen.mainScreen().applicationFrame
         self.overlay.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height * 2)
-        self.overlay.backgroundColor = UIColor.blackColor().CGColor
-        self.overlay.opacity = 0.0
-        self.layer.addSublayer(self.overlay)
+        self.overlay.backgroundColor = UIColor.blackColor()
+        self.overlay.alpha = 0
+        self.overlay.userInteractionEnabled = true
+
+        self.addSubview(self.overlay)
+    }
+
+    func close(gestureRecognizer: UITapGestureRecognizer? = nil){
+        print("overlay 2 tapped")
     }
     
     private func setupInitialLayout(){
@@ -158,11 +169,15 @@ class AZUSimpleDropdownMenu : UIView {
         transition.delegate = self
         transition.setValue("show", forKey: "showAction")
         self.layer.addAnimation(transition,forKey: kCATransitionFromBottom)
+//        self.userInteractionEnabled = true;
+//        let tap:UIGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("close:"))
+//        tap.delegate = self
+//        self.addGestureRecognizer(tap)
     }
     
     func hideView() {
         self.dropdownConstraint?.constant = -1200
-        self.overlay.opacity = 0.0
+        self.overlay.alpha = 0.0
         
         self.superview?.setNeedsUpdateConstraints()
         
@@ -182,7 +197,7 @@ class AZUSimpleDropdownMenu : UIView {
             case "show":
                 //fade in the background view
                 UIView.animateWithDuration(0.08, animations: {
-                    self.overlay.opacity = 0.95
+                    self.overlay.alpha = 0.9
                 })
             case "hide":
                 self.removeFromSuperview()

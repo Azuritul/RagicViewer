@@ -45,7 +45,7 @@ class BasicAuthLoginViewController: UIViewController {
         tempTableView.backgroundColor = UIColor.whiteColor()
         tempTableView.separatorStyle = .SingleLine
         tempTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellKey)
-
+        tempTableView.rowHeight = 44
         self.tableView = tempTableView
         self.view.addSubview(tempTableView)
         
@@ -53,7 +53,7 @@ class BasicAuthLoginViewController: UIViewController {
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[tempTableView]", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+//        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[tempTableView]", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
     }
 
@@ -174,11 +174,7 @@ extension BasicAuthLoginViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
-    }
-    
+
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40.0
     }
@@ -187,9 +183,7 @@ extension BasicAuthLoginViewController : UITableViewDelegate {
         return UIView()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {  }
     
 }
 

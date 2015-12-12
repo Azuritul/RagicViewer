@@ -25,7 +25,9 @@ class TabFolderViewController: UIViewController {
     
     /// The view for dropdown menu
     var menuWindow:AZUSimpleDropdownMenu?
-    
+
+    let cellKey = "cellKey"
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +42,13 @@ class TabFolderViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = true
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = false;
         tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
         tableView.separatorStyle = .SingleLine;
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellKey)
         self.tableView = tableView;
         self.view.addSubview(tableView)
         
@@ -197,8 +200,7 @@ extension TabFolderViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellKey = "cellKey"
-//        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)
+
         if let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey) {
             
             let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]

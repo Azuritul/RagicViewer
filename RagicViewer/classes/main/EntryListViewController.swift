@@ -14,6 +14,7 @@ class EntryListViewController: UIViewController {
     var tableView:UITableView?
     var dataArray:Array<AnyObject> = []
     var url:String
+    let cellKey = "keyForCell"
 
     init(url:String) {
         self.url = url
@@ -33,7 +34,7 @@ class EntryListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-
+        tableView.registerClass(UITableViewCell.self,forCellReuseIdentifier: cellKey)
         let button:UIButton = UIButton(type: .Custom)
         button.frame = CGRectMake(0,0,320,44)
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
@@ -44,6 +45,7 @@ class EntryListViewController: UIViewController {
 
         let bindings = ["tableView":tableView]
         self.tableView = tableView
+
         self.view.addSubview(tableView)
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
@@ -121,7 +123,7 @@ extension EntryListViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellKey = "keyForCell"
+
 
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellKey) {
             

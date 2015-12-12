@@ -40,10 +40,10 @@ class RagicClient: NSObject {
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
             do {
-                let jsonOptional:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
+                let jsonObject:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0))
                 
                 // Might need to document the returning json because the structure is pretty complicated
-                if let json = jsonOptional as?Dictionary<String, AnyObject> {
+                if let json = jsonObject as? [String:AnyObject] {
                     if let key = json["apikey"] as AnyObject? as? String {
                         // API key returned by server is saved because it will be used afterwards for building HTTP request
                         NSUserDefaults.standardUserDefaults().setObject(key, forKey:Constants.KEY_APIKEY)
@@ -73,6 +73,11 @@ class RagicClient: NSObject {
         
     }
     
+    func printStringFromNSData(data:NSData) {
+        let string = NSString(data: data, encoding:NSUTF8StringEncoding)
+        print(string)
+    }
+    
     /**
       Loading top level contents for user using existing main account in user defaults.
     
@@ -83,12 +88,16 @@ class RagicClient: NSObject {
             
             if let data = data {
                 do {
-                    let jsonResponse:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers)
-                    
-                    if let jsonResponse = jsonResponse as? Dictionary<String, AnyObject> {
+                    let jsonObject:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers)
+                    //let string = NSString(data: data, encoding:NSUTF8StringEncoding)
+                    //print(string)
+                    if let jsonObject = jsonObject as? Dictionary<String, AnyObject> {
+
+                        //key would be the name for the database, so iterate the keys
+                        
                         if let currentUserAccount:String = AZRagicSwiftUtils.getUserMainAccount() {
-                            if let mainAccount = jsonResponse[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
-                                //println(mainAccount)
+                            if let mainAccount = jsonObject[currentUserAccount] as AnyObject? as? Dictionary<String, AnyObject> {
+                                //print(mainAccount)
                                 if let children = mainAccount["children"] as AnyObject? as? Dictionary<String, NSDictionary> {
                                     self.delegate?.loadFinishedWithResult?(children)
                                 }
