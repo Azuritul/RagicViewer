@@ -122,7 +122,7 @@ class TabFolderViewController: UIViewController {
     }
     
     func loadData() {
-        let client = RagicClient()
+        let client = RagicClient.sharedInstance
         client.delegate = self
         client.loadTopLevel()
     }
