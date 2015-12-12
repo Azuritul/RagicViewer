@@ -61,7 +61,7 @@ class EntryListViewController: UIViewController {
     
     //MARK: - Utility methods
     func loadData(offset:Int, count:Int) {
-        let client = RagicClient()
+        let client = RagicClient.sharedInstance
         client.delegate = self;
         client.loadEntries(self.url, offset:offset, count:count)
     }

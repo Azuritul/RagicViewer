@@ -38,10 +38,10 @@ class AZRagicSwiftUtils : NSObject {
       :return: Boolean value indicating whether account is exist or not.
      */
     class func isMainAccountExist() -> Bool {
-        if let _ = AZRagicSwiftUtils.getUserMainAccount() {
-            return true
+        guard let _ = AZRagicSwiftUtils.getUserMainAccount() else {
+            return false
         }
-        return false
+        return true
     }
     
     /**

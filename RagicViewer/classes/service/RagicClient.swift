@@ -17,6 +17,9 @@ import Foundation
 @objc
 class RagicClient: NSObject {
 
+    private override init() {}
+    static let sharedInstance = RagicClient()
+
     var delegate:ClientDelegate?
     
     // MARK: Service methods

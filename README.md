@@ -5,7 +5,7 @@ This is the repository for RagicViewer, an unofficial Ragic client for iOS, main
 
 If you find any issues, please fire an issue or send a pull request.
 
-##Requirement
+## Minimum Requirement
 
 * XCode 7
 * iOS 8
@@ -13,10 +13,10 @@ If you find any issues, please fire an issue or send a pull request.
 
 A code signing key from Apple is required to deploy apps to a device. Without a developer key, the app can only be installed on the iPhone Simulator.
 
-##Notice
+## Notice
 From version 1.1.0, the codebase is migrated to Swift.  If you need Objective-C codebase, please checkout using tag `v1.0.0`
 
-##Third party component
+## Third party component
 * [SVProgressHUD] (https://github.com/TransitApp/SVProgressHUD)
 * [Glyphicons] (http://glyphicons.com/)
 
@@ -44,7 +44,7 @@ From version 1.1.0, the codebase is migrated to Swift.  If you need Objective-C 
 ## License
 MIT License (MIT)
 
-Copyright (c) 2015 Azuritul Wu
+Copyright (c) 2015 Azuritul
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
