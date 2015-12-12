@@ -3,7 +3,6 @@
 //  RagicViewer
 //
 //  Created by azuritul on 2014/10/15.
-//  Copyright (c) 2014年 Labcule. All rights reserved.
 //
 
 import UIKit
@@ -86,7 +85,7 @@ class TabFolderViewController: UIViewController {
     func moreButtonPressed(){
         if (self.menuWindow?.isDescendantOfView(self.view) == true ) {
             self.menuWindow?.hideView()
-            
+
         } else {
             let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["Switch Account", "Logout"])
             

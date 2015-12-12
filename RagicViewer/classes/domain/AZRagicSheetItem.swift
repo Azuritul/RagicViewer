@@ -3,7 +3,6 @@
 //  RagicViewer
 //
 //  Created by azuritul on 2014/10/9.
-//  Copyright (c) 2014年 Labcule. All rights reserved.
 //
 
 import Foundation
