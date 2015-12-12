@@ -22,7 +22,14 @@ From version 1.1.0, the codebase is migrated to Swift.  If you need Objective-C 
 
 ## Installation
 * Clone the repo to your own hard drive (with `git clone  https://github.com/Azuritul/RagicViewer.git`)
-* Use Xcode or other IDE to open the project
+
+### Install Cocoapods
+* sudo gem install cocoapods
+* pods setup
+* CD to the directory and `pod install`
+
+### Run
+* Launch with RagicViewer.xcworkspace
 * Build and run
 
 ## Current Features
