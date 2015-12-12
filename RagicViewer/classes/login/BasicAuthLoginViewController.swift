@@ -74,7 +74,7 @@ class BasicAuthLoginViewController: UIViewController {
       Called if user info is input correctly. Asking the service class to login.
      */
     func login() {
-        let client:RagicClient = RagicClient()
+        let client:RagicClient = RagicClient.sharedInstance
         client.delegate = self;
         client.login(self.accountField!.text!, password: self.passwordField!.text!)
     }
