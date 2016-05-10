@@ -25,8 +25,8 @@ class BasicAuthLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let customBarItem = UIBarButtonItem(title: "Back", style: .Done, target: self, action: "back")
-        let loginBarItem = UIBarButtonItem(title: "Login", style: .Done, target: self, action: "loginButtonPressed")
+        let customBarItem = UIBarButtonItem(title: "Back", style: .Done, target: self, action: #selector(BasicAuthLoginViewController.back))
+        let loginBarItem = UIBarButtonItem(title: "Login", style: .Done, target: self, action: #selector(BasicAuthLoginViewController.loginButtonPressed))
         
         self.navigationItem.leftBarButtonItem = customBarItem
         self.navigationItem.rightBarButtonItem = loginBarItem

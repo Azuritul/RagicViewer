@@ -39,7 +39,7 @@ class EntryListViewController: UIViewController {
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
         button.setTitle("Load more...", forState: .Normal)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.addTarget(self, action: "loadMore", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(EntryListViewController.loadMore), forControlEvents: .TouchUpInside)
         tableView.tableFooterView = button
 
         let bindings = ["tableView":tableView]

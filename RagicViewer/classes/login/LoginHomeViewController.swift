@@ -41,7 +41,7 @@ class LoginHomeViewController: UIViewController {
         let button:UIButton = UIButton(type: UIButtonType.System)
         button.setTitle("Login", forState:.Normal)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.addTarget(self, action:"loginPressed", forControlEvents:UIControlEvents.TouchUpInside)
+        button.addTarget(self, action:#selector(LoginHomeViewController.loginPressed), forControlEvents:UIControlEvents.TouchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
         button.layer.cornerRadius = 5

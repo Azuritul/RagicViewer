@@ -29,7 +29,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dismissButton = UIBarButtonItem(image: UIImage(named: "glyphicons_207_remove_2.png"), style: .Done, target: self, action: "dismissPressed")
+        let dismissButton = UIBarButtonItem(image: UIImage(named: "glyphicons_207_remove_2.png"), style: .Done, target: self, action: #selector(AccountListViewController.dismissPressed))
         self.navigationItem.rightBarButtonItem = dismissButton;
         self.title = "Switch Account";
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()

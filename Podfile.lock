@@ -1,10 +1,13 @@
 PODS:
+  - AZDropdownMenu (1.1.0)
   - SVProgressHUD (1.1.3)
 
 DEPENDENCIES:
+  - AZDropdownMenu
   - SVProgressHUD
 
 SPEC CHECKSUMS:
+  AZDropdownMenu: a7a08209b9317b3e7076b6f80d1bbf72dd1af9d1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
 
 COCOAPODS: 0.39.0

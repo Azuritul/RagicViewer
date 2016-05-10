@@ -32,7 +32,7 @@ class TabFolderViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = false
         self.view.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        let moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: "moreButtonPressed")
+        let moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: #selector(TabFolderViewController.moreButtonPressed))
 
         self.navigationItem.rightBarButtonItem = moreButton
         self.title = "Ragic Viewer";
@@ -89,8 +89,8 @@ class TabFolderViewController: UIViewController {
         } else {
             let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["Switch Account", "Logout"])
             
-            menu.attachMethodFor(self, forItemIndex: 0, action: "popSwitchAccountController", forControlEvents: .TouchUpInside)
-            menu.attachMethodFor(self, forItemIndex: 1, action: "confirmLogout", forControlEvents: .TouchUpInside)
+            menu.attachMethodFor(self, forItemIndex: 0, action: #selector(TabFolderViewController.popSwitchAccountController), forControlEvents: .TouchUpInside)
+            menu.attachMethodFor(self, forItemIndex: 1, action: #selector(TabFolderViewController.confirmLogout), forControlEvents: .TouchUpInside)
             
             self.menuWindow = menu
             self.menuWindow?.showFromView(self.view)
