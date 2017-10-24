@@ -161,7 +161,7 @@ extension EntryListViewController: UITableViewDataSource {
 //MARK: - UITableViewDelegate
 extension EntryListViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView( heightForRowAt: NSIndexPath) -> CGFloat {
         return 60.0
     }
 

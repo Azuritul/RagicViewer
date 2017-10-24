@@ -37,12 +37,12 @@ class AZRagicSheetItem : NSObject {
         if children != nil {
             
             for child in children! {
-                let childItem = "##Child## : { KEY: [\(child.key)] NAME: [\(child.name))] SEQ: [\(child.seq)] URL: [\(child.itemUrl)] }"
+                let childItem = "##Child## : { KEY: [\(String(describing: child.key))] NAME: [\(String(describing: child.name)))] SEQ: [\(String(describing: child.seq))] URL: [\(String(describing: child.itemUrl))] }"
                 childArr.append(childItem)
             }
             
         }
-        return "##Item## : { KEY: [\(key)] NAME: [\(name)] SEQ: [\(seq)] URL: [\(itemUrl)] Child: [\(childArr)] }"
+        return "##Item## : { KEY: [\(String(describing: key))] NAME: [\(String(describing: name))] SEQ: [\(String(describing: seq))] URL: [\(String(describing: itemUrl))] Child: [\(childArr)] }"
             
     }
     

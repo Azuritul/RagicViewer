@@ -168,19 +168,19 @@ extension BasicAuthLoginViewController : UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension BasicAuthLoginViewController : UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
 
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40.0
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {  }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {  }
     
 }
 

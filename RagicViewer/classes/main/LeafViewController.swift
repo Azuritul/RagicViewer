@@ -52,7 +52,7 @@ class LeafViewController: UIViewController, UIWebViewDelegate, WKNavigationDeleg
         }
     }
 
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         DispatchQueue.main.async {
             SVProgressHUD.dismiss()
         }
