@@ -66,7 +66,7 @@ class EntryListViewController: UIViewController {
         client.loadEntries(entryUrl: self.url, offset:offset, count:count)
     }
 
-    func loadMore() {
+    @objc func loadMore() {
         SVProgressHUD.show(with: .gradient)
         self.loadData(offset: self.dataArray.count + 1, count: 20)
     }

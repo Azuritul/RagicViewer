@@ -35,7 +35,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white];
         
         let temp = UITableView()
         temp.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
 
 
     //MARK: - Utility methods
-    func dismissPressed(){
+    @objc func dismissPressed(){
         self.dismiss(animated: true, completion:{() in
             if(self.accountChanged) {
                 self.delegate?.didSwitchToAccount?()

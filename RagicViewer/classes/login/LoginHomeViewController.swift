@@ -80,7 +80,7 @@ class LoginHomeViewController: UIViewController {
     /**
       Called when login button is pressed.
      */
-    func loginPressed() {
+    @objc func loginPressed() {
         let tabs:BasicAuthLoginViewController = BasicAuthLoginViewController()
         let nav:UINavigationController = UINavigationController(rootViewController: tabs)
         nav.modalTransitionStyle = UIModalTransitionStyle.coverVertical

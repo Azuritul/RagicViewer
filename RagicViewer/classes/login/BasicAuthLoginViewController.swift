@@ -34,7 +34,7 @@ class BasicAuthLoginViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
         self.navigationController?.navigationBar.barTintColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white];
         
         self.view.backgroundColor = UIColor.white;
         let tempTableView = UITableView(frame: CGRect.zero, style:.grouped)
@@ -66,7 +66,7 @@ class BasicAuthLoginViewController: UIViewController {
     /**
       Called when back button is pressed. Would cancel login operation.
      */
-    func back(){
+    @objc func back(){
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -100,7 +100,7 @@ class BasicAuthLoginViewController: UIViewController {
     /**
       Called when login button is pressed.
      */
-    func loginButtonPressed(){
+    @objc func loginButtonPressed(){
         SVProgressHUD.show(withStatus: "Loading", maskType: .gradient)
         if self.isFormValid() {
             self.login()

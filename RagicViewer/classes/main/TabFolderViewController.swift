@@ -38,7 +38,7 @@ class TabFolderViewController: UIViewController {
         self.title = "Ragic Viewer";
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor =  AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +82,7 @@ class TabFolderViewController: UIViewController {
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    func moreButtonPressed(){
+    @objc func moreButtonPressed(){
         if (self.menuWindow?.isDescendant(of: self.view) == true ) {
             //self.menuWindow?.hideView()
             self.menuWindow?.hideMenu()
