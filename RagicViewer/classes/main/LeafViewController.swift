@@ -34,10 +34,10 @@ class LeafViewController: UIViewController, UIWebViewDelegate, WKNavigationDeleg
         self.webView = webView
         self.view.addSubview(webView)
         let bindings = ["webView":webView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-        self.webView?.loadRequest(RagicClient.webviewRequestWithUrl(self.url!))
-        SVProgressHUD.setDefaultMaskType(.Gradient)
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.webView?.load(RagicClient.webviewRequestWithUrl(url: self.url!) as URLRequest)
+        SVProgressHUD.setDefaultMaskType(.gradient)
         SVProgressHUD.show()
         
     }
@@ -46,14 +46,16 @@ class LeafViewController: UIViewController, UIWebViewDelegate, WKNavigationDeleg
         super.didReceiveMemoryWarning()
     }
 
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        dispatch_async(dispatch_get_main_queue()){
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        DispatchQueue.main.async {
             SVProgressHUD.dismiss()
         }
     }
 
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        dispatch_async(dispatch_get_main_queue(), {SVProgressHUD.dismiss()})
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: Error) {
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+        }
     }
 
 }

@@ -20,7 +20,7 @@ class AZRagicSwiftUtils : NSObject {
         :return: Optional of a String that representing user account.
      */
     class func getUserMainAccount() -> String? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(Constants.KEY_ACCOUNT) as? String
+        return UserDefaults.standard.object(forKey: Constants.KEY_ACCOUNT) as? String
     }
     
     /**
@@ -29,7 +29,7 @@ class AZRagicSwiftUtils : NSObject {
       :return: Optional of a String that representing api key.
      */
     class func getUserAPIKey() -> String? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(Constants.KEY_APIKEY) as? String
+        return UserDefaults.standard.object(forKey: Constants.KEY_APIKEY) as? String
     }
     
     /**
@@ -48,9 +48,9 @@ class AZRagicSwiftUtils : NSObject {
       Removing user's api key and account name from iOS's user defaults.
      */
     class func removeUserInfo() {
-        let standardStore = NSUserDefaults.standardUserDefaults()
-        standardStore.removeObjectForKey(Constants.KEY_ACCOUNT)
-        standardStore.removeObjectForKey(Constants.KEY_APIKEY)
+        let standardStore = UserDefaults.standard
+        standardStore.removeObject(forKey: Constants.KEY_ACCOUNT)
+        standardStore.removeObject(forKey: Constants.KEY_APIKEY)
         standardStore.synchronize()
     }
     
@@ -62,14 +62,14 @@ class AZRagicSwiftUtils : NSObject {
     class func colorFromHexString(hexString:String) -> UIColor {
         
         var rgbValue:UInt32 = 0
-        let scanner : NSScanner = NSScanner(string: hexString)
-        if hexString.rangeOfString("#") != nil {
+        let scanner : Scanner = Scanner(string: hexString)
+        if hexString.contains("#") {
             scanner.scanLocation = 1
         } else {
             scanner.scanLocation = 0
         }
         
-        scanner.scanHexInt(&rgbValue)
+        scanner.scanHexInt32(&rgbValue)
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
@@ -84,17 +84,17 @@ class AZRagicSwiftUtils : NSObject {
       :return: String that represents the account file path.
      */
     class func accountsFilePath() -> String {
-        let path:Array = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let path:Array = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory:String = path.first! as String
-        let fullPath = NSURL(string:documentsDirectory)?.URLByAppendingPathComponent("ragic_accounts.plist")
+        let fullPath = NSURL(string:documentsDirectory)?.appendingPathComponent("ragic_accounts.plist")
         
-        return fullPath!.path!;
+        return fullPath!.path;
     }
     
     
     class func switchAccount(newAccount:String) {
-        NSUserDefaults.standardUserDefaults().setObject(newAccount, forKey: Constants.KEY_ACCOUNT)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(newAccount, forKey: Constants.KEY_ACCOUNT)
+        UserDefaults.standard.synchronize()
     }
     
    

@@ -27,13 +27,13 @@
 		00F8899C19DAA39800BBC01D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F8899B19DAA39800BBC01D /* UIKit.framework */; };
 		00F8899E19DAA3BA00BBC01D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F8899D19DAA3BA00BBC01D /* Foundation.framework */; };
 		00F889A019DAA3C400BBC01D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F8899F19DAA3C400BBC01D /* CoreGraphics.framework */; };
+		369E498AD507C98C7EFC5E5F /* Pods_RagicViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEA93CCFB0EE9BE10EE35C6 /* Pods_RagicViewer.framework */; };
 		6029311E84D26F672C8D6F68 /* glyphicons_206_ok_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 602936B6AA52D2E4D0DEB67E /* glyphicons_206_ok_2.png */; };
 		60293290DCAFBA5BEFF344E6 /* titleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 6029304F4A23EC3B83E82FEC /* titleImage.JPG */; };
 		602933D40B0B04BD711E41BC /* glyphicons_440_folder_closed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6029392CC71A200A9687BD58 /* glyphicons_440_folder_closed.png */; };
 		602935346FF1AB55D4AF1B61 /* glyphicons_187_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 602938BD88B5B3BC2A2D15A2 /* glyphicons_187_more.png */; };
 		6029377E45E9E3BEE35A604A /* glyphicons_158_show_lines.png in Resources */ = {isa = PBXBuildFile; fileRef = 6029378B0E305C04DB5F9510 /* glyphicons_158_show_lines.png */; };
 		60293CA0DAB4A391A9115D74 /* glyphicons_207_remove_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 602931794D045C07852897F6 /* glyphicons_207_remove_2.png */; };
-		DB69704EB0EDA885626000D1 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1118A8E535EA79FEF6D3478F /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +75,7 @@
 		00F8899D19DAA3BA00BBC01D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00F8899F19DAA3C400BBC01D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1118A8E535EA79FEF6D3478F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DF1941D037BC68308ED0BAB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		5C15DDE2ABCB6BFD9DC442E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		34E7CAE7CEDEB20FFAEF34F6 /* Pods-RagicViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RagicViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RagicViewer/Pods-RagicViewer.debug.xcconfig"; sourceTree = "<group>"; };
 		6029304F4A23EC3B83E82FEC /* titleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titleImage.JPG; sourceTree = "<group>"; };
 		602931794D045C07852897F6 /* glyphicons_207_remove_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_207_remove_2.png; sourceTree = "<group>"; };
 		602936B6AA52D2E4D0DEB67E /* glyphicons_206_ok_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_206_ok_2.png; sourceTree = "<group>"; };
@@ -84,6 +83,8 @@
 		602938BD88B5B3BC2A2D15A2 /* glyphicons_187_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_187_more.png; sourceTree = "<group>"; };
 		6029392CC71A200A9687BD58 /* glyphicons_440_folder_closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_440_folder_closed.png; sourceTree = "<group>"; };
 		602939EEADB07BC404E3FA0D /* RagicViewer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RagicViewer-Prefix.pch"; sourceTree = "<group>"; };
+		DACE7E614D0FEE0EDCC3B34D /* Pods-RagicViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RagicViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RagicViewer/Pods-RagicViewer.release.xcconfig"; sourceTree = "<group>"; };
+		EAEA93CCFB0EE9BE10EE35C6 /* Pods_RagicViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RagicViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +95,7 @@
 				00F889A019DAA3C400BBC01D /* CoreGraphics.framework in Frameworks */,
 				00F8899E19DAA3BA00BBC01D /* Foundation.framework in Frameworks */,
 				00F8899C19DAA39800BBC01D /* UIKit.framework in Frameworks */,
-				DB69704EB0EDA885626000D1 /* Pods.framework in Frameworks */,
+				369E498AD507C98C7EFC5E5F /* Pods_RagicViewer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +127,7 @@
 				00F8898A19DA9DAC00BBC01D /* RagicViewerTests */,
 				00F8896C19DA9DAC00BBC01D /* Products */,
 				D1D41F52AABC4B2B9AFC8326 /* Frameworks */,
-				C7EF50CFF0A232107021950E /* Pods */,
+				6CF34424E191CDFAD5D3BE10 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,11 +255,11 @@
 			path = login;
 			sourceTree = "<group>";
 		};
-		C7EF50CFF0A232107021950E /* Pods */ = {
+		6CF34424E191CDFAD5D3BE10 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C15DDE2ABCB6BFD9DC442E2 /* Pods.debug.xcconfig */,
-				2DF1941D037BC68308ED0BAB /* Pods.release.xcconfig */,
+				34E7CAE7CEDEB20FFAEF34F6 /* Pods-RagicViewer.debug.xcconfig */,
+				DACE7E614D0FEE0EDCC3B34D /* Pods-RagicViewer.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -267,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				1118A8E535EA79FEF6D3478F /* Pods.framework */,
+				EAEA93CCFB0EE9BE10EE35C6 /* Pods_RagicViewer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -278,12 +280,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00F8899119DA9DAC00BBC01D /* Build configuration list for PBXNativeTarget "RagicViewer" */;
 			buildPhases = (
-				B3B529A3AAF54E69A2ACE048 /* Check Pods Manifest.lock */,
+				007C4EDFDC6E0CA4BD2B595A /* [CP] Check Pods Manifest.lock */,
 				00F8896719DA9DAC00BBC01D /* Sources */,
 				00F8896819DA9DAC00BBC01D /* Frameworks */,
 				00F8896919DA9DAC00BBC01D /* Resources */,
-				D78FD4ECFA954506865A6091 /* Copy Pods Resources */,
-				AD628B1AB9A2E0FFF3F97E3B /* Embed Pods Frameworks */,
+				2A023C21982E89CA66C0D147 /* [CP] Embed Pods Frameworks */,
+				90BC6B9BB5049D302FF88CDA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -324,6 +326,7 @@
 				TargetAttributes = {
 					00F8896A19DA9DAC00BBC01D = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 2P6E839PYQ;
 					};
 					00F8898619DA9DAC00BBC01D = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -375,49 +378,57 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AD628B1AB9A2E0FFF3F97E3B /* Embed Pods Frameworks */ = {
+		007C4EDFDC6E0CA4BD2B595A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RagicViewer-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B3B529A3AAF54E69A2ACE048 /* Check Pods Manifest.lock */ = {
+		2A023C21982E89CA66C0D147 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RagicViewer/Pods-RagicViewer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AZDropdownMenu/AZDropdownMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AZDropdownMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RagicViewer/Pods-RagicViewer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D78FD4ECFA954506865A6091 /* Copy Pods Resources */ = {
+		90BC6B9BB5049D302FF88CDA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RagicViewer/Pods-RagicViewer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -556,13 +567,14 @@
 		};
 		00F8899219DA9DAC00BBC01D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C15DDE2ABCB6BFD9DC442E2 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 34E7CAE7CEDEB20FFAEF34F6 /* Pods-RagicViewer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2P6E839PYQ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
@@ -571,6 +583,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewer/classes/util/RagicViewer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 			};
@@ -578,13 +591,14 @@
 		};
 		00F8899319DA9DAC00BBC01D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2DF1941D037BC68308ED0BAB /* Pods.release.xcconfig */;
+			baseConfigurationReference = DACE7E614D0FEE0EDCC3B34D /* Pods-RagicViewer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2P6E839PYQ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RagicViewer/RagicViewer-Prefix.pch";
 				INFOPLIST_FILE = RagicViewer/Info.plist;
@@ -592,6 +606,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.azuritul.RagicViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RagicViewer/classes/util/RagicViewer-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 			};

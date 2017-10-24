@@ -25,33 +25,33 @@ class BasicAuthLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let customBarItem = UIBarButtonItem(title: "Back", style: .Done, target: self, action: #selector(BasicAuthLoginViewController.back))
-        let loginBarItem = UIBarButtonItem(title: "Login", style: .Done, target: self, action: #selector(BasicAuthLoginViewController.loginButtonPressed))
+        let customBarItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(BasicAuthLoginViewController.back))
+        let loginBarItem = UIBarButtonItem(title: "Login", style: .done, target: self, action: #selector(BasicAuthLoginViewController.loginButtonPressed))
         
         self.navigationItem.leftBarButtonItem = customBarItem
         self.navigationItem.rightBarButtonItem = loginBarItem
         self.navigationItem.title = "RagicViewer"
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
-        self.navigationController?.navigationBar.barTintColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()];
+        self.navigationController?.navigationBar.barTintColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
         
-        self.view.backgroundColor = UIColor.whiteColor();
-        let tempTableView = UITableView(frame: CGRectZero, style:.Grouped)
+        self.view.backgroundColor = UIColor.white;
+        let tempTableView = UITableView(frame: CGRect.zero, style:.grouped)
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         tempTableView.delegate = self
         tempTableView.dataSource = self
-        tempTableView.backgroundColor = UIColor.whiteColor()
-        tempTableView.separatorStyle = .SingleLine
-        tempTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellKey)
+        tempTableView.backgroundColor = UIColor.white
+        tempTableView.separatorStyle = .singleLine
+        tempTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellKey)
         tempTableView.rowHeight = 44
         self.tableView = tempTableView
         self.view.addSubview(tempTableView)
         
         let bindings = ["tempTableView":tempTableView]
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-6-[tempTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
 //        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[tempTableView]", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
     }
@@ -67,7 +67,7 @@ class BasicAuthLoginViewController: UIViewController {
       Called when back button is pressed. Would cancel login operation.
      */
     func back(){
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     /**
@@ -76,7 +76,7 @@ class BasicAuthLoginViewController: UIViewController {
     func login() {
         let client:RagicClient = RagicClient.sharedInstance
         client.delegate = self;
-        client.login(self.accountField!.text!, password: self.passwordField!.text!)
+        client.login(username: self.accountField!.text!, password: self.passwordField!.text!)
     }
     
     /**
@@ -89,36 +89,34 @@ class BasicAuthLoginViewController: UIViewController {
         let account:String? = self.accountField?.text
         let password:String? = self.passwordField?.text
         
-        if account == nil || password == nil {
-            return false;
+        if let account = account, let _ = password {
+            if (account.contains("@") == true) {
+                return true
+            }
         }
-        
-        if account!.rangeOfString("@") == nil {
-            return false;
-        }
-        return true;
+        return false
     }
     
     /**
       Called when login button is pressed.
      */
     func loginButtonPressed(){
-        SVProgressHUD.showWithStatus("Loading", maskType: .Gradient)
+        SVProgressHUD.show(withStatus: "Loading", maskType: .gradient)
         if self.isFormValid() {
             self.login()
             self.passwordField?.resignFirstResponder()
         } else {
-            SVProgressHUD.showErrorWithStatus("Username or password is wrong")
+            SVProgressHUD.showError(withStatus: "Username or password is wrong")
         }
     }
     
-    private func dispatchToMainView() {
+    func dispatchToMainView() {
         if SVProgressHUD.isVisible() {
             SVProgressHUD.dismiss()
         }
         let controller:TabFolderViewController = TabFolderViewController()
         let nav:UINavigationController = UINavigationController(rootViewController: controller)
-        self.presentViewController(nav, animated: true, completion: nil)
+        self.present(nav, animated: true, completion: nil)
     }
     
 }
@@ -126,38 +124,38 @@ class BasicAuthLoginViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension BasicAuthLoginViewController : UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey)!
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellKey)!
 
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         switch (indexPath.row) {
         case 0:
             let field:UITextField = UITextField()
             field.translatesAutoresizingMaskIntoConstraints = false
             field.placeholder = "email address"
-            field.autocapitalizationType = .None
-            field.keyboardType = .EmailAddress
+            field.autocapitalizationType = .none
+            field.keyboardType = .emailAddress
             self.accountField = field;
             cell.contentView.addSubview(self.accountField!)
             let bindings = ["field":field]
-            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         case 1:
             let field = UITextField()
             field.translatesAutoresizingMaskIntoConstraints = false
             field.placeholder = "password"
-            field.secureTextEntry = true
+            field.isSecureTextEntry = true
             self.passwordField = field
             cell.contentView.addSubview(self.passwordField!)
             let bindings = ["field":field]
-            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-            cell.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-12-[field]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+            cell.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[field(>=40)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         default:
             break;
         }
@@ -191,12 +189,14 @@ extension BasicAuthLoginViewController : ClientDelegate {
     
     func loginFinishedWithStatusCode(code: String, result: Dictionary<String, AnyObject>?) {
         if code == "success" {
-            dispatch_async(dispatch_get_main_queue(), { self.dispatchToMainView()})
+            DispatchQueue.main.async {
+                self.dispatchToMainView()
+            }
         } else {
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
-                SVProgressHUD.showErrorWithStatus("Login failed")
-            })
+                SVProgressHUD.showError(withStatus: "Login failed")
+            }
         }
     }
 }

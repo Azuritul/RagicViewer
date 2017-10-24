@@ -38,11 +38,11 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
         self.isSetUpFinished = false
         self.titles = titles
         super.init(frame:frame)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.alpha = 0.95;
         self.translatesAutoresizingMaskIntoConstraints = false
         for title in titles {
-            let button = createButton(title)
+            let button = createButton(title: title)
             self.itemsArray.append(button)
         }
         
@@ -66,18 +66,18 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
             setupButtonLayout()
         }
 
-        for (_, button) in itemsArray.enumerate() {
-            self.bringSubviewToFront(button)
+        for (_, button) in itemsArray.enumerated() {
+            self.bringSubview(toFront: button)
         }
 
     }
     
     private func setupOverlay(){
-        let frame = UIScreen.mainScreen().applicationFrame
-        self.overlay.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height * 2)
-        self.overlay.backgroundColor = UIColor.blackColor()
+        let frame = UIScreen.main.applicationFrame
+        self.overlay.frame = CGRect(x:frame.origin.x, y:frame.origin.y, width: frame.size.width, height: frame.size.height * 2)
+        self.overlay.backgroundColor = UIColor.black
         self.overlay.alpha = 0
-        self.overlay.userInteractionEnabled = true
+        self.overlay.isUserInteractionEnabled = true
 
         self.addSubview(self.overlay)
     }
@@ -92,10 +92,10 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
         let viewHeight = CGFloat(self.titles.count * 60)
         
         // Initialize an array to store the constraints
-        var constraintsArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|[rootview]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views:selfBindings)
+        var constraintsArray = NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootview]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views:selfBindings)
         
-        self.dropdownConstraint = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: self.superview, attribute: .Top, multiplier: 1, constant: 64)
-        let height = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: viewHeight)
+        self.dropdownConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: self.superview, attribute: .top, multiplier: 1, constant: 64)
+        let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: viewHeight)
         
         constraintsArray.append(self.dropdownConstraint!)
         constraintsArray.append(height)
@@ -106,18 +106,18 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
     
     private func setupButtonLayout(){
         
-        for (idx, button) in itemsArray.enumerate() {
+        for (idx, button) in itemsArray.enumerated() {
             
-            let buttonHeight = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: ITEM_HEIGHT)
-            let pinLeft = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: 0)
+            let buttonHeight = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: ITEM_HEIGHT)
+            let pinLeft = NSLayoutConstraint(item: button, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0)
             
-            self.addConstraint(itemWidthConstraint(button, targetView: self))
+            self.addConstraint(itemWidthConstraint(sourceView: button, targetView: self))
             self.addConstraint(buttonHeight)
             self.addConstraint(pinLeft)
             if idx == 0 {
-                self.addConstraint(vAlignmentConstraint(button, targetView:nil, buttonIndex:idx))
+                self.addConstraint(vAlignmentConstraint(sourceView: button, targetView:nil, buttonIndex:idx))
             } else {
-                self.addConstraint(vAlignmentConstraint(button, targetView:itemsArray[idx-1], buttonIndex:idx))
+                self.addConstraint(vAlignmentConstraint(sourceView: button, targetView:itemsArray[idx-1], buttonIndex:idx))
             }
         }
         self.isSetUpFinished = true
@@ -126,35 +126,35 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
     
     //MARK: - Constraint creation methods
     private func itemWidthConstraint(sourceView:UIView, targetView:UIView) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: sourceView, attribute: .Width, relatedBy: .Equal, toItem: targetView, attribute: .Width, multiplier: 1, constant: 0)
+        return NSLayoutConstraint(item: sourceView, attribute: .width, relatedBy: .equal, toItem: targetView, attribute: .width, multiplier: 1, constant: 0)
     }
     
     private func vAlignmentConstraint(sourceView:UIView, targetView:UIView?, buttonIndex:Int) -> NSLayoutConstraint {
         //Pin first button to top of superview
         if buttonIndex == 0 {
-            return NSLayoutConstraint(item: sourceView, attribute: .Top, relatedBy: .Equal, toItem: self,
-                attribute: .Top, multiplier:1, constant: 0)
+            return NSLayoutConstraint(item: sourceView, attribute: .top, relatedBy: .equal, toItem: self,
+                attribute: .top, multiplier:1, constant: 0)
         } else { //Pin other buttons to the bottom of the previous button
-            return NSLayoutConstraint(item: sourceView, attribute: .Top, relatedBy: .Equal, toItem: targetView!, attribute: .Bottom, multiplier:1, constant: 0)
+            return NSLayoutConstraint(item: sourceView, attribute: .top, relatedBy: .equal, toItem: targetView!, attribute: .bottom, multiplier:1, constant: 0)
         }
     }
     
     //MARK: - Utility methods
     private func createButton(title:String) -> UIButton {
-        let button = UIButton(type: .Custom)
-        button.setTitle(title, forState: .Normal)
+        let button = UIButton(type: .custom)
+        button.setTitle(title, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel!.font = UIFont.boldSystemFontOfSize(16.0)
-        button.titleLabel!.textAlignment = .Center
-        button.setTitleColor(AZRagicSwiftUtils.colorFromHexString("#636363"), forState: .Normal)
-        button.backgroundColor = UIColor.whiteColor()
-        button.userInteractionEnabled = true
+        button.titleLabel!.font = UIFont.boldSystemFont(ofSize: 16.0)
+        button.titleLabel!.textAlignment = .center
+        button.setTitleColor(AZRagicSwiftUtils.colorFromHexString(hexString: "#636363"), for: .normal)
+        button.backgroundColor = UIColor.white
+        button.isUserInteractionEnabled = true
         return button
     }
     
     func attachMethodFor(target: AnyObject, forItemIndex index: Int, action: Selector, forControlEvents controlEvents: UIControlEvents) {
         let button = self.itemsArray[index]
-        button.addTarget(target, action: action, forControlEvents: controlEvents)
+        button.addTarget(target, action: action, for: controlEvents)
     }
     
     func showFromView(view:UIView){
@@ -165,9 +165,9 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.type = kCATransitionMoveIn
         transition.subtype = kCATransitionFromBottom
-        transition.delegate = self
+        //transition.delegate = self
         transition.setValue("show", forKey: "showAction")
-        self.layer.addAnimation(transition,forKey: kCATransitionFromBottom)
+        self.layer.add(transition,forKey: kCATransitionFromBottom)
 //        self.userInteractionEnabled = true;
 //        let tap:UIGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("close:"))
 //        tap.delegate = self
@@ -185,17 +185,17 @@ class AZUSimpleDropdownMenu : UIView, UIGestureRecognizerDelegate {
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromTop
-        transition.delegate = self
+        //transition.delegate = self
         transition.setValue("hide", forKey: "showAction")
-        self.layer.addAnimation(transition, forKey: kCATransitionFromTop)
+        self.layer.add(transition, forKey: kCATransitionFromTop)
 
     }
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        switch anim.valueForKey("showAction") as! String {
+     func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        switch anim.value(forKey: "showAction") as! String {
             case "show":
                 //fade in the background view
-                UIView.animateWithDuration(0.08, animations: {
+                UIView.animate(withDuration: 0.08, animations: {
                     self.overlay.alpha = 0.9
                 })
             case "hide":

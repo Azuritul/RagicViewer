@@ -29,13 +29,13 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dismissButton = UIBarButtonItem(image: UIImage(named: "glyphicons_207_remove_2.png"), style: .Done, target: self, action: #selector(AccountListViewController.dismissPressed))
+        let dismissButton = UIBarButtonItem(image: UIImage(named: "glyphicons_207_remove_2.png"), style: .done, target: self, action: #selector(AccountListViewController.dismissPressed))
         self.navigationItem.rightBarButtonItem = dismissButton;
         self.title = "Switch Account";
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()];
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
         
         let temp = UITableView()
         temp.translatesAutoresizingMaskIntoConstraints = false
@@ -46,8 +46,8 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView = temp;
         let bindings = ["tableView": temp]
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
         self.loadData()
         
@@ -60,7 +60,7 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
 
     //MARK: - Utility methods
     func dismissPressed(){
-        self.dismissViewControllerAnimated(true, completion:{() in
+        self.dismiss(animated: true, completion:{() in
             if(self.accountChanged) {
                 self.delegate?.didSwitchToAccount?()
             }
@@ -74,43 +74,43 @@ class AccountListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     //MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataArray?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellKey = "keyForCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellKey)
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellKey)
         
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
+            cell = UITableViewCell(style: .default, reuseIdentifier: cellKey)
         }
         
         let dict = self.dataArray![indexPath.row] as AnyObject? as? [String:AnyObject]
         let name = dict!["account"] as AnyObject? as! String
         
         let label = cell?.textLabel
-        cell?.backgroundColor = UIColor.clearColor()
+        cell?.backgroundColor = UIColor.clear
         label?.font = UIFont(name: "HelveticaNeue", size: 18)
-        label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-        label?.highlightedTextColor = UIColor.lightGrayColor()
+        label?.textColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#636363")
+        label?.highlightedTextColor = UIColor.lightGray
         cell?.selectedBackgroundView = UIView()
         label?.text = name
-        cell?.accessoryType = (AZRagicSwiftUtils.getUserMainAccount() == name) ? .Checkmark : .None
+        cell?.accessoryType = (AZRagicSwiftUtils.getUserMainAccount() == name) ? .checkmark : .none
         
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let lastAccount = AZRagicSwiftUtils.getUserMainAccount()
         let dict = self.dataArray![indexPath.row] as AnyObject? as? [String:AnyObject]
         let selectedAccount = dict!["account"] as AnyObject? as! String
         
         self.accountChanged = !(lastAccount == selectedAccount)
         
-        AZRagicSwiftUtils.switchAccount(selectedAccount)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        AZRagicSwiftUtils.switchAccount(newAccount: selectedAccount)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         tableView.reloadData()
     }
 

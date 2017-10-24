@@ -28,7 +28,7 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.title = "Ragic Viewer"
         let tableView = UITableView()
-        tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
+        tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#F0F0F2")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.delegate = self
@@ -37,8 +37,8 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         self.view.addSubview(tableView)
         
         let bindings = ["tableView": tableView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         
     }
     
@@ -46,7 +46,7 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
         super.didReceiveMemoryWarning()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = false
     }
@@ -54,42 +54,42 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: - UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.dataArray.count == 0 {
-            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let messageLabel = UILabel(frame: CGRect(x:0, y:0, width:self.view.bounds.size.width, height:self.view.bounds.size.height))
             messageLabel.text = "There is currently no data."
-            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.textColor = UIColor.black
             messageLabel.numberOfLines = 0
-            messageLabel.textAlignment = .Center
+            messageLabel.textAlignment = .center
             messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
             messageLabel.sizeToFit()
             self.tableView?.backgroundView = messageLabel
-            self.tableView?.separatorStyle = .None
+            self.tableView?.separatorStyle = .none
             return 0
         } else {
-            self.tableView?.separatorStyle = .SingleLine
+            self.tableView?.separatorStyle = .singleLine
             self.tableView?.backgroundView = nil
         }
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellKey = "keyForCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellKey)
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellKey)
         
         if(cell == nil) {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellKey)
+            cell = UITableViewCell(style: .default, reuseIdentifier: cellKey)
         }
         
         let item = self.dataArray[indexPath.row]
         
-        cell?.backgroundColor = UIColor.clearColor()
+        cell?.backgroundColor = UIColor.clear
         let label = cell?.textLabel
         label?.font = UIFont(name: "HelveticaNeue", size: 16)
-        label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-        label?.highlightedTextColor = UIColor.lightGrayColor()
+        label?.textColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#636363")
+        label?.highlightedTextColor = UIColor.lightGray
         cell?.selectedBackgroundView = UIView()
         label?.text = item.name
         return cell!;
@@ -97,8 +97,8 @@ class SheetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     //MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         let item = self.dataArray[indexPath.row]
         let listingViewController = EntryListViewController(url: item.itemUrl!)
         self.navigationController?.pushViewController(listingViewController, animated: true)

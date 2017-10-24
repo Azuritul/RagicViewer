@@ -29,17 +29,17 @@ class EntryListViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Ragic Viewer"
         let tableView = UITableView()
-        tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
+        tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#F0F0F2")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self,forCellReuseIdentifier: cellKey)
-        let button:UIButton = UIButton(type: .Custom)
-        button.frame = CGRectMake(0,0,320,44)
-        button.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#D70700")
-        button.setTitle("Load more...", forState: .Normal)
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.addTarget(self, action: #selector(EntryListViewController.loadMore), forControlEvents: .TouchUpInside)
+        tableView.register(UITableViewCell.self,forCellReuseIdentifier: cellKey)
+        let button:UIButton = UIButton(type: .custom)
+        button.frame = CGRect(x: 0,y: 0,width: 320, height: 44)
+        button.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
+        button.setTitle("Load more...", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(EntryListViewController.loadMore), for: .touchUpInside)
         tableView.tableFooterView = button
 
         let bindings = ["tableView":tableView]
@@ -47,11 +47,11 @@ class EntryListViewController: UIViewController {
 
         self.view.addSubview(tableView)
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: bindings))
         
-        self.loadData(0, count: 20)
-        SVProgressHUD.showWithMaskType(.Gradient)
+        self.loadData(offset: 0, count: 20)
+        SVProgressHUD.show(with: .gradient)
 
     }
 
@@ -63,15 +63,15 @@ class EntryListViewController: UIViewController {
     func loadData(offset:Int, count:Int) {
         let client = RagicClient.sharedInstance
         client.delegate = self;
-        client.loadEntries(self.url, offset:offset, count:count)
+        client.loadEntries(entryUrl: self.url, offset:offset, count:count)
     }
 
     func loadMore() {
-        SVProgressHUD.showWithMaskType(.Gradient)
-        self.loadData(self.dataArray.count + 1, count: 20)
+        SVProgressHUD.show(with: .gradient)
+        self.loadData(offset: self.dataArray.count + 1, count: 20)
     }
     
-    private func detailTextFromResultDict(dict:[String:AnyObject]) -> String? {
+    func detailTextFromResultDict(dict:[String:AnyObject]) -> String? {
         var text:String = ""
         for (key, value) in dict {
             if key.hasPrefix("_") && key.hasSuffix("_") {
@@ -86,11 +86,11 @@ class EntryListViewController: UIViewController {
     }
     
     func reloadData(){
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async {
             self.tableView?.reloadData()
             self.tableView?.flashScrollIndicators()
             SVProgressHUD.dismiss()
-        })
+        }
     }
 
 }
@@ -100,31 +100,31 @@ extension EntryListViewController: UITableViewDataSource {
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.dataArray.isEmpty {
-            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let messageLabel = UILabel(frame: CGRect(x:0, y:0, width:self.view.bounds.size.width, height:self.view.bounds.size.height))
             messageLabel.text = "There is currently no data."
-            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.textColor = UIColor.black
             messageLabel.numberOfLines = 0
-            messageLabel.textAlignment = .Center
+            messageLabel.textAlignment = .center
             messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
             messageLabel.sizeToFit()
             self.tableView?.backgroundView = messageLabel
-            self.tableView?.separatorStyle = .None
+            self.tableView?.separatorStyle = .none
             return 0
         } else {
-            self.tableView?.separatorStyle = .SingleLine
+            self.tableView?.separatorStyle = .singleLine
             self.tableView?.backgroundView = nil
         }
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArray.count ?? 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataArray.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 
-        if let cell = tableView.dequeueReusableCellWithIdentifier(cellKey) {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellKey) {
             
             let item = self.dataArray[indexPath.row] as! [String:AnyObject]
             
@@ -135,19 +135,19 @@ extension EntryListViewController: UITableViewDataSource {
             
             let label = cell.textLabel
             let detailLabel = cell.detailTextLabel
-            cell.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = UIColor.clear
             cell.selectedBackgroundView = UIView()
             
             label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-            label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-            label?.highlightedTextColor = UIColor.lightGrayColor()
+            label?.textColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#636363")
+            label?.highlightedTextColor = UIColor.lightGray
             label?.text = title ?? "\(placeholder)"
             
             detailLabel?.font = UIFont(name: "HelveticaNeue", size: 10)
-            detailLabel?.textColor = UIColor.lightGrayColor()
+            detailLabel?.textColor = UIColor.lightGray
             detailLabel?.numberOfLines = 2
-            detailLabel?.lineBreakMode = .ByWordWrapping;
-            detailLabel?.text = self.detailTextFromResultDict(item)
+            detailLabel?.lineBreakMode = .byWordWrapping;
+            detailLabel?.text = self.detailTextFromResultDict(dict: item)
             return cell
         }
         
@@ -161,12 +161,12 @@ extension EntryListViewController: UITableViewDataSource {
 //MARK: - UITableViewDelegate
 extension EntryListViewController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60.0
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView?.deselectRow(at: indexPath as IndexPath, animated: true)
             let item = self.dataArray[indexPath.row] as! [String:AnyObject]
             if let nodeId = item["_ragicId"] as AnyObject? as! Int! {
                 let detailViewURL = "\(self.url)/\(nodeId).xhtml"
@@ -182,27 +182,27 @@ extension EntryListViewController: ClientDelegate {
 
     func loadFinishedWithResult(result: Dictionary<String, AnyObject>?) {
         if let result = result {
-            let sortedKeys  = result.keys.sort();
+            let sortedKeys  = result.keys.sorted();
             for key in sortedKeys {
                 self.dataArray.append(result[key]!)
             }
             self.navigationController?.hidesBarsOnSwipe = result.count > 10
             self.reloadData()
             if(self.dataArray.count < 20) {
-                self.tableView?.tableFooterView?.hidden = true
+                self.tableView?.tableFooterView?.isHidden = true
             } else {
-                self.tableView?.tableFooterView?.hidden = false
+                self.tableView?.tableFooterView?.isHidden = false
             }
         } else {
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
-            })
+            }
         }
     }
 
     func loginFinishedWithStatusCode(code:String, result:Dictionary<String, AnyObject>?) {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async {
             SVProgressHUD.dismiss()
-        })
+        }
     }
 }

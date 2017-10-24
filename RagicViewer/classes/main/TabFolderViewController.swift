@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import AZDropdownMenu
 /**
   The topmost view controller. Showing all the sheets under specific user account.
  */
@@ -23,39 +23,39 @@ class TabFolderViewController: UIViewController {
     var xAxisLayoutConstraint:NSLayoutConstraint?
     
     /// The view for dropdown menu
-    var menuWindow:AZUSimpleDropdownMenu?
-
+    //var menuWindow:AZUSimpleDropdownMenu?
+    var menuWindow:AZDropdownMenu?
     let cellKey = "cellKey"
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = false
-        self.view.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        let moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .Done, target: self, action: #selector(TabFolderViewController.moreButtonPressed))
+        self.view.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#F0F0F2")
+        let moreButton = UIBarButtonItem(image: UIImage(named:"glyphicons_187_more"), style: .done, target: self, action: #selector(TabFolderViewController.moreButtonPressed))
 
         self.navigationItem.rightBarButtonItem = moreButton
         self.title = "Ragic Viewer";
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor =  AZRagicSwiftUtils.colorFromHexString("#D70700")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor =  AZRagicSwiftUtils.colorFromHexString(hexString: "#D70700")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self;
         tableView.dataSource = self;
-        tableView.opaque = false;
-        tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#F0F0F2")
-        tableView.separatorStyle = .SingleLine;
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellKey)
+        tableView.isOpaque = false;
+        tableView.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#F0F0F2")
+        tableView.separatorStyle = .singleLine;
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellKey)
         self.tableView = tableView;
         self.view.addSubview(tableView)
         
         let tableViewBindings = ["tableView": tableView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: tableViewBindings))
         
-        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.setDefaultMaskType(.gradient)
         SVProgressHUD.show()
         self.loadData()
     }
@@ -64,7 +64,7 @@ class TabFolderViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = false;
     }
@@ -76,49 +76,57 @@ class TabFolderViewController: UIViewController {
         let presentation = accountsViewController.popoverPresentationController
         
         accountsViewController.delegate = self
-        navigationController.modalPresentationStyle = .Popover
-        presentation?.permittedArrowDirections = .Any
+        navigationController.modalPresentationStyle = .popover
+        presentation?.permittedArrowDirections = .any
         presentation?.sourceView = self.menuWindow
-        self.presentViewController(navigationController, animated: true, completion: nil)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     func moreButtonPressed(){
-        if (self.menuWindow?.isDescendantOfView(self.view) == true ) {
-            self.menuWindow?.hideView()
+        if (self.menuWindow?.isDescendant(of: self.view) == true ) {
+            //self.menuWindow?.hideView()
+            self.menuWindow?.hideMenu()
 
         } else {
-            let menu = AZUSimpleDropdownMenu(frame: self.view.frame, titles: ["Switch Account", "Logout"])
+            let menu = AZDropdownMenu(titles: ["Switch Account", "Logout"])
             
-            menu.attachMethodFor(self, forItemIndex: 0, action: #selector(TabFolderViewController.popSwitchAccountController), forControlEvents: .TouchUpInside)
-            menu.attachMethodFor(self, forItemIndex: 1, action: #selector(TabFolderViewController.confirmLogout), forControlEvents: .TouchUpInside)
-            
+            menu.cellTapHandler = { [weak self] (indexPath: IndexPath) -> Void in
+                if (indexPath.row == 0) {
+                    self?.popSwitchAccountController()
+                }
+                if (indexPath.row == 1) {
+                    self?.confirmLogout()
+                }
+                
+            }
             self.menuWindow = menu
-            self.menuWindow?.showFromView(self.view)
+            //self.menuWindow?.showFromView(view: self.view)
+            self.menuWindow?.showMenuFromView(self.view)
             
         }
     }
     
     func confirmLogout() {
-        let alertController = UIAlertController(title:"Logout", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title:"Logout", message:"Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
             (alert: UIAlertAction!) in
                 AZRagicSwiftUtils.removeUserInfo()
                 self.forwardToLoginView()
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alert: UIAlertAction!) in } )
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (alert: UIAlertAction!) in } )
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
     func forwardToLoginView() {
         let controller = LoginHomeViewController()
         let nav = UINavigationController(rootViewController: controller)
-        nav.navigationBar.hidden = true
-        self.presentViewController(nav, animated: true, completion: nil)
+        nav.navigationBar.isHidden = true
+        self.present(nav, animated: true, completion: nil)
     }
     
     func loadData() {
@@ -128,12 +136,12 @@ class TabFolderViewController: UIViewController {
     }
     
     func reloadTable() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async {
             if SVProgressHUD.isVisible() {
                 SVProgressHUD.dismiss()
             }
             self.tableView?.reloadData()
-        })
+        }
     }
     
 }
@@ -141,22 +149,23 @@ class TabFolderViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension TabFolderViewController : UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if self.tableView != nil {
             let header = UIView()
-            let label = UILabel(frame: CGRectMake(self.tableView!.frame.origin.x,
-                self.tableView!.frame.origin.y,
-                self.tableView!.bounds.size.width, 44))
+            let label = UILabel(frame: CGRect(x:self.tableView!.frame.origin.x,
+                                              y:self.tableView!.frame.origin.y,
+                                              width:self.tableView!.bounds.size.width,
+                                              height: 44))
             label.text = AZRagicSwiftUtils.getUserMainAccount()
-            label.font = UIFont.boldSystemFontOfSize(14)
-            label.textColor = UIColor.whiteColor()
-            label.textAlignment = .Center
-            header.backgroundColor = AZRagicSwiftUtils.colorFromHexString("#A12B28")
+            label.font = UIFont.boldSystemFont(ofSize: 14)
+            label.textColor = UIColor.white
+            label.textAlignment = .center
+            header.backgroundColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#A12B28")
             header.alpha = 0.9
             header.addSubview(label)
             return header
@@ -164,8 +173,8 @@ extension TabFolderViewController : UITableViewDelegate {
         return nil
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         let item = self.result?[indexPath.row]
         let children = SheetListViewController(array: item!.children!)
         self.navigationController?.pushViewController(children, animated: true)
@@ -175,42 +184,42 @@ extension TabFolderViewController : UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension TabFolderViewController : UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return result?.count ?? 0
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.result?.count == 0 {
-            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let messageLabel = UILabel(frame: CGRect(x:0, y:0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             messageLabel.text = "There is currently no data."
-            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.textColor = UIColor.black
             messageLabel.numberOfLines = 0
-            messageLabel.textAlignment = .Center
+            messageLabel.textAlignment = .center
             messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
             messageLabel.sizeToFit()
             self.tableView?.backgroundView = messageLabel
-            self.tableView?.separatorStyle = .None
+            self.tableView?.separatorStyle = .none
             return 0
         } else {
-            self.tableView?.separatorStyle = .SingleLine
+            self.tableView?.separatorStyle = .singleLine
             self.tableView?.backgroundView = nil
         }
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellKey) {
+        if let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellKey) {
             
             let sheetItem:AZRagicSheetItem? = self.result?[indexPath.row]
             let label = cell.textLabel
             if sheetItem != nil {
-                cell.backgroundColor = UIColor.clearColor()
+                cell.backgroundColor = UIColor.clear
                 cell.selectedBackgroundView = UIView()
-                cell.accessoryType = .DisclosureIndicator
+                cell.accessoryType = .disclosureIndicator
                 label?.font = UIFont(name: "HelveticaNeue", size: 16.0)
-                label?.textColor = AZRagicSwiftUtils.colorFromHexString("#636363")
-                label?.highlightedTextColor = UIColor.lightGrayColor()
+                label?.textColor = AZRagicSwiftUtils.colorFromHexString(hexString: "#636363")
+                label?.highlightedTextColor = UIColor.lightGray
                 
             }
             label?.text = sheetItem?.name
@@ -223,11 +232,11 @@ extension TabFolderViewController : UITableViewDataSource {
 // MARK: - AccountListViewControllerDelegate
 extension TabFolderViewController : AccountListViewControllerDelegate {
     func didSwitchToAccount() {
-        SVProgressHUD.setDefaultMaskType(.Gradient)
+        SVProgressHUD.setDefaultMaskType(.gradient)
         SVProgressHUD.show()
 
         SVProgressHUD.show()
-        self.menuWindow?.hideView()
+        self.menuWindow?.hideMenu()
         self.loadData()
     }
 }
@@ -245,10 +254,11 @@ extension TabFolderViewController : ClientDelegate {
                 resultArray.append(item)
                 
             }
-            if self.result?.count > 0 {
-                self.result?.removeAll(keepCapacity: false)
-            }
-            if self.result == nil {
+            if let result = self.result {
+                if result.count > 0 {
+                    self.result?.removeAll(keepingCapacity: false)
+                }
+            } else {
                 self.result = [AZRagicSheetItem]()
             }
             self.result! += resultArray

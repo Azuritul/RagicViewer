@@ -3,5 +3,8 @@ platform :ios, "8.0"
 
 use_frameworks!
 
-pod 'SVProgressHUD'
-pod 'AZDropdownMenu'
+target 'RagicViewer' do
+  pod 'SVProgressHUD'
+  pod 'AZDropdownMenu', '~> 1.1.2'
+end
+
