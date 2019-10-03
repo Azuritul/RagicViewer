@@ -1,7 +1,7 @@
 RagicViewer [![Build Status](https://travis-ci.org/Azuritul/RagicViewer.svg?branch=master)](https://travis-ci.org/Azuritul/RagicViewer) 
 ===========
 
-This is the repository for RagicViewer, an unofficial Ragic client for iOS, mainly built for personal interest and study needs. Ragic is a simple web-based data tool, you can check out Ragic's [website](https://www.ragic.com) for more info.
+This is the repository for RagicViewer, an unofficial Ragic client for iOS, mainly built out of personal interest and study needs. Ragic is a simple web-based data tool, you can check out Ragic's [website](https://www.ragic.com) for more info.
 
 If you find any issues, please fire an issue or send a pull request.
 
