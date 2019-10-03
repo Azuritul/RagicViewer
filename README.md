@@ -37,9 +37,9 @@ From version 1.1.0, the codebase is migrated to Swift.  If you need Objective-C 
 * Switch accounts
 
 ## Screenshot
-![Home](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/home.png)
-![Login](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/login.png)
-![Detail](https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/detail.png)
+![Home](<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/home.png" width=300>)
+![Login](<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/login.png" width=200>)
+![Detail](<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/detail.png" width=200>)
 
 ## License
 MIT License (MIT)
