@@ -38,11 +38,8 @@ From version 1.1.0, the codebase is migrated to Swift.  If you need Objective-C 
 
 ## Screenshot
 <img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/home.png" width=300>
-<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/login.png" width=200>
-<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/detail.png" width=200>
-![Home]()
-![Login]()
-![Detail]()
+<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/login.png" width=300>
+<img src="https://github.com/Azuritul/RagicViewer/blob/gh-pages/images/detail.png" width=300>
 
 ## License
 MIT License (MIT)
